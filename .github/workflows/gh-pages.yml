@@ -37,6 +37,10 @@ jobs:
         working-directory: ./prez-ui
         run: npm ci
 
+      - name: Temporary workaround for yasr bug
+        working-directory: ./prez-ui
+        run: echo "<template></template>" > ./src/views/SparqlView.vue
+
       - name: Build website
         working-directory: ./prez-ui
         run: npm run build
