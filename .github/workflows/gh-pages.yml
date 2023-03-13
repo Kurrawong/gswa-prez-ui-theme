@@ -43,7 +43,7 @@ jobs:
 
       - name: Build website
         working-directory: ./prez-ui
-        run: npm run build
+        run: npm run build-only
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
