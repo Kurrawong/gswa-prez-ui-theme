@@ -27,6 +27,7 @@ jobs:
       - name: Clone prez-ui
         run: |
           mkdir ./prez-ui && \
+          cd ./prez-ui && \
           git init && \
           git remote add origin https://github.com/RDFLib/prez-ui.git && \
           git fetch --depth 1 origin $(cat /tmp/COMMIT_HASH) && \
