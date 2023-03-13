@@ -253,7 +253,7 @@ import PrezApp from "./PrezApp.vue";
       </div>
     </div>
   </footer>
-  <link rel="stylesheet" href="/globals.css" />
+  <link rel="stylesheet" href="globals.css" />
 </template>
 
 <style scoped>
