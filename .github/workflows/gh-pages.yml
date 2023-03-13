@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: |
+          git init && \
+          git remote add origin https://github.com/RDFLib/prez-ui.git && \
+          git fetch --depth 1 origin $(cat /tmp/COMMIT_HASH) && \
+          git checkout FETCH_HEAD
+
+      - name: Install Node dependencies
+        working-directory: ./prez-ui
+        run: npm ci
+
+      - name: Build website
+        working-directory: ./prez-ui
+        run: npm run build
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          BRANCH: gh-pages
+          FOLDER: ./prez-ui/dist
