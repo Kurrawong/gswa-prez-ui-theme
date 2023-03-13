@@ -39,6 +39,11 @@ jobs:
         working-directory: ./prez-ui
         run: echo "<template></template>" > ./src/views/SparqlView.vue
 
+      - name: Copy QLD Gov Department of Resources theme
+        run: |
+          mv ./prez-ui/src/App.vue ./prez-ui/src/PrezApp.vue
+          cp App.vue ./prez-ui/src/App.vue
+
       - name: Build website
         working-directory: ./prez-ui
         run: npm run build-only -- --base=/qld-resources-prez-ui/
