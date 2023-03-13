@@ -7,10 +7,12 @@ RUN apk update && \
 
 WORKDIR /app
 
+COPY COMMIT_HASH /tmp/COMMIT_HASH
+
 RUN git init && \
     git remote add origin https://github.com/RDFLib/prez-ui.git && \
     # Pin to commit hash.
-    git fetch --depth 1 origin 6901643d842d4c840838a38e6afcfd18d638c2a9 && \
+    git fetch --depth 1 origin $(cat /tmp/COMMIT_HASH) && \
     git checkout FETCH_HEAD
 
 COPY public/ /app/public
@@ -20,4 +22,4 @@ COPY App.vue /app/src/App.vue
 
 RUN echo "<template></template>" > /app/src/views/SparqlView.vue
 
-RUN npm ci  
+RUN npm ci
