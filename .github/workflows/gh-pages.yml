@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: |
+      - name: Clone prez-ui
+        working-directory: ./prez-ui
+        run: |
           git init && \
           git remote add origin https://github.com/RDFLib/prez-ui.git && \
           git fetch --depth 1 origin $(cat /tmp/COMMIT_HASH) && \
