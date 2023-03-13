@@ -43,6 +43,7 @@ jobs:
         run: |
           mv ./prez-ui/src/App.vue ./prez-ui/src/PrezApp.vue
           cp App.vue ./prez-ui/src/App.vue
+          cp public/* ./prez-ui/src/public
 
       - name: Build website
         working-directory: ./prez-ui
