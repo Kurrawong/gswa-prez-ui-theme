@@ -23,3 +23,7 @@ The output will be in a `dist/` directory.
 ```
 make view
 ```
+
+## Prez UI version
+
+The prez-ui version is always pinned to a specific commit in the [upstream Prez UI repository](https://github.com/RDFLib/prez-ui). This is represented in the file [COMMIT_HASH](COMMIT_HASH).
