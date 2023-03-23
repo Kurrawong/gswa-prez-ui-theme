@@ -1,5 +1,5 @@
 build:
-	docker build -t qld-prez-builder .
+	docker build -t qld-prez-builder -f builder.Dockerfile .
 
 dist:
 	docker run --rm --name qld-prez-builder -v ${PWD}/dist:/app/dist qld-prez-builder npm run build-only

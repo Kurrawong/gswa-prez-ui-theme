@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16 AS builder
+FROM node:18-alpine3.16
 
 RUN apk update && \
     apk add \
@@ -23,12 +23,3 @@ COPY App.vue /app/src/App.vue
 RUN echo "<template></template>" > /app/src/views/SparqlView.vue
 
 RUN npm ci
-RUN npm run build-only
-
-# Final image
-FROM docker.io/nginx:1.21.5-alpine
-
-COPY --from=builder $HOME/app/dist /usr/share/nginx/content
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 8000
