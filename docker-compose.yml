@@ -1,0 +1,25 @@
+services:
+  fuseki:
+    image: ghcr.io/kurrawong/fuseki-geosparql
+    ports:
+      - 3030:3030
+    volumes:
+      - fuseki-data:/fuseki
+
+  prez:
+    image: ghcr.io/rdflib/prez
+    ports:
+      - 8000:8000
+    environment:
+      - VOCPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq-prez/query
+      - SPACEPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq-prez/query
+
+  prez-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8000
+
+volumes:
+  fuseki-data:
