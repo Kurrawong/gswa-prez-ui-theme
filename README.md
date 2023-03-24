@@ -33,13 +33,13 @@ The prez-ui version is always pinned to a specific commit in the [upstream Prez 
 Pull the latest container images from the registries.
 
 ```
-docker-compose pull
+docker-compose --profile stack pull
 ```
 
 Build the Prez UI container image.
 
 ```
-docker-compose build
+docker-compose --profile ui build
 ```
 
 Create a container and start the Fuseki service to load the initial data.
