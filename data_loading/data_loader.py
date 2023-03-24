@@ -4,7 +4,7 @@ from pathlib import Path
 import httpx
 from rich.progress import track
 from rdflib import Graph, Literal, Namespace
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, RDFS, RDF, SKOS
 
 DATA_FILE_PATH_ROOT = "/app/vocabularies"
 DATA_FILE_GLOB_PATTERN = ""
@@ -13,8 +13,10 @@ FUSEKI_URL = "http://fuseki:3030"
 AUTH_CREDENTIALS = ("admin", "admin")
 
 
-async def upload_file(url: str, file: Path, http_client: httpx.AsyncClient) -> None:
-    params = {"graph": f"urn:file:{file.name}"}
+async def upload_file(
+    url: str, graph_name: str, file: Path, http_client: httpx.AsyncClient
+) -> None:
+    params = {"graph": graph_name}
     headers = {"content-type": "text/turtle"}
     with open(file, "r", encoding="utf-8") as f:
         data = f.read()
@@ -40,7 +42,7 @@ async def main() -> None:
             files += directory.glob("**/*.ttl")
 
         for file in track(files, description="Uploading..."):
-            await upload_file(url, file, http_client)
+            await upload_file(url, f"urn:file:{file.name}", file, http_client)
 
         graph = Graph()
         for file in files:
@@ -65,11 +67,32 @@ async def main() -> None:
                 )
             )
 
-        print("Uploading identifiers.ttl...")
+        print("Uploading identifiers.ttl and support graphs...")
         identifiers_file = Path("identifiers.ttl")
         identifiers_graph.serialize(identifiers_file, format="turtle")
 
-        await upload_file(url, identifiers_file, http_client)
+        await upload_file(
+            url, f"urn:file:{identifiers_file.name}", identifiers_file, http_client
+        )
+
+        support_graph = Graph()
+        concept_schemes = graph.subjects(RDF.type, SKOS.ConceptScheme)
+        for concept_scheme in concept_schemes:
+            support_graph.add((PREZ.SchemesList, RDFS.member, concept_scheme))
+
+        collections = graph.subjects(RDF.type, SKOS.Collection)
+        for collection in collections:
+            support_graph.add((PREZ.VocPrezCollectionList, RDFS.member, collection))
+
+        support_graph_file = Path("support_graph.ttl")
+        support_graph.serialize(support_graph_file, format="turtle")
+
+        await upload_file(
+            url,
+            "https://prez.dev/vocprez-system-graph",
+            support_graph_file,
+            http_client,
+        )
 
 
 if __name__ == "__main__":
