@@ -5,14 +5,28 @@ services:
       - 3030:3030
     volumes:
       - fuseki-data:/fuseki
+    profiles:
+      - db
+      - stack
 
   prez:
     image: ghcr.io/rdflib/prez
     ports:
       - 8000:8000
     environment:
-      - VOCPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq-prez/query
-      - SPACEPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq-prez/query
+      - VOCPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq
+      - SPACEPREZ_SPARQL_ENDPOINT=http://fuseki:3030/gsq
+    depends_on:
+      - fuseki
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://fuseki:3030"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    profiles:
+      - web
+      - stack
 
   prez-ui:
     build:
@@ -20,6 +34,30 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8001:8000
+    depends_on:
+      - prez
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://prez:8000"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    profiles:
+      - ui
+      - stack
+
+  data-loader:
+    build:
+      context: .
+      dockerfile: data-loader.Dockerfile
+    volumes:
+      - ./data_loading/create_fuseki_dataset.py:/app/create_fuseki_dataset.py
+      - ./data_loading/data_loader.py:/app/data_loader.py
+      - ./data_loading/entrypoint.sh:/app/entrypoint.sh
+      - ./data_loading/enable_union_default_graph.py:/app/enable_union_default_graph.py
+      - fuseki-data:/fuseki
+    profiles:
+      - loader
 
 volumes:
   fuseki-data:
