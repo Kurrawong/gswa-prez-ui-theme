@@ -6,8 +6,9 @@ from rich.progress import track
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import DCTERMS, RDFS, RDF, SKOS
 
-DATA_FILE_PATH_ROOT = "/app/vocabularies"
-DATA_FILE_GLOB_PATTERN = ""
+SPATIAL_DATA_FILE_PATH_ROOT = Path("/app/qldgeofeatures-dataset/qldgeofeatures.ttl")
+VOCAB_DATA_FILE_PATH_ROOT = "/app/vocabularies"
+VOCAB_DATA_FILE_GLOB_PATTERN = "vocabularies-*"
 FUSEKI_DATASET_NAME = "gsq"
 FUSEKI_URL = "http://fuseki:3030"
 AUTH_CREDENTIALS = ("admin", "admin")
@@ -37,7 +38,7 @@ async def main() -> None:
     async with httpx.AsyncClient() as http_client:
         url = f"{FUSEKI_URL}/{FUSEKI_DATASET_NAME}"
 
-        directories = Path(DATA_FILE_PATH_ROOT).glob("vocabularies-*")
+        directories = Path(VOCAB_DATA_FILE_PATH_ROOT).glob(VOCAB_DATA_FILE_GLOB_PATTERN)
         for directory in directories:
             files += directory.glob("**/*.ttl")
 
@@ -91,6 +92,13 @@ async def main() -> None:
             url,
             "https://prez.dev/vocprez-system-graph",
             support_graph_file,
+            http_client,
+        )
+
+        await upload_file(
+            url,
+            f"urn:file:{SPATIAL_DATA_FILE_PATH_ROOT.name}",
+            SPATIAL_DATA_FILE_PATH_ROOT,
             http_client,
         )
 
