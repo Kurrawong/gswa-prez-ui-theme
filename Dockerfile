@@ -3,6 +3,9 @@ FROM node:18-alpine3.16 AS builder
 ARG VITE_ENABLED_PREZS
 ENV VITE_ENABLED_PREZS=${VITE_ENABLED_PREZS}
 
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+
 RUN apk update && \
     apk add \
         bash \
@@ -23,10 +26,8 @@ COPY public/ /app/public
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
 COPY App.vue /app/src/App.vue
 
-RUN echo "<template></template>" > /app/src/views/SparqlView.vue
-
 RUN npm ci
-RUN echo "Running vite build with VITE_ENABLED_PREZS=${VITE_ENABLED_PREZS}}"
+RUN echo "Running vite build with VITE_ENABLED_PREZS=${VITE_ENABLED_PREZS} and VITE_API_BASE_URL=${VITE_API_BASE_URL}"
 RUN npm run build-only
 
 # Final image
