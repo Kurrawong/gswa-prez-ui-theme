@@ -45,6 +45,9 @@ jobs:
         working-directory: ./prez-ui
         run: npm run build-only -- --base=/qld-resources-prez-ui/
 
+      - name: Add index.html as GH Pages 404 page
+        run: cp ./prez-ui/dist/index.html ./prez-ui/dist/404.html
+
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
