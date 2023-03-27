@@ -99,7 +99,9 @@ import PrezApp from "./PrezApp.vue";
       </div>
     </div>
   </header>
-  <PrezApp />
+  <div class="prez-app">
+    <PrezApp />
+  </div>
   <footer class="qgds__footer qgds__footer--dark" role="contentinfo">
     <div class="container-fluid">
       <div class="row visually-hidden">
@@ -278,5 +280,9 @@ import PrezApp from "./PrezApp.vue";
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+}
+
+.prez-app > main {
+  background-color: rgb(245, 245, 245);
 }
 </style>
