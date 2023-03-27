@@ -313,4 +313,8 @@ import PrezApp from "./PrezApp.vue";
   line-height: 24px !important;
   margin-block-end: 0px !important;
 }
+
+#nav-header > h2 {
+  color: white !important;
+}
 </style>
