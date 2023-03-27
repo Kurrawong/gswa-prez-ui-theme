@@ -20,6 +20,4 @@ COPY public/ /app/public
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
 COPY App.vue /app/src/App.vue
 
-RUN echo "<template></template>" > /app/src/views/SparqlView.vue
-
 RUN npm ci
