@@ -4,6 +4,10 @@ import PrezApp from "./PrezApp.vue";
 
 <template>
   <link rel="stylesheet" href="globals.css" />
+  <link
+    rel="preconnect stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,600;0,700;1,600;1,700&amp;family=Lato:wght@300;400;700;900&amp;display=swap"
+  />
   <div class="qgds__header__pre-header">
     <nav class="qgds__skip-link" aria-label="skip links" tabindex="-1">
       <a class="qgds__skip-link__link" href="#content">Skip to main content</a>
@@ -268,5 +272,11 @@ import PrezApp from "./PrezApp.vue";
 <style>
 #page-heading > h1 {
   color: rgb(242, 242, 242);
+}
+
+.qgds__header__pre-header-url {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 </style>
