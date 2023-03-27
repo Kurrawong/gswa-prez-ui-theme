@@ -13,7 +13,7 @@ make build
 ### Create the static web assets
 
 ```
-make dist
+make output
 ```
 
 The output will be in a `dist/` directory.
@@ -22,6 +22,12 @@ The output will be in a `dist/` directory.
 
 ```
 make view
+```
+
+Alternatively, to run all the make commands in sequence in one go, use
+
+```
+make all
 ```
 
 ## Prez UI version
