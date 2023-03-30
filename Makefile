@@ -24,7 +24,7 @@ stack-load:
 	docker-compose --profile db down
 
 stack-load-podman:
-	podman build -f data-loader.Docker -t data-loader .
+	podman build -f data-loader.Dockerfile -t data-loader .
 	podman run \
 		--rm \
 		--name data-loader \
