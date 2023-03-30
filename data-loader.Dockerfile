@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM docker.io/python:3.11-alpine
 
 RUN apk add \
         bash \
