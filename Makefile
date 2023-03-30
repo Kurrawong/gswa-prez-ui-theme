@@ -23,6 +23,17 @@ stack-load:
 	docker-compose run data-loader
 	docker-compose --profile db down
 
+stack-load-podman:
+	podman build -f data-loader.Docker -t data-loader .
+	podman run \
+		--rm \
+		--name data-loader \
+		-v ./data_loading/create_fuseki_dataset.py:/app/create_fuseki_dataset.py \
+		-v ./data_loading/data_loader.py:/app/data_loader.py \
+		-v ./data_loading/entrypoint.sh:/app/entrypoint.sh \
+		-v ./data_loading/enable_union_default_graph.py:/app/enable_union_default_graph.py \
+		-v /fuseki-data:/fuseki
+
 stack-run:
 	docker-compose --profile stack up -d
 
