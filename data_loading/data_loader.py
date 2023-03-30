@@ -7,6 +7,7 @@ from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import DCTERMS, RDFS, RDF, SKOS
 
 SPATIAL_DATA_FILE_PATH_ROOT = Path("/app/qldgeofeatures-dataset/qldgeofeatures.ttl")
+SPATIAL_DATA_BACKGROUND_ONT_ROOT = Path("/app/qldgeofeatures-dataset/background-onts")
 VOCAB_DATA_FILE_PATH_ROOT = "/app/vocabularies"
 VOCAB_DATA_FILE_GLOB_PATTERN = "vocabularies-*"
 FUSEKI_DATASET_NAME = "gsq"
@@ -37,6 +38,8 @@ async def main() -> None:
 
     async with httpx.AsyncClient() as http_client:
         url = f"{FUSEKI_URL}/{FUSEKI_DATASET_NAME}"
+
+        files += list(SPATIAL_DATA_BACKGROUND_ONT_ROOT.glob("**/*.ttl"))
 
         directories = Path(VOCAB_DATA_FILE_PATH_ROOT).glob(VOCAB_DATA_FILE_GLOB_PATTERN)
         for directory in directories:
