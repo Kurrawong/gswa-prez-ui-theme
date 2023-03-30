@@ -1,4 +1,5 @@
 import asyncio
+from os import environ
 from pathlib import Path
 
 import httpx
@@ -11,8 +12,8 @@ SPATIAL_DATA_BACKGROUND_ONT_ROOT = Path("/app/qldgeofeatures-dataset/background-
 VOCAB_DATA_FILE_PATH_ROOT = "/app/vocabularies"
 VOCAB_DATA_FILE_GLOB_PATTERN = "vocabularies-*"
 FUSEKI_DATASET_NAME = "gsq"
-FUSEKI_URL = "http://fuseki:3030"
-AUTH_CREDENTIALS = ("admin", "admin")
+FUSEKI_URL = environ["FUSEKI_URL"]
+AUTH_CREDENTIALS = (environ["FUSEKI_USER"], environ["FUSEKI_PASSWORD"])
 
 
 async def upload_file(
