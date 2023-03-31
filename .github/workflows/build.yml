@@ -11,7 +11,7 @@ on:
 env:
   IMAGE_NAME: ghcr.io/kurrawong/gsq-prez-ui
   VITE_ENABLED_PREZS: SpacePrez,VocPrez
-  VITE_API_BASE_URL: https://api.gsq-prez.dev.kurrawong.ai/api
+  VITE_API_BASE_URL: https://api.gsq-prez.dev.kurrawong.ai
 
 jobs:
   build:
