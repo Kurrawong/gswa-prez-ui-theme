@@ -8,9 +8,9 @@ ui-view:
 	docker run --rm -it --name qld-prez-ui -v ${PWD}/dist:/app -v ${PWD}/entrypoint.sh:/entrypoint.sh --entrypoint='./entrypoint.sh' -p 8000:8000 python:3-alpine
 
 ui-all:
-	make build
-	make output
-	make view
+	make ui-build
+	make ui-output
+	make ui-view
 
 stack-pull:
 	docker-compose --profile stack pull
