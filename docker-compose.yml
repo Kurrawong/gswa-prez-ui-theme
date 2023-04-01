@@ -37,7 +37,7 @@ services:
       args:
         VITE_ENABLED_PREZS: SpacePrez,VocPrez
         VITE_API_BASE_URL: http://localhost:8000
-        VITE_MAP_SETTINGS_API_KEY: AIzaSyBSYh-hVJVY_Uzpyi6UIqpbtpuJ2PJm4Sg
+        VITE_MAP_SETTINGS_API_KEY: ""
     ports:
       - 8001:8000
     depends_on:
