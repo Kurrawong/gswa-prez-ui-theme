@@ -4,11 +4,12 @@ from pathlib import Path
 
 import httpx
 from rich.progress import track
-from rdflib import Graph, Literal, Namespace
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS, RDFS, RDF, SKOS
 
 SPATIAL_DATA_FILE_PATH_ROOT = Path("/app/qldgeofeatures-dataset/qldgeofeatures.ttl")
 SPATIAL_DATA_BACKGROUND_ONT_ROOT = Path("/app/qldgeofeatures-dataset/background-onts")
+VOCAB_DATA_BACKGROUND_ONT_ROOT = Path("/app/background-onts")
 VOCAB_DATA_FILE_PATH_ROOT = "/app/vocabularies"
 VOCAB_DATA_FILE_GLOB_PATTERN = "vocabularies-*"
 FUSEKI_DATASET_NAME = "gsq"
@@ -41,6 +42,7 @@ async def main() -> None:
         url = f"{FUSEKI_URL}/{FUSEKI_DATASET_NAME}"
 
         files += list(SPATIAL_DATA_BACKGROUND_ONT_ROOT.glob("**/*.ttl"))
+        files += list(VOCAB_DATA_BACKGROUND_ONT_ROOT.glob("**/*.ttl"))
 
         directories = Path(VOCAB_DATA_FILE_PATH_ROOT).glob(VOCAB_DATA_FILE_GLOB_PATTERN)
         for directory in directories:
@@ -89,13 +91,58 @@ async def main() -> None:
         for collection in collections:
             support_graph.add((PREZ.VocPrezCollectionList, RDFS.member, collection))
 
-        support_graph_file = Path("support_graph.ttl")
-        support_graph.serialize(support_graph_file, format="turtle")
+        # Specify SpacePrez profile label for dataset and feture collection.
+        spaceprez_graph = Graph()
+        spaceprez_graph.add(
+            (
+                URIRef("https://www.w3.org/TR/vocab-dcat/"),
+                URIRef("http://www.w3.org/ns/dx/conneg/altr-ext#hasLabelPredicate"),
+                URIRef("https://schema.org/name"),
+            )
+        )
+        spaceprez_graph.add(
+            (
+                URIRef("https://www.w3.org/TR/vocab-dcat/"),
+                RDF.type,
+                URIRef("http://www.w3.org/ns/dx/prof/Profile"),
+            )
+        )
+        spaceprez_graph.add(
+            (
+                URIRef("http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30"),
+                URIRef("http://www.w3.org/ns/dx/conneg/altr-ext#hasLabelPredicate"),
+                URIRef("https://schema.org/name"),
+            )
+        )
+        spaceprez_graph.add(
+            (
+                URIRef("http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30"),
+                RDF.type,
+                URIRef("http://www.w3.org/ns/dx/prof/Profile"),
+            )
+        )
+        spaceprez_graph.add(
+            (
+                URIRef("https://w3id.org/profile/dcat2null"),
+                URIRef("http://www.w3.org/ns/dx/conneg/altr-ext#hasLabelPredicate"),
+                URIRef("https://schema.org/name"),
+            )
+        )
+        spaceprez_graph.add(
+            (
+                URIRef("https://w3id.org/profile/dcat2null"),
+                RDF.type,
+                URIRef("http://www.w3.org/ns/dx/prof/Profile"),
+            )
+        )
+
+        spaceprez_graph_file = Path("spaceprez_support_graph.ttl")
+        spaceprez_graph.serialize(spaceprez_graph_file, format="turtle")
 
         await upload_file(
             url,
-            "https://prez.dev/vocprez-system-graph",
-            support_graph_file,
+            "urn:file:spaceprez-support-graph",
+            spaceprez_graph_file,
             http_client,
         )
 

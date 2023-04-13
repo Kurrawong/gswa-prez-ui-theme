@@ -2,7 +2,7 @@ services:
   fuseki:
     image: ghcr.io/kurrawong/fuseki-geosparql
     environment:
-      - JAVA_OPTS=-Xms512m -Xmx4096m
+      - JAVA_OPTS=-Xms512m -Xmx2048m
     ports:
       - 3030:3030
     volumes:
@@ -37,6 +37,8 @@ services:
       args:
         VITE_ENABLED_PREZS: SpacePrez,VocPrez
         VITE_API_BASE_URL: http://localhost:8000
+        VITE_MAP_SEARCH_PROPS_FC_LABEL: https://schema.org/name
+        VITE_MAP_SEARCH_PROPS_DS_LABEL: https://schema.org/name
         VITE_MAP_SETTINGS_API_KEY: ""
     ports:
       - 8001:8000
@@ -61,6 +63,7 @@ services:
       - ./data_loading/data_loader.py:/app/data_loader.py
       - ./data_loading/entrypoint.sh:/app/entrypoint.sh
       - ./data_loading/enable_union_default_graph.py:/app/enable_union_default_graph.py
+      - ./data_loading/enable_geosparql.py:/app/enable_geosparql.py
       - fuseki-data:/fuseki
     profiles:
       - loader
