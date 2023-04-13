@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import PrezApp from "./PrezApp.vue";
+
+const globalCss = import.meta.env.BASE_URL + "globals.css";
 </script>
 
 <template>
-  <link rel="stylesheet" href="globals.css" />
+  <link rel="stylesheet" :href="globalCss" />
   <link
     rel="preconnect stylesheet"
     href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,600;0,700;1,600;1,700&amp;family=Lato:wght@300;400;700;900&amp;display=swap"
