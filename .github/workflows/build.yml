@@ -12,6 +12,8 @@ env:
   IMAGE_NAME: ghcr.io/kurrawong/gsq-prez-ui
   VITE_ENABLED_PREZS: SpacePrez,VocPrez
   VITE_API_BASE_URL: https://api.gsq-prez.dev.kurrawong.ai
+  VITE_MAP_SEARCH_PROPS_FC_LABEL: https://schema.org/name
+  VITE_MAP_SEARCH_PROPS_DS_LABEL: https://schema.org/name
 
 jobs:
   build:
@@ -41,6 +43,8 @@ jobs:
             VITE_ENABLED_PREZS=${{ env.VITE_ENABLED_PREZS }}
             VITE_API_BASE_URL=${{ env.VITE_API_BASE_URL }}
             VITE_MAP_SETTINGS_API_KEY=${{ secrets.MAP_SETTINGS_API_KEY }}
+            VITE_MAP_SEARCH_PROPS_FC_LABEL=${{ secrets.VITE_MAP_SEARCH_PROPS_FC_LABEL }}
+            VITE_MAP_SEARCH_PROPS_DS_LABEL=${{ secrets.VITE_MAP_SEARCH_PROPS_DS_LABEL }}
           context: .
           file: Dockerfile
           push: true
