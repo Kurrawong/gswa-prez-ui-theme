@@ -39,6 +39,11 @@ jobs:
         working-directory: ./prez-ui
         run: npm ci
 
+      - name: Strip out Prez UI header and footer placeholders
+        run: |
+          sed -i 's+<header id="header"></header>+<div id="header"></div>+g' ./prez-ui/index.html
+          sed -i 's+<footer id="footer"></footer>+<div id="footer"></div>+g' ./prez-ui/index.html
+
       - name: Copy QLD Gov Department of Resources theme
         run: |
           mv ./prez-ui/src/App.vue ./prez-ui/src/PrezApp.vue
