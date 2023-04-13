@@ -278,6 +278,10 @@ const globalCss = import.meta.env.BASE_URL + "globals.css";
   color: rgb(242, 242, 242);
 }
 
+.qgds__header-brand-image {
+  color: #022a50;
+}
+
 .qgds__header__pre-header-url {
   font-size: 16px;
   font-weight: 400;
