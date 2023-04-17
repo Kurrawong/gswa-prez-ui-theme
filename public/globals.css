@@ -2584,12 +2584,12 @@ body {
     padding-right: 0.15rem;
   }
   h1, h2, h3, h4, h5, h6 {
-    color: #022a50;
+    /* color: #022a50; */
     font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 700;
   }
   h1 {
-    line-height: 52px;
+    /* line-height: 52px; */
   }
   @media only screen and (max-width: 575px) {
     h1 {
@@ -2600,8 +2600,8 @@ body {
     color: #fff;
   }
   h2 {
-    font-size: 2rem;
-    line-height: 1.25;
+    /* font-size: 2rem;
+    line-height: 1.25; */
   }
   h2:first-child {
     margin-top: 0;
@@ -2642,8 +2642,8 @@ body {
     margin-top: 0.5rem;
   }
   a, a:hover, a:active {
-    color: #022a50;
-    text-decoration: underline 0.031rem solid;
+    /* color: #022a50;
+    text-decoration: underline 0.031rem solid; */
     text-underline-offset: 0.3em;
   }
   .page-title h1 {
