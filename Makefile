@@ -28,3 +28,6 @@ stack-up:
 
 stack-down:
 	docker-compose --profile stack down
+
+stack-ui:
+	docker-compose build prez-ui && docker-compose stop prez-ui && docker-compose rm -f prez-ui && make stack-up
