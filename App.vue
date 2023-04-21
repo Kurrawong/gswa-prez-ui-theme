@@ -42,7 +42,7 @@ const globalCss = import.meta.env.BASE_URL + "globals.css";
         </svg>
         <span class="qgds__header__pre-header-cta__text">Contact us</span>
       </a>
-      <div class="qgds__header__pre-header-buttons">
+      <!-- <div class="qgds__header__pre-header-buttons">
         <button
           type="button"
           class="btn"
@@ -76,7 +76,7 @@ const globalCss = import.meta.env.BASE_URL + "globals.css";
           </svg>
           <span class="qgds__main-nav__toggle-text">Menu</span>
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
   <header>
