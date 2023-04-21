@@ -1,6 +1,6 @@
 services:
   fuseki:
-    image: ghcr.io/kurrawong/fuseki-geosparql
+    image: ghcr.io/kurrawong/fuseki-geosparql:git-main-23a3a84d
     environment:
       - JAVA_OPTS=-Xms512m -Xmx2048m
     ports:
@@ -12,7 +12,7 @@ services:
       - stack
 
   prez:
-    image: ghcr.io/rdflib/prez
+    image: ghcr.io/rdflib/prez:3.0.8
     ports:
       - 8000:8000
     environment:
