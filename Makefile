@@ -1,3 +1,4 @@
+# Legacy command, use stack-* instead.
 ui-build:
 	docker build -t qld-prez-builder -f builder.Dockerfile .
 
