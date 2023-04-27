@@ -32,8 +32,8 @@ jobs:
           cd ./prez-ui && \
           git init && \
           git remote add origin https://github.com/RDFLib/prez-ui.git && \
-          git fetch --depth 1 origin refs/tags/$(cat /tmp/PREZ_UI_GIT_TAG):refs/tags/$(cat /tmp/PREZ_UI_GIT_TAG) && \
-          git checkout tags/$(cat /tmp/PREZ_UI_GIT_TAG)
+          git fetch --depth 1 origin refs/tags/$(cat ../PREZ_UI_GIT_TAG):refs/tags/$(cat ../PREZ_UI_GIT_TAG) && \
+          git checkout tags/$(cat ../PREZ_UI_GIT_TAG)
 
       - name: Install Node dependencies
         working-directory: ./prez-ui
