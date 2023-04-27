@@ -13,13 +13,13 @@ RUN apk update && \
 
 WORKDIR /app
 
-COPY COMMIT_HASH /tmp/COMMIT_HASH
+COPY PREZ_UI_GIT_TAG /tmp/PREZ_UI_GIT_TAG
 
 RUN git init && \
     git remote add origin https://github.com/RDFLib/prez-ui.git && \
-    # Pin to commit hash.
-    git fetch --depth 1 origin $(cat /tmp/COMMIT_HASH) && \
-    git checkout FETCH_HEAD
+    # Pin to git tag version.
+    git fetch --depth 1 origin refs/tags/$(cat /tmp/PREZ_UI_GIT_TAG):refs/tags/$(cat /tmp/PREZ_UI_GIT_TAG) && \
+    git checkout tags/$(cat /tmp/PREZ_UI_GIT_TAG)
 
 COPY public/ /app/public
 

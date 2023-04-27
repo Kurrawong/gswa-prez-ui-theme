@@ -34,7 +34,7 @@ make ui-all
 
 ## Prez UI version
 
-The prez-ui version is always pinned to a specific commit in the [upstream Prez UI repository](https://github.com/RDFLib/prez-ui). This is represented in the file [COMMIT_HASH](COMMIT_HASH).
+The prez-ui version is always pinned to a specific git tag in the [upstream Prez UI repository](https://github.com/RDFLib/prez-ui). This is tracked in the file [PREZ_UI_GIT_TAG](PREZ_UI_GIT_TAG) and used in the build scripts.
 
 ## Running the full Prez stack with Compose
 
