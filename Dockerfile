@@ -31,6 +31,9 @@ RUN sed -i 's+<footer id="footer"></footer>+<div id="footer"></div>+g' /app/inde
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
 COPY App.vue /app/src/App.vue
 
+# Add custom VocPrez page.
+COPY VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
+
 RUN npm ci && npm run build
 
 # ---
