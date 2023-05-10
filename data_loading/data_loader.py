@@ -9,7 +9,7 @@ from rdflib.namespace import DCTERMS, RDFS, RDF, SKOS
 
 SPATIAL_DATA_FILE_PATH_ROOT = Path("/app/qldgeofeatures-dataset/qldgeofeatures.ttl")
 SPATIAL_DATA_BACKGROUND_ONT_ROOT = Path("/app/qldgeofeatures-dataset/background-onts")
-VOCAB_DATA_BACKGROUND_ONT_ROOT = Path("/app/background-onts")
+VOCAB_DATA_BACKGROUND_ONT_ROOT = Path("/app/vocabularies/background-onts")
 VOCAB_DATA_FILE_PATH_ROOT = "/app/vocabularies"
 VOCAB_DATA_FILE_GLOB_PATTERN = "vocabularies-*"
 FUSEKI_DATASET_NAME = "gsq"
@@ -91,7 +91,7 @@ async def main() -> None:
         for collection in collections:
             support_graph.add((PREZ.VocPrezCollectionList, RDFS.member, collection))
 
-        # Specify SpacePrez profile label for dataset and feture collection.
+        # Specify SpacePrez profile label for dataset and feature collection.
         spaceprez_graph = Graph()
         spaceprez_graph.add(
             (
