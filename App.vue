@@ -274,6 +274,10 @@ const globalCss = import.meta.env.BASE_URL + "globals.css";
 </style>
 
 <style>
+td {
+  padding: 10px !important;
+}
+
 #page-heading > h1 {
   color: rgb(242, 242, 242);
 }
