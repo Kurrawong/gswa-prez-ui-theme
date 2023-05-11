@@ -1,11 +1,5 @@
 FROM docker.io/node:18-alpine3.16 AS builder
 
-ARG VITE_ENABLED_PREZS
-ARG VITE_API_BASE_URL
-ARG VITE_MAP_SETTINGS_API_KEY
-ARG VITE_MAP_SEARCH_PROPS_FC_LABEL
-ARG VITE_MAP_SEARCH_PROPS_DS_LABEL
-
 RUN apk update && \
     apk add \
         bash \
@@ -34,12 +28,23 @@ COPY App.vue /app/src/App.vue
 # Add custom VocPrez page.
 COPY VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
 
+RUN rm .env
+
 RUN npm ci && npm run build
 
 # ---
 FROM docker.io/nginx:1.23-alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/content
+RUN apk add --no-cache bash
+
+RUN mkdir /app
+
+COPY ./docker_entrypoint.sh ./.env ./
+COPY --from=builder /app/dist /app
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
+RUN chmod +x /docker_entrypoint.sh
+
 EXPOSE 8000
+
+ENTRYPOINT [ "/bin/bash", "./docker_entrypoint.sh" ]
