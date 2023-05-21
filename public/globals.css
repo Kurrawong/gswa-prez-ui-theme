@@ -506,11 +506,12 @@ body {
     display: none;
   }
   header {
-    background: #fff;
+    background: rgb(230, 232, 230);
   }
   header .qgds__header {
     padding-top: 3rem;
     padding-bottom: 3rem;
+    background-color: rgb(0, 139, 145);
   }
   @media only screen and (min-width: 992px) {
     header .qgds__header {
@@ -785,216 +786,7 @@ body {
   .image-banner-src {
     width: 100%;
   }
-  footer {
-    background: #225578;
-    color: #fff;
-    font-size: 0.875rem;
-    padding: 0;
-    padding-bottom: 1.5rem;
-    border-top: 0.25rem solid #c14213;
-  }
-  @media only screen and (min-width: 992px) {
-    footer {
-      padding: 4rem 0;
-    }
-  }
-  footer h1, footer h2, footer h3, footer h4 {
-    padding-top: 0;
-    padding-bottom: 1rem;
-    color: #fff;
-  }
-  footer h3 {
-    font-size: 1.25rem;
-    line-height: 1.2;
-    margin: 0;
-    font-weight: 600;
-  }
-  @media only screen and (max-width: 991px) {
-    footer h3 {
-      font-size: 1rem;
-      line-height: 1.25;
-      padding: 0;
-    }
-  }
-  footer p {
-    color: #fff;
-    margin-top: 0;
-    font-size: 0.875rem;
-  }
-  footer a {
-    color: #fff;
-    text-decoration: underline 0.031rem solid;
-  }
-  @media only screen and (max-width: 991px) {
-    footer a {
-      line-height: 1.5rem;
-    }
-  }
-  footer a:hover {
-    text-decoration: none;
-    color: #fff;
-  }
-  footer svg {
-    fill: #fff;
-    max-width: 220px;
-    width: 220px;
-    height: 38px;
-  }
-  footer hr {
-    display: none;
-  }
-  @media only screen and (max-width: 991px) {
-    footer hr {
-      display: block;
-      margin-bottom: 1.5rem;
-      background: #b4d2e8;
-      opacity: 1;
-    }
-  }
-  footer .qgds__footer__column {
-    padding-top: 1.5rem;
-  }
-  @media only screen and (min-width: 992px) {
-    footer .qgds__footer__column {
-      padding-top: 0;
-    }
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__column .feedback__section {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      clear: both;
-    }
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__column .feedback__section .btn {
-      float: right;
-      margin-top: 0;
-    }
-  }
-  footer nav.qgds__footer__navigation {
-    border-top: 1px solid rgba(180, 210, 232, 0.2);
-    padding-top: 1.5rem;
-  }
-  @media only screen and (min-width: 992px) {
-    footer nav.qgds__footer__navigation {
-      border: 0;
-      border-right: 1px solid #2b6c98;
-      padding-top: 0;
-    }
-  }
-  footer nav.qgds__footer__navigation ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    line-height: 1.5;
-    list-style-type: none;
-  }
-  footer nav.qgds__footer__navigation ul li {
-    margin: 0.475rem 0;
-    flex-basis: 100%;
-    font-size: 0.875rem;
-  }
-  @media only screen and (max-width: 991px) {
-    footer nav.qgds__footer__navigation ul li {
-      flex-basis: 50%;
-      margin: 0;
-    }
-  }
-  @media only screen and (min-width: 768px) {
-    footer nav.qgds__footer__navigation ul li {
-      flex-basis: 33%;
-      width: 33%;
-    }
-  }
-  @media only screen and (min-width: 992px) {
-    footer nav.qgds__footer__navigation ul li {
-      flex-basis: 100%;
-      width: auto;
-    }
-  }
-  footer .qgds__footer__social {
-    border-top: 1px solid rgba(180, 210, 232, 0.2);
-    padding-top: 2rem;
-  }
-  @media only screen and (min-width: 992px) {
-    footer .qgds__footer__social {
-      border: 0;
-      padding-top: 0;
-    }
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__social {
-      padding-top: 1.5rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__social .qgds__footer__heading {
-      margin-right: 0.75rem;
-      padding-bottom: 0;
-    }
-  }
-  footer .qgds__footer__social ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  footer .qgds__footer__social ul li {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
-    font-size: 0.875rem;
-    flex-basis: 100%;
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__social ul li {
-      flex-basis: auto;
-    }
-  }
-  footer .qgds__footer__social ul li a {
-    display: flex;
-    line-height: 1rem;
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__social ul li a .qgds__footer__social__label {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
-  }
-  footer .qgds__footer__social ul li a svg {
-    margin-right: 0.5rem;
-    width: 32px;
-    height: 20px;
-  }
-  @media only screen and (max-width: 991px) {
-    footer .qgds__footer__social ul li a svg {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-  }
-  footer .qgds__footer__acknowledgements {
-    margin: 0;
-    margin-bottom: 1.6rem;
-  }
-  footer .qgds__footer__copyright {
-    margin-top: 1.6rem;
-  }
+
   nav.navbar {
     padding: 0;
     background: #f5f5f5;
@@ -2894,4 +2686,76 @@ body {
   span.sq-file-info__thumbnail img {
     width: 150px;
     max-width: 100%;
+  }
+
+
+
+  .submit-btn {
+    background-color: rgb(45, 47, 50)!important;
+    border-color: rgb(45, 47, 50)!important;
+  }
+
+  .collapse-btn {
+    color: rgb(112, 112, 112)!important;
+  }
+
+  .bottom-nav-items a {
+    color: rgb(112, 112, 112)!important;
+  }
+
+  .home-page-link {
+    background-color: rgb(230, 232, 230)!important;
+  }
+
+  .home-page-link h3 {
+    color: rgb(112, 112, 112)!important;
+  }
+
+  /*
+  a {
+    color: rgb(112, 112, 112)!important;
+  }
+  */
+
+  .nav-link .active {
+    background-color: rgb(230, 232, 230)!important;
+    color: white;
+  }
+
+  .nav-link:hover {
+    background-color: rgb(230, 232, 230)!important;
+    color: white;
+  }
+
+  header h4 a {
+    color: rgb(112, 112, 112)!important;
+  }
+
+  .prez-app header {
+    background-color: white!important;
+  }
+
+  .prez-app header #nav-header {
+    visibility: hidden;
+  }
+
+  .utility-navigation {
+    vertical-align: top!important;
+    font-size: 13px!important;
+  }
+
+  .home-page-links a {
+    color: #333;
+  }
+
+  a.nav-link .router-link-active {
+    background-color: #006B6E!important;
+  }
+
+  .prez-app a {
+    color: #006B6E ;
+  }
+
+  #main-nav a {
+    color: #006B6E ;
   }

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: ghcr.io/kurrawong/gsq-prez-ui
+  IMAGE_NAME: ghcr.io/kurrawong/gswa-prez-ui
 
 jobs:
   build:

@@ -1,8 +1,6 @@
-# QLD Government Department of Resources Prez UI Theme
+# GSWA Prez UI Theme
 
 This repository contains the scripts to produce a custom theme of Prez.
-
-Note: When this repository is transferred to https://github.com/geological-survey-of-queensland, ensure the Google Maps API key is updated.
 
 ## Running the theme
 

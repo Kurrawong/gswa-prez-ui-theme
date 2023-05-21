@@ -1,0 +1,5545 @@
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+[hidden] {
+  display: none;
+}
+html {
+  background: #ffffff;
+  color: #000000;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+html,
+button,
+input,
+select,
+textarea {
+  font-family: "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+body {
+  margin: 0;
+}
+a:focus {
+  outline: thin dotted;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+dfn {
+  font-style: italic;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+mark {
+  background: #ff0;
+  color: #000;
+}
+p,
+pre {
+  margin: 1em 0;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+q {
+  quotes: none;
+}
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+dl,
+menu,
+dd {
+  margin: 0;
+}
+menu,
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 0;
+}
+form {
+  margin: 0;
+}
+fieldset {
+  border: 0 none;
+  margin: 0;
+  padding: 0;
+}
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+}
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button,
+input {
+  line-height: normal;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  *overflow: visible;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* ==========================================================================
+   Global
+   ========================================================================== */
+/**
+* The global less file contain elements that are shared arcoss the site.
+* Common html elements will be found here.
+*
+* Related LESS files
+* - header-typography.less
+* - header-grid.less
+* - header-typography.less
+*/
+body {
+  background: #e0e0e0;
+  padding: 0;
+  margin: 0;
+}
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ffffff;
+  color: #000000;
+  padding: 0.2em 0;
+}
+.print-logo {
+  display: none!important;
+  visibility: hidden;
+}
+::-moz-selection,
+::selection {
+  background: #008b91;  /* pDMIRS */
+  color: #ffffff;
+  text-shadow: none;
+}
+/* Tablet media query
+   ========================================================================== */
+/* Tablet media query
+   ========================================================================== */
+/* ==========================================================================
+   Grid layout
+   ========================================================================== */
+/**
+ * Column layout with horizontal scroll.
+ *
+ * This creates a single row of full-height, non-wrapping columns that can
+ * be browsed horizontally within their parent.
+ */
+/**
+* site structue
+* 1. The wrapper controls the max width that the site will stretch too. Being a
+* fluid layout the column widths will be based on a % of this maximum value
+*/
+.wrapper {
+  position: relative;
+  max-width: 1260px;
+  /* 1 */
+  margin: 0 auto;
+}
+.main-body {
+  background: #ffffff;
+}
+/**
+ * Grid container
+ *
+ * Must only contain `.columns` children.
+ * 1. acts as a clearfix
+ *
+*/
+.row {
+  zoom: 1;
+  /* 1 */
+}
+.row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+ * Grid cells
+ *
+ * No explicit width by default. Extend with `.columns n` classes.
+ * Fliud cells for tablet and desktop viewports
+ *
+*/
+  .columns {
+    float: left;
+  }
+  /**
+ * Cell dimensions
+ *
+ * These % are based off the following senario:
+ * Box width: 2260px;
+ * Margin between columns 20px;
+*/
+  .one {
+    width: 8.33333%;
+  }
+  .two {
+    width: 16.66667%;
+  }
+  .three {
+    width: 25%;
+  }
+  .four {
+    width: 33.33332%;
+  }
+  .five {
+    width: 41.66669%;
+  }
+  .six {
+    width: 50%;
+  }
+  .seven {
+    width: 58.33333%;
+  }
+  .eight {
+    width: 66.66667%;
+  }
+  .nine {
+    width: 75%;
+  }
+  .ten {
+    width: 83.33333%;
+  }
+  .eleven {
+    width: 91.66667%;
+  }
+  .twelve {
+    width: 100%;
+  }
+}
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+* Here we set the main typographic elements that are displayed on the site
+*
+*/
+/**
+* General font styles
+*
+*/
+html {
+  font-size: 62.5%;
+}
+body {
+  font: 13px/22px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.3rem;
+  color: #333333;
+}
+a {
+  color: #006B6E; /* pDMIRS */
+  text-decoration: underline;
+}
+a:hover,
+a:focus {
+  color: #333333;
+}
+a:visited {
+  color: #800080;
+}
+.view-more {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 12px!important;
+  line-height: 16px!important;
+}
+.view-more:hover,
+.view-more:focus {
+  text-decoration: underline;
+}
+p {
+  margin: 1.0em 0;
+}
+ol,
+ul {
+  padding: 0 0 0 20px;
+  margin: 1em 0;
+}
+blockquote {
+  font: 16px/1.5 "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #333333;
+  margin: 1.0em 0;
+}
+img.fullwidth {
+  display: block;
+  width: 100%;
+}
+/**
+* Header styles
+* 1. sectional header
+*
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: 300 1em/1.25 "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #000000;
+  margin: 20px 0;
+}
+h1 {
+  font-size: 30px;
+  font-size: 3.0rem;
+}
+h2 {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+h3 {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+h4,
+h5,
+h6 {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+h5 {
+  color: #707274;
+}
+h6 {
+  color: #939598;
+}
+/* Tablet media query
+   ========================================================================== */
+/* Tablet media query
+   ========================================================================== */
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+* This file contains default styling for html form tags
+*
+*/
+legend {
+  font: 18px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #000000;
+  margin: 15px 0;
+}
+.form-text {
+  font: 16px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #707274;
+}
+.form-text p {
+  margin: 0 0 1.0em 0;
+}
+.form-row,
+.group-row {
+  margin: 0 0 15px 0;
+}
+.form-row:last-child,
+.group-row:last-child {
+  margin-bottom: 0;
+}
+fieldset .form-row:last-child {
+  margin-bottom: 15px;
+}
+:last-child {
+  margin-bottom: 0;
+}
+/**
+* labels
+*
+*/
+label {
+  display: block;
+  font-size: 15px;
+}
+/**
+* inputs, selects, textareas
+* 1. select box hieght for mobile views
+*
+*/
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+select,
+.k-dropdown-wrap,
+textarea {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  font: 16px/58px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #707070;
+  padding: 0 15px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+.k-dropdown-wrap:focus,
+textarea:focus,
+input[type="text"].k-state-focused,
+input[type="password"].k-state-focused,
+input[type="email"].k-state-focused,
+input[type="tel"].k-state-focused,
+select.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+textarea.k-state-focused {
+  box-shadow: 0 0 5px #4d90fe;
+  border: 1px solid #4d90fe;
+}
+select {
+  height: 58px;
+  /* 1 */
+}
+/*
+* radio buttons, checkboxes
+* radio buttons and checkboxes are rendered items using the uniform j plugin
+* 1. checkbox syles
+* 2. radio button style
+* 3. Group radio buttons with the label to the left;
+*
+*/
+.checker,
+.radio {
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+}
+.checker span,
+.radio span {
+  width: 20px;
+  height: 20px;
+  text-indent: 0!important;
+}
+.checker input[type="radio"],
+.radio input[type="radio"],
+.checker input[type="checkbox"],
+.radio input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+.checker {
+  /* 1 */
+}
+.checker span {
+  border: 1px solid #707274;
+  background: #ffffff;
+}
+.checker span.checked {
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -393px -255px;
+  background-color: #ffffff;
+  text-indent: -9999px;
+  /* 1 */
+}
+.radio {
+  /* 2 */
+}
+.radio span {
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -393px -215px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.radio span.checked {
+  background-position: -393px -235px;
+}
+.radio-group,
+.radio-group-inputs {
+  /* 3 */
+}
+.radio-group input[type="radio"],
+.radio-group-inputs input[type="radio"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+.radio-group .checker,
+.radio-group-inputs .checker,
+.radio-group .radio,
+.radio-group-inputs .radio {
+  display: inline-block;
+  vertical-align: middle;
+  width: 8%;
+}
+.radio-group label,
+.radio-group-inputs label {
+  display: inline-block;
+  vertical-align: middle;
+  width: 90%;
+  color: #707274;
+  line-height: 40px;
+  margin: 0;
+}
+.radio-group-inputs label {
+  width: 30%;
+  line-height: 60px;
+}
+.radio-group-inputs input[type="text"],
+.radio-group-inputs input[type="tel"],
+.radio-group-inputs input[type="email"],
+.radio-group-inputs input[type="password"] {
+  width: 59%;
+  display: inline-block;
+  vertical-align: middle;
+}
+/*
+* Drop downs
+* In the tablet and desktop viewports the select field is rendered with
+* a graphical drop down
+*
+*/
+.k-dropdown {
+  display: block;
+}
+.k-dropdown .k-dropdown-wrap {
+  position: relative;
+  cursor: pointer;
+}
+.k-dropdown .k-dropdown-wrap.k-state-focused .k-select {
+  border-left: 1px solid #f0f0f0;
+}
+.k-dropdown .k-dropdown-wrap .k-select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 58px;
+  height: 58px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -166px -46px;
+
+  text-indent: -9999px;
+  /* 1 */
+  border-left: 1px solid #cccccc;
+  cursor: pointer;
+}
+.k-list-container {
+  border: 1px solid #f0f0f0;
+  border-top: 0 none;
+  background: #ffffff;
+}
+.k-list-container ul.k-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.k-list-container li.k-item {
+  padding: 5px;
+}
+.k-list-container li.k-item.k-state-selected {
+  background: #f0f0f0;
+}
+.k-list-container li.k-item.k-state-hover {
+  background: #008b91;  /* pDMIRS */
+  color: #ffffff;
+}
+/*
+* Buttons
+*
+*/
+.btn,
+button[type="submit"],
+button[type="button"] {
+  display: inline-block;
+  width: auto;
+  height: 58px;
+  min-height: 0;
+  width: 100%;
+  background: #00a6ab;  /* pDMIRS */
+  border: 0 none;
+  color: #ffffff;
+  font: 12px/58px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+}
+.btn:hover,
+button[type="submit"]:hover,
+button[type="button"]:hover,
+.btn:focus,
+button[type="submit"]:focus,
+button[type="button"]:focus {
+  background-color: #b30000;
+  color: #fff;
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+.btn.btn-secondary,
+button[type="submit"].btn-secondary,
+button[type="button"].btn-secondary {
+  background-color: #707274;
+}
+.btn.btn-link,
+button[type="submit"].btn-link,
+button[type="button"].btn-link {
+  background: none;
+  color: #008b91;  /* pDMIRS */
+}
+.btn.btn-link:hover,
+button[type="submit"].btn-link:hover,
+button[type="button"].btn-link:hover {
+  text-decoration: underline;
+}
+.btn:visited,
+button[type="submit"]:visited,
+button[type="button"]:visited {
+  color: #ffffff;
+}
+.btn:focus,
+button[type="submit"]:focus {
+  background: #000;
+}
+.form-row.form-button {
+  text-align: right;
+  margin-bottom: 15px;
+}
+/**
+* Validation
+* inline form validation and errors
+*
+*/
+input.error {
+  border-color: #008b91 !important;  /* pDMIRS */
+}
+label.error {
+  clear: both;
+  color: #008b91;  /* pDMIRS */
+  font-size: 15px;
+  padding-top: 10px;
+}
+label.error:before {
+  float: left;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -64px -279px;
+
+  text-indent: -9999px;
+  /* 1 */
+  width: 22px;
+  height: 22px;
+  content: '';
+  margin-right: 7px;
+}
+label.error + .form-message {
+  display: none;
+}
+.validation {
+  color: #707274;
+  font-size: 15px;
+  padding-top: 10px;
+}
+.validation .icon {
+  float: left;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -64px -279px;
+
+  text-indent: -9999px;
+  /* 1 */
+  width: 22px;
+  height: 22px;
+  margin-right: 7px;
+}
+.validation .length .icon,
+.validation .capital .icon,
+.validation .lowercase .icon,
+.validation .number .icon,
+.validation.validationConfirm .icon {
+  background-position: -94px -309px;
+}
+.validation .length.valid .icon,
+.validation .capital.valid .icon,
+.validation .lowercase.valid .icon,
+.validation .number.valid .icon,
+.validation.validationConfirm.valid .icon {
+  background-position: -64px -309px;
+}
+/**
+* Message
+* inline form instruction message.
+* this will be replaced by validation messages when needed
+*
+*/
+.form-message {
+  clear: both;
+  color: #707274;
+  font-size: 15px;
+  padding-top: 10px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* labels
+*
+*/
+  .form-row > label {
+    line-height: 30px;
+    padding: 15px 0;
+  }
+  /**
+* Form structure
+* 1. the dividing divs between form rows
+* 2. left coloumn elements
+* 3. right column elements
+*
+*/
+  fieldset .form-row {
+    zoom: 1;
+  }
+  fieldset .form-row:before,
+  fieldset .form-row:after {
+    content: "";
+    display: table;
+  }
+  fieldset .form-row:after {
+    clear: both;
+  }
+  fieldset .form-row > label {
+    float: left;
+    width: 33.33332%;
+    /* 2 */
+  }
+  fieldset .form-row > input[type="text"],
+  fieldset .form-row > input[type="password"],
+  fieldset .form-row > select,
+  fieldset .form-row > .k-dropdown,
+  fieldset .form-row > textarea,
+  fieldset .form-row > .radio-group,
+  fieldset .form-row > .radio-group-inputs {
+    float: left;
+    width: 66.66667%;
+    /* 3 */
+  }
+  /*
+* Buttons
+*
+*/
+  .btn,
+  button[type="submit"],
+  button[type="button"] {
+    width: auto;
+    min-width: 160px;
+    padding: 0 20px;
+  }
+  .btn.btn-secondary,
+  button[type="submit"].btn-secondary,
+  button[type="button"].btn-secondary {
+    background-color: #707274;
+  }
+  .btn.btn-link,
+  button[type="submit"].btn-link,
+  button[type="button"].btn-link {
+    background: none;
+    color: #008b91;  /* pDMIRS */
+  }
+  a.btn {
+    min-width: 140px;
+  }
+  /**
+* Validation
+* inline form validation and errors
+*
+*/
+  .form-row label.error,
+  .form-row .validation {
+    clear: both;
+    margin-left: 33.33332%;
+    width: auto;
+  }
+  /**
+* Message
+* inline form instruction message.
+* this will be replaced by validation messages when needed
+*
+*/
+  .form-message {
+    margin-left: 33.33332%;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Validation
+* inline form validation and errors
+*
+*/
+  .form fieldset .form-row > label {
+    width: 25%;
+  }
+  .form fieldset .form-row > input[type="text"],
+  .form fieldset .form-row > input[type="password"],
+  .form fieldset .form-row > select,
+  .form fieldset .form-row > .k-dropdown,
+  .form fieldset .form-row > textarea,
+  .form fieldset .form-row > .radio-group,
+  .form fieldset .form-row > .radio-group-inputs {
+    float: left;
+    width: 41.66669%;
+  }
+  .form fieldset .form-row .validation,
+  .form fieldset .form-row .form-message,
+  .form fieldset .form-row label.error {
+    clear: none;
+    float: left;
+    width: 25%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 0 0 8.33333%;
+  }
+  .form fieldset .form-row .validation + .validation,
+  .form fieldset .form-row .form-message + .validation,
+  .form fieldset .form-row label.error + .validation {
+    width: 25%;
+    margin-left: 75%;
+  }
+  /**
+* Message
+* inline form instruction message.
+* this will be replaced by validation messages when needed
+*
+*/
+  .form-message {
+    padding: 0;
+  }
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .radio span,
+  .validation .icon,
+  label.error:before {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Print settings
+   ========================================================================== */
+/**
+* Normalise Printing definitions
+* The print LESS reset the print styles
+*
+*/
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #cccccc;
+    page-break-inside: avoid;
+    padding: 35px;
+  }
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  .print-logo {
+    display: block!important;
+    visibility: visible;
+  }
+  /**
+* Custom print settings
+* Print setting to hide / show / customise the print layout
+* 1. hide from the print form
+*/
+  footer,
+  .on-page-navigation,
+  .content-action,
+  .supporting-content,
+  .alert-notification,
+  .quick-links,
+  .latest-news,
+  .pagination,
+  .breadcrumbs,
+  .online-systems {
+    display: none;
+    /* 1 */
+  }
+  .content-highlight {
+    font-size: 1.5em;
+    padding: 0;
+  }
+  .content-highlight .icon {
+    display: none;
+  }
+  .content .feature-page .feature-image img {
+    width: auto;
+  }
+  .content .document-overview ul img {
+    width: auto;
+  }
+  .content .document-overview ul .document-container {
+    height: auto;
+  }
+}
+/**
+* Shared
+* Shared widgets LESS
+*
+*/
+/* ==========================================================================
+   Alert
+   ========================================================================== */
+/**
+* The alert is a global element that is used across the site to notify users
+* of important information.
+*
+*/
+.alert-notification {
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
+  /* FF3.6+ */
+  background: -webkit-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+  /* W3C */
+  padding-bottom: 15px;
+}
+.alert-title {
+  zoom: 1;
+}
+.alert-title:before,
+.alert-title:after {
+  content: "";
+  display: table;
+}
+.alert-title:after {
+  clear: both;
+}
+.alert-title .alert-icon {
+  width: 64px;
+  height: 64px;
+  float: left;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -128px -215px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.alert-title .alert-name {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  min-height: 64px;
+  font: 16px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 22px 0;
+  margin: 0 50px 0 64px;
+}
+.alert-title .alert-name strong {
+  font-weight: 300;
+  color: #008b91;  /* pDMIRS */
+}
+.alert-title .alert-toggle {
+  /* 3 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -370px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  margin-top: 7px;
+}
+.alert-title .alert-toggle.active {
+  background-position: -370px -50px;
+}
+.alert-title:hover {
+  cursor: pointer;
+}
+.alert-body {
+  display: none;
+  padding: 0 50px 0 64px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .alert-notification {
+    padding-bottom: 0;
+  }
+  .alert-title {
+    padding-top: 1px;
+  }
+  .alert-title .alert-icon {
+    width: 72px;
+    background-position: -192px -215px;
+    background-color: #008b91;  /* pDMIRS */
+  }
+  .alert-title .alert-name {
+    min-height: 64px;
+    font: 14px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    margin: 0 70px 0 85px;
+  }
+  .alert-title .alert-name strong {
+    font-weight: 700;
+    color: #333333;
+  }
+  .alert-title .alert-toggle {
+    width: 64px;
+    height: 63px;
+    background-position: -314px 7px;
+    background-color: #008b91;  /* pDMIRS */
+    margin-top: 1px;
+  }
+  .alert-title .alert-toggle:hover {
+    background-color: #008b91;  /* pDMIRS */
+  }
+  .alert-title .alert-toggle.active {
+    background-position: -314px -43px;
+  }
+  .alert-body {
+    padding: 0 70px 20px 85px;
+  }
+  .alert-body p {
+    margin-top: 0;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .alert-title .alert-name {
+    font: 16px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .alert-title .alert-icon,
+  .alert-title .alert-toggle {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Filter
+   ========================================================================== */
+/**
+* Styling for the inpage filtering control panel
+*
+*/
+.filter {
+  background: #f0f0f0;
+  border-bottom: 1px solid #ffffff;
+}
+.filter h2 {
+  position: relative;
+  display: block;
+  font: 18px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+}
+.filter h2:after {
+  /* 3 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -365px 5px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.filter h2.active:after {
+  background-position: -365px -45px;
+}
+.filter .filter-container {
+  display: none;
+  padding: 15px;
+}
+.filter .filter-container .k-dropdown,
+.filter .filter-container select {
+  margin-bottom: 5px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .filter h2 {
+    display: none!important;
+  }
+  .filter .filter-container {
+    display: block;
+    padding: 20px;
+    zoom: 1;
+  }
+  .filter .filter-container:before,
+  .filter .filter-container:after {
+    content: "";
+    display: table;
+  }
+  .filter .filter-container:after {
+    clear: both;
+  }
+  .filter .filter-container .k-dropdown,
+  .filter .filter-container select {
+    float: left;
+    width: 40%;
+    margin-right: 2%;
+  }
+  .filter .filter-container a.btn {
+    float: left;
+    width: 16%;
+    min-width: 0;
+    padding: 0;
+  }
+  /**
+* process explained filter
+*
+*/
+  .process .filter {
+    float: left;
+    width: 73%;
+    margin: 0 1% 1% 1%;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+/* Retina media query
+   ========================================================================== */
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+/**
+* The pagination less is used on pages to display a number count such as search
+* resutls or news listing
+*
+*/
+.pagination ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  padding: 15px;
+}
+.pagination ul li {
+  display: inline-block;
+}
+.pagination ul li a {
+  display: block;
+  line-height: 14px;
+  color: #333333;
+  border-right: 1px solid #333333;
+  text-decoration: none;
+  padding: 0 10px;
+  margin: 8px 0;
+}
+.pagination ul li a.active,
+.pagination ul li a:hover,
+.pagination ul li a:focus {
+  color: #008b91;  /* pDMIRS */
+}
+.pagination ul li:first-child a {
+  border: 0 none;
+  padding: 0 10px 0 0;
+}
+.pagination ul li:last-child a {
+  border: 0 none;
+  padding: 0 0 0 20px;
+}
+/* ==========================================================================
+   Onmline sysyems
+   ========================================================================== */
+/**
+* The online systems is a global toggle element that provides easy access to
+* promoted systems
+* The online systems are only available on the desktop / tablet viewport.
+*
+*/
+.online-systems {
+  display: none;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .online-systems {
+    display: block;
+  }
+  .online-systems .online-systems-header {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 33.33333%;
+  }
+  .online-systems .online-systems-header.active h2:after {
+    background-position: -130px -60px;
+  }
+  .online-systems h2 {
+    font: 15px/2 "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    margin: 0;
+    background: #ececec;
+    color: #333333;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px 10px;
+  }
+  .online-systems h2:before,
+  .online-systems h2:after {
+    display: block;
+    background: url(sprites.png) no-repeat;
+    background-position: 0 0;
+
+    text-indent: -9999px;
+    /* 1 */
+    width: 30px;
+    height: 30px;
+    content: '';
+  }
+  .online-systems h2:before {
+    float: left;
+    background-position: -263px -215px;
+    margin-right: 7px;
+  }
+  .online-systems h2:after {
+    float: right;
+    background-position: -181px -60px;
+    margin-left: 7px;
+  }
+  .online-systems h2:hover,
+  .online-systems h2:focus {
+    background-color: #d3d3d3;
+    cursor: pointer;
+  }
+  .online-systems h2 a {
+    color: #333333;
+    text-decoration: none;
+  }
+  .online-systems-container {
+    display: none;
+    zoom: 1;
+    background-color: #ececec;
+    padding: 35px 40px;
+  }
+  .online-systems-container:before,
+  .online-systems-container:after {
+    content: "";
+    display: table;
+  }
+  .online-systems-container:after {
+    clear: both;
+  }
+  .online-systems-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 45%;
+  }
+  .online-systems-container ul:first-child {
+    margin-right: 10%;
+  }
+  .online-systems-container ul a {
+    zoom: 1;
+    display: block;
+    text-decoration: none;
+    color: #333333;
+    margin-bottom: 15px;
+  }
+  .online-systems-container ul a:before,
+  .online-systems-container ul a:after {
+    content: "";
+    display: table;
+  }
+  .online-systems-container ul a:after {
+    clear: both;
+  }
+  .online-systems-container ul span {
+    display: block;
+  }
+  .online-systems-container ul .system-icon {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+  }
+  .online-systems-container ul .system-title {
+    font: 15px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    color: #000000;
+    margin-left: 40px;
+  }
+  .online-systems-container ul .system-description {
+    font: 13px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    color: #666;
+    margin-left: 40px;
+  }
+  .online-systems-container a.view-all {
+    clear: both;
+    float: right;
+    background: none;
+    color: #008b91;  /* pDMIRS */
+    padding: 0;
+    min-width: 0;
+  }
+  .home .online-systems-header {
+    top: 0;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .online-systems .online-systems-header {
+    width: 25%;
+    padding-right: 25px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .home .online-systems-header {
+    top: 70px;
+    width: 33.33332%;
+    padding-right: 0;
+  }
+  .home .online-systems-header.active {
+    position: relative;
+    top: 0;
+    width: 100%;
+    background: #e0e0e0;
+    zoom: 1;
+  }
+  .home .online-systems-header.active:before,
+  .home .online-systems-header.active:after {
+    content: "";
+    display: table;
+  }
+  .home .online-systems-header.active:after {
+    clear: both;
+  }
+  .home .online-systems-header.active h2 {
+    width: 33.33333%;
+    float: right;
+  }
+  .home .online-systems-container {
+    margin-top: 0;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .online-systems h2:before,
+  .online-systems h2:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Latest news / listing template
+   ========================================================================== */
+/**
+* The latest news displays a linked thumbnail layout.
+* The latest news is used on both the home page and the internal news pages.
+* The latestest news listing can be extended to include all card based
+* template pages.
+*
+*/
+/**
+* Home page layout
+*
+*/
+.home .latest-news h2 {
+  position: relative;
+  display: block;
+  font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+  padding-right: 0;
+}
+.home .latest-news h2:after {
+  /* 3 */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -370px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.home .latest-news h2.active:after {
+  background-position: -370px -50px;
+}
+.home .latest-news .latest-news-container {
+  display: none;
+}
+.home .latest-news .listing-item .title {
+  margin-bottom: 0;
+}
+/**
+* Item listing layout
+* 1. home page variation
+* 2. listing page variation
+*
+*/
+.listing-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  zoom: 1;
+  clear: both;
+}
+.listing-container:before,
+.listing-container:after {
+  content: "";
+  display: table;
+}
+.listing-container:after {
+  clear: both;
+}
+.listing-item a {
+  display: block;
+  text-decoration: none;
+  padding-bottom: 30px;
+  border-right: 1px solid #e0e0e0;
+}
+.listing-item a:hover img,
+.listing-item a:focus img {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+.listing-item .thumbnail,
+.listing-item .date,
+.listing-item .title,
+.listing-item .description {
+  display: block;
+  overflow: hidden;
+}
+.listing-item .thumbnail {
+  display: none;
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  margin-right: -1px;
+}
+.listing-item .thumbnail img {
+  display: block;
+  min-width: 100%;
+  height: 190px;
+  max-width: none;
+}
+.listing-item .date,
+.listing-item .title,
+.listing-item .description {
+  font: 13px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+.listing-item .date {
+  height: 20px;
+  color: #707070;
+  padding: 15px 24px;
+}
+.listing-item .title {
+  font-size: 16px;
+  color: #006B6E;  /* pDMIRS */
+  padding: 0 24px;
+  margin-bottom: 10px;
+}
+.listing-item .description {
+  font-size: 12px;
+  color: #333333;
+  padding: 0 24px;
+}
+.home .listing-item {
+  /* 1 */
+}
+.home .listing-item:nth-child(6n) a {
+  border-right: 1px solid #e0e0e0;
+}
+.home .listing-item .thumbnail {
+  display: block;
+}
+.landing .news-listing h2 {
+  /* 2 */
+  display: block;
+  font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 20px;
+  margin: 0;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .listing-item .title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    height: 80px;
+  }
+  .listing-item .description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    height: 120px;
+  }
+  /**
+* News panel slider / layout
+* 1. Three column grid width
+* 2. Nine column grid width
+*
+*/
+  .home .latest-news h2 {
+    padding-left: 20px;
+  }
+  .home .latest-news h2:after {
+    display: none;
+  }
+  .home .latest-news-container {
+    display: block!important;
+  }
+  .home .latest-news-content {
+    float: left;
+    width: 25%;
+    /* 1 */
+    height: 349px;
+    border-bottom: 1px solid #ffffff;
+    padding-left: 15px;
+  }
+  .home .dmp-carousel {
+    float: right;
+    width: 75%;
+    /* 2 */
+  }
+  /**
+* Item listing layout
+* 1. col column width of landing page
+* 2. full width listing inside carousel
+* 3. no boder on landing page
+* 4. Landing page varitation
+*
+*/
+  .listing-item {
+    float: left;
+    width: 33.33332%;
+    /* 1 */
+  }
+  .listing-item:nth-child(6n) a {
+    border-right: 0 none;
+  }
+  .listing-item .thumbnail {
+    display: block;
+  }
+  .home .listing-item {
+    width: 100%;
+    /* 2 */
+  }
+  .landing .listing-item a {
+    border: 0 none;
+    /* 3 */
+  }
+  .landing .news-listing h2 {
+    /* 4 */
+    padding-left: 20px;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* News panel slider / layout
+* 1. Two column grid width
+* 2. Ten column grid width
+* 3. Landing page variation
+*
+*/
+  .listing-item {
+    width: 16.66667%;
+  }
+  .home .latest-news h2 {
+    padding: 5px 20px;
+  }
+  .home .latest-news-content {
+    width: 16.66667%;
+    /* 1 */
+    height: 350px;
+    padding-left: 25px;
+  }
+  .home .dmp-carousel {
+    width: 83.33333%;
+    /* 2 */
+  }
+  .landing .news-listing h2 {
+    /* 3 */
+    padding: 5px 20px;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .home .latest-news h2:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Task based slider
+   ========================================================================== */
+/**
+* The task based slider is a slide toggle widget the exists on the home page
+* and task pages of the site.
+* The slide transitions are controled by the CSS
+*
+*/
+/**
+* slider functionality
+*
+*/
+.quick-slider > ul {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.quick-slider > ul > li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #EAEAEA;  /* pDMIRS */
+}
+.quick-slider > ul > li:last-child {
+  border: 0 none;
+}
+.quick-slider > ul > li .slide-header {
+  position: relative;
+  display: block;
+  background: #A12A1D;  /* pDMIRS */
+  font: 18px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #ffffff;
+  padding: 20px 22px;
+}
+.quick-slider > ul > li .slide-header:after {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -270px -50px;
+
+  text-indent: -9999px;
+  /* 1 */
+  content: '';
+}
+.quick-slider > ul > li .slide-header:hover {
+  cursor: pointer;
+  background: #A93D2A;  /* pDMIRS */
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+.quick-slider > ul > li.open .slide-header {
+  background: #eaeaea;
+  color: #333333;
+}
+.quick-slider > ul > li.open .slide-header:after {
+  background-position: -170px -50px;
+}
+.quick-slider > ul > li .slide-body {
+  display: none;
+  background-color: #eaeaea;
+  border-top: 1px solid #707274;
+  padding: 22px;
+}
+.quick-slider > ul > li .slide-body.expanded {
+  display: block;
+}
+.task .quick-slider {
+  float: none;
+}
+/**
+* Slider content
+*
+*/
+.quick-search label {
+  display: block;
+  font: 700 15px/24px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+.quick-search input[type="text"] {
+  margin: 15px 0;
+}
+.quick-search input[type="submit"] {
+  width: auto;
+  min-width: 140px;
+}
+.quick-list {
+  font: 15px/24px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+.quick-list .or {
+  display: block;
+  text-transform: uppercase;
+  margin: 15px 0;
+}
+.quick-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.quick-list ul li {
+  border-bottom: 1px solid #666;
+}
+.quick-list ul a {
+  display: block;
+  text-decoration: none;
+  padding: 7px 0;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Slider functionality
+* 1. three column grid width
+* 2. transition speed
+* 3. Static width to stop text movement of transition
+*
+*/
+  .quick-slider {
+    zoom: 1;
+    float: left;
+    width: 25%;
+    /* 1 */
+  }
+  .quick-slider:before,
+  .quick-slider:after {
+    content: "";
+    display: table;
+  }
+  .quick-slider:after {
+    clear: both;
+  }
+  .quick-slider > ul {
+    height: 420px;
+    background: #A12A1D;  /* pDMIRS */
+    padding-top: 60px;
+  }
+  .quick-slider > ul > li:first-child {
+    border-top: 1px solid #EAEAEA; /* pDMIRS */
+  }
+  .quick-slider > ul > li:last-child {
+    border-bottom: 1px solid #A12A1D; /* pDMIRS */
+  }
+  .quick-slider > ul > li.open .slide-header:after {
+    background-position: -220px -50px;
+  }
+  .quick-slider > ul > li .slide-body {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: block;
+    height: 480px !important;
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0 none;
+    z-index: 5;
+    -webkit-transition: width .8s ease;
+    /* 2 */
+    -moz-transition: width .8s ease;
+    -ms-transition: width .8s ease;
+    -o-transition: width .8s ease;
+  }
+  .quick-slider > ul > li .slide-body.expanded {
+    width: 300%;
+    display: block;
+  }
+  .quick-slider > ul > li .slide-content {
+    width: 506px;
+    /* 3 */
+    padding: 20px 20px 20px 50px;
+  }
+  .task .quick-slider {
+    width: 25%;
+  }
+  /**
+* slider content
+*
+*/
+  .quick-search label {
+    font: 700 15px/24px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  }
+  .quick-search input[type="text"] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 66.66667%;
+    margin-right: 3.5040%;
+  }
+  .quick-search input[type="submit"] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 28.82882%;
+    min-width: 0;
+  }
+  .quick-list ul {
+    width: 66.6667%;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Slider functionality
+* 1. two column grid width
+* 2. Static width to stop text movement of transition
+*
+*/
+  .quick-slider {
+    width: 16.66667%;
+    /* 1 */
+  }
+  .quick-slider > ul > li .slide-content {
+    width: 442px;
+    /* 2 */
+    padding: 20px 20px 20px 50px;
+  }
+  .task .quick-slider > ul > li .slide-content {
+    width: 695px;
+  }
+}
+/* Large Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1260px) {
+  /**
+* Sider functionality
+* 1. Static width to stop text movement of transition
+*
+*/
+  .quick-slider > ul > li .slide-content {
+    width: 560px;
+    /* 1 */
+  }
+  .task .quick-slider > ul > li .slide-content {
+    width: 875px;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .quick-slider > ul > li .slide-header:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/**
+* Header
+* Header specific LESS
+*
+*/
+/* ==========================================================================
+   Header
+   ========================================================================== */
+/**
+* The header is a global element that is used across the site.
+* There will be a different header for both the mobile and desktop viewports.
+*
+* Related LESS files
+* - header-search.less
+* - header-navigation.less
+* - header-navigation-megamenu.less
+* - header-navigation-colours.less
+*/
+/* Tablet media query
+   ========================================================================== */
+.mobile-only {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  .hide-on-mobile {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
+  }
+}
+.header .wrapper {
+  background: #008b91; /* pDMIRS FFF */
+  zoom: 1;
+}
+.header .wrapper:before,
+.header .wrapper:after {
+  content: "";
+  display: table;
+}
+.header .wrapper:after {
+  clear: both;
+}
+.skipmenu {
+  display: none!important;
+  visibility: hidden;
+}
+.skipmenu li:first-child {
+  /* 1 */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.logo {
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: 0 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  width: 220px;
+  height: 50px;
+  float: left;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .skipmenu {
+    display: block!important;
+    visibility: visible;
+    height: 48px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .skipmenu a {
+    font: 12px/52px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    color: #646464;
+    padding-left: 20px;
+  }
+  .skipmenu a:hover {
+    color: #000000;
+  }
+  .logo {
+    width: 550px;
+    height: 115px;
+    background-position: 0 -100px;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .skipmenu a {
+    padding-left: 40px;
+  }
+  .logo {
+    margin-left: 20px;
+  }
+  .logo a {
+    display: block;
+    height: 100%;
+  }
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .logo {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Primary Navigation
+   ========================================================================== */
+/**
+* The primary naivagtion structure is a tier responsive navigation.
+*
+* Related LESS files
+* - header-navigation-colours.less
+* - header-navigation-megamenu.less
+*/
+/**
+* Mobile menu toggle
+* 1. white + icon
+* 2. white - icon
+* 3. black + icon
+* 4. black - icon
+*
+*/
+header nav {
+  clear: both;
+}
+#navigation-toggle {
+  float: right;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -270px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  background-color: #333333;
+}
+#navigation-container {
+  display: none;
+}
+.navigation .toggle-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -320px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  /* 1 */
+}
+.navigation a.active .toggle-icon {
+  background-position: -320px -50px;
+  /* 2 */
+}
+.navigation ul .toggle-icon {
+  background-position: -370px 0;
+  /* 3 */
+}
+.navigation ul a.active .toggle-icon {
+  background-position: -370px -50px;
+  /* 4 */
+}
+/**
+* Teir 1 navigation styles
+* Navigation items are hidden on load. They will be displayed on toggle of the
+* menu icon.
+*
+* 1. Hide home link in mobile viewport
+*/
+.navigation {
+  border-bottom: 1px solid #999;
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navigation > li > a {
+  background: #333333;
+  border-top: 1px solid #999;
+}
+.navigation > li > a:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 50px;
+  background: #00a6ab;  /* pDMIRS */
+  content: '';
+}
+.navigation > li:first-child > a {
+  border: 0 none;
+}
+.navigation a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  font: 15px/19px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #ffffff;
+  padding: 15px 25px;
+}
+.navigation li.home {
+  display: none;
+  /* 1 */
+}
+.navigation li:nth-child(2) {
+  padding: 0;
+}
+/**
+* Teir 2, teir 3 navigation items.
+* Navigation items are hidden on load. They will be displayed on toggle of the
+* + / - icons
+*
+* 1. Teir 2 link
+* 2. Teir 3 link
+*/
+.navigation .menu {
+  display: none;
+}
+.navigation .menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navigation .menu ul a {
+  /* 1 */
+  background: #c0c0c0;
+  color: #000000;
+  border-top: 1px solid #e0e0e0;
+}
+.navigation .menu ul ul {
+  display: none;
+}
+.navigation .menu ul ul a {
+  /* 2 */
+  background: #d5d5d5;
+  border-top: 1px solid #f0f0f0;
+}
+.navigation .menu ul ul ul a {
+  background: #f0f0f0;
+  border-top: 1px solid #d8d8d8;
+}
+.navigation .menu .support-column ul a {
+  background: #fff;
+  padding: 10px 25px;
+}
+/**
+* Utility navigation
+*
+*/
+.utility-navigation {
+  background: #333333;
+  padding: 15px 0 55px;
+}
+.utility-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.utility-navigation a {
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  line-height: 25px;
+  padding: 5px 25px;
+}
+.support-navigation .tel {
+  font-weight: 700;
+  padding-left: 0;
+  border: 0 none;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Mobile menu toggle
+* 1. Hide togle is table viewport
+*
+*/
+  #navigation-toggle,
+  .toggle-icon {
+    display: none!important;
+    visibility: hidden;
+    /* 1 */
+  }
+  nav {
+    clear: both;
+  }
+  #navigation-container {
+    display: block !important;
+  }
+  /**
+* Teir 1 navigation styles
+* Navigation items are hidden on load. They will be displayed on toggle of the
+* menu icon.
+*
+* 1. active page styles
+* 2. tier 1 link width
+* 3. home link width
+*/
+  .navigation {
+    max-height: 74px;
+    border-bottom: 0 none;
+    zoom: 1;
+  }
+  .navigation:before,
+  .navigation:after {
+    content: "";
+    display: table;
+  }
+  .navigation:after {
+    clear: both;
+  }
+  .navigation > li {
+    display: block;
+    float: left;
+    width: 10.15625%;
+    /* 2 */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 1px;
+  }
+  .navigation > li > a {
+    color: #333333;
+    background: #ffffff;
+    border-top: 5px solid #bbbbbb;
+    border-bottom: 5px solid #bbbbbb;
+    min-height: 32px;
+    font-size: 11px;
+    line-height: 15px;
+    padding: 16px 7px;
+  }
+  .navigation > li > a:before {
+    top: 16px;
+    left: -1px;
+    width: 1px;
+    height: 32px;
+    background: #bbbbbb !important;
+    content: '';
+  }
+  .navigation > li > a:hover {
+    background-color: #f0f0f0;
+    color: #333333;
+    color: #ffffff;
+  }
+  .navigation > li > a:hover:before {
+    display: none;
+  }
+  .navigation li.home {
+    display: block;
+    width: 8.59375%;
+    /* 3 */
+    padding: 0;
+    border-top: 5px solid #bbbbbb;
+    border-bottom: 3px solid #bbbbbb;
+    background-color: #f0f0f0;
+    margin-top: 8px;
+  }
+  .navigation li.home a {
+    height: 64px;
+    width: 64px;
+    padding: 0;
+    display: block;
+    background: url(sprites.png) no-repeat;
+    background-position: 0 -215px;
+
+    text-indent: -9999px;
+    /* 1 */
+    margin: 0 auto;
+  }
+  .navigation li.home a:before {
+    display: none;
+  }
+  .navigation li.home a:hover {
+    background-color: transparent!important;
+  }
+  .navigation li.home:hover {
+    background-color: #bbbbbb !important;
+  }
+  .navigation li:nth-child(2) a:before {
+    display: none;
+  }
+  /**
+* utility navigation
+*
+*/
+  .utility-navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #008b91;  /* pDMIRS */
+    padding: 15px 2px;
+  }
+  .utility-navigation ul {
+    zoom: 1;
+    float: left;
+  }
+  .utility-navigation ul:before,
+  .utility-navigation ul:after {
+    content: "";
+    display: table;
+  }
+  .utility-navigation ul:after {
+    clear: both;
+  }
+  .utility-navigation li {
+    float: left;
+  }
+  .utility-navigation a {
+    border-left: 1px solid #fff;
+    text-decoration: underline;
+    line-height: 15px;
+    padding: 0 13px;
+  }
+  .utility-navigation a:hover {
+    text-decoration: none;
+  }
+  .support-navigation .tel {
+    text-decoration: none;
+    padding-left: 0;
+    border: 0;
+  }
+  .support-navigation li:first-child a {
+    border: 0 none;
+  }
+}
+/* Large Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1260px) {
+  /**
+* Teir 1 navigation styles
+* Navigation items are hidden on load. They will be displayed on toggle of the
+* menu icon.
+*
+* 1. tier 1 link width
+* 2. home link width
+*/
+  .navigation > li {
+    width: 10.4763%;
+    /* 2 */
+  }
+  .navigation > li > a {
+    font-size: 15px;
+    line-height: 15px;
+    padding: 16px 20px;
+  }
+  .navigation li.home {
+    width: 5.71430%;
+    /* 2 */
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  #navigation-toggle,
+  .navigation .toggle-icon,
+  .navigation li.home a {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Global
+   ========================================================================== */
+/**
+* The global less fille contain elements that ae shared arcoss the site.
+* Common html elements will be found here.
+*
+* Related LESS files
+* - header-typography.less
+*/
+/* 1. hide from mobile viewport*/
+.content-support {
+  /* 1 */
+  display: none;
+}
+.menu-support > p {
+  font-size: 15px;
+  color: #000000;
+  padding: 15px 25px 0 25px;
+  margin: 0;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* On hover drop down state
+*
+*/
+  .navigation {
+    position: relative;
+  }
+  .navigation > li.default:hover .menu,
+  .navigation > li.hover_intent .menu {
+    display: block;
+  }
+  .navigation > li.default:hover > a:after,
+  .navigation > li.hover_intent > a:after {
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 9px 0 9px;
+    border-color: #bbbbbb transparent transparent transparent;
+    content: '';
+    margin-left: -7px;
+    z-index: 9;
+  }
+  .navigation .menu {
+    position: absolute;
+    top: 69px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 5px 3px 0 #e0e0e0;
+    border-top: 5px solid #bbbbbb;
+    z-index: 8;
+  }
+  .navigation li.home a:after {
+    display: none!important;
+  }
+  .k-ie7 .header {
+    position: relative;
+    z-index: 100;
+  }
+  /**
+* Sectional internal styling
+* These colours denote the active page
+*
+*/
+  .section1 .header .wrapper,
+  .section2 .header .wrapper,
+  .section3 .header .wrapper,
+  .section4 .header .wrapper,
+  .section5 .header .wrapper,
+  .section6 .header .wrapper,
+  .section7 .header .wrapper,
+  .section8 .header .wrapper,
+  .section9 .header .wrapper {
+    border-bottom: 5px solid #bbbbbb;
+  }
+  .section1 .navigation > li > a,
+  .section2 .navigation > li > a,
+  .section3 .navigation > li > a,
+  .section4 .navigation > li > a,
+  .section5 .navigation > li > a,
+  .section6 .navigation > li > a,
+  .section7 .navigation > li > a,
+  .section8 .navigation > li > a,
+  .section9 .navigation > li > a,
+  .section1 .navigation li.home,
+  .section2 .navigation li.home,
+  .section3 .navigation li.home,
+  .section4 .navigation li.home,
+  .section5 .navigation li.home,
+  .section6 .navigation li.home,
+  .section7 .navigation li.home,
+  .section8 .navigation li.home,
+  .section9 .navigation li.home {
+    border-bottom: 0 none;
+  }
+  .section1 .navigation a:after,
+  .section2 .navigation a:after,
+  .section3 .navigation a:after,
+  .section4 .navigation a:after,
+  .section5 .navigation a:after,
+  .section6 .navigation a:after,
+  .section7 .navigation a:after,
+  .section8 .navigation a:after,
+  .section9 .navigation a:after {
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    display: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 9px 0 9px;
+    border-color: #bbbbbb transparent transparent transparent;
+    content: '';
+    margin-left: -7px;
+    z-index: 8;
+  }
+  /**
+* Navigation section colours
+* Navigation colours will appear on the top level navigation items.
+* There are nine unique colours that will repeat after nine navigation items.
+*
+* 1. Minerals
+* 2. Petroleum
+* 3. Dangerous Goods
+* 4. Geological Survey
+* 5. Environment
+* 6. Safety
+* 7. Investors
+* 8. Community & Education
+* 9. About Us & Careers
+*
+*/
+  .navigation > li.default:hover,
+   > li.hover_intent {
+    /* 1 */
+  }
+  .navigation > li.default:hover a:after,
+   > li.hover_intent a:after {
+    border-color: #bbbbbb transparent transparent transparent;
+  }
+  .navigation > li.default:hover .menu,
+   > li.hover_intent .menu {
+    border-color: #bbbbbb;
+  }
+  .navigation > li:nth-child(2):hover {
+    /* 1 */
+  }
+  .navigation > li:nth-child(2):hover a:after {
+    border-color: #008542 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(2):hover .menu {
+    border-color: #008542;
+  }
+  .navigation > li:nth-child(3):hover {
+    /* 2 */
+  }
+  .navigation > li:nth-child(3):hover a:after {
+    border-color: #0572a8 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(3):hover .menu {
+    border-color: #0572a8;
+  }
+  .navigation > li:nth-child(4):hover {
+    /* 3 */
+  }
+  .navigation > li:nth-child(4):hover a:after {
+    border-color: #bd4f19 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(4):hover .menu {
+    border-color: #bd4f19;
+  }
+  .navigation > li:nth-child(5):hover {
+    /* 4 */
+  }
+  .navigation > li:nth-child(5):hover a:after {
+    border-color: #0c4987 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(5):hover .menu {
+    border-color: #0c4987;
+  }
+  .navigation > li:nth-child(6):hover {
+    /* 5 */
+  }
+  .navigation > li:nth-child(6):hover a:after {
+    border-color: #6a7f10 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(6):hover .menu {
+    border-color: #6a7f10;
+  }
+  .navigation > li:nth-child(7):hover {
+    /* 6 */
+  }
+  .navigation > li:nth-child(7):hover a:after {
+    border-color: #d06f1a transparent transparent transparent;
+  }
+  .navigation > li:nth-child(7):hover .menu {
+    border-color: #d06f1a;
+  }
+  .navigation > li:nth-child(8):hover {
+    /* 7 */
+  }
+  .navigation > li:nth-child(8):hover a:after {
+    border-color: #e60505 transparent transparent transparent;
+  }
+  .navigation > li:nth-child(8):hover .menu {
+    border-color: #e60505;
+  }
+  .navigation > li:nth-child(9):hover {
+    /* 8 */
+  }
+  .navigation > li:nth-child(9):hover a:after {
+    border-color: #6e757a transparent transparent transparent;
+  }
+  .navigation > li:nth-child(9):hover .menu {
+    border-color: #6e757a;
+  }
+  .navigation > li:nth-child(10):hover {
+    /* 9 */
+  }
+  .navigation > li:nth-child(10):hover a:after {
+    border-color: #006B6E transparent transparent transparent; /* pDMIRS */
+  }
+  .navigation > li:nth-child(10):hover .menu {
+    border-color: #006B6E; /* pDMIRS */
+  }
+  /**
+* mega menu structure
+* 1. first content box
+*
+*/
+  .navigation .menu {
+    zoom: 1;
+  }
+  .navigation .menu:before,
+  .navigation .menu:after {
+    content: "";
+    display: table;
+  }
+  .navigation .menu:after {
+    clear: both;
+  }
+  .navigation .menu .sub-nav-menu {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25.000%;
+    float: left;
+    padding: 0 4.76190%;
+    margin: 50px 0;
+  }
+  .navigation .menu .sub-nav-menu .menu-title {
+    display: block;
+  }
+  .navigation .menu .menu-support {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    width: 50.000%;
+    float: left;
+    margin: 40px 0;
+  }
+  .navigation .menu .menu-support .support-column {
+    width: 45.000%;
+    padding-right: 5.000%;
+    float: left;
+  }
+  .navigation .menu .menu-support .support-column ul {
+    margin-bottom: 25px;
+  }
+  .navigation .menu .menu-support .support-column ul:last-child {
+    margin: 0;
+  }
+  .navigation .menu .menu-support {
+    padding: 0 1.25%;
+    border-left: 0;
+  }
+  .navigation .menu .content-support {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    width: 25.000%;
+    float: right;
+    padding: 0 2.38905% 0 3.96825%;
+    margin: 40px 0;
+    border-left: 1px solid #bbbbbb;
+  }
+  .navigation .menu .content-support .support-title {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+  }
+  .navigation .menu .content-support > .support-title:first-child {
+    /* 1 */
+    border-top: 0 none;
+    padding-top: 0;
+  }
+  /**
+* mega menu styling
+* 1. primary title styles
+* 2. secondary title styles
+*
+*/
+  .navigation .menu ul a,
+  .navigation .menu a {
+    font: 13px/18px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    border: 0 none;
+    background: none;
+    padding: 5px 0;
+    color: #333333;
+  }
+  .navigation .menu ul a:hover,
+  .navigation .menu a:hover {
+    background: none!important;
+    text-decoration: underline;
+  }
+  .navigation .menu .sub-nav-menu .menu-title,
+  .navigation .menu .support-title,
+  .navigation .menu .support-title a {
+    /* 1 */
+    font: 700 16px/24px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  }
+  .navigation .menu .menu-title {
+    /* 2 */
+    font-weight: 700;
+  }
+}
+/* ==========================================================================
+   Primary Navigation colours
+   ========================================================================== */
+/**
+* The navigation colours control the nine section colours that are applied to the
+* menu.
+*
+* Navigation colours will appear on the top level navigation items.
+* There are nine unique colours that will repeat after nine navigation items.
+*
+* 1. Minerals
+* 2. Petroleum
+* 3. Dangerous Goods
+* 4. Geological Survey
+* 5. Environment
+* 6. Safety
+* 7. Investors
+* 8. Community & Education
+* 9. About Us & Careers
+*
+*/
+/**
+* Mobile colour tabs
+* These colours tabs appear to the left before the primary navigation items.
+*
+*/
+.navigation > li:nth-child(2) a:before {
+  /* 1 */
+  background-color: #008542;
+}
+.navigation > li:nth-child(3) a:before {
+  /* 2 */
+  background-color: #0572a8;
+}
+.navigation > li:nth-child(4) a:before {
+  /* 3 */
+  background-color: #bd4f19;
+}
+.navigation > li:nth-child(5) a:before {
+  /* 4 */
+  background-color: #0c4987;
+}
+.navigation > li:nth-child(6) a:before {
+  /* 5 */
+  background-color: #6a7f10;
+}
+.navigation > li:nth-child(7) a:before {
+  /* 6 */
+  background-color: #d06f1a;
+}
+.navigation > li:nth-child(8) a:before {
+  /* 7 */
+  background-color: #e60505;
+}
+.navigation > li:nth-child(9) a:before {
+  /* 8 */
+  background-color: #6e757a;
+}
+.navigation > li:nth-child(10) a:before {
+  /* 9 */
+  background-color: #006B6E;  /* pDMIRS */
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Mobile colour tabs
+* These colours tabs appear under the primary navigation items.
+*
+*/
+  .navigation > li:nth-child(2) a {
+    /* 1 */
+    border-bottom-color: #008542;
+  }
+  .navigation > li:nth-child(2) a:hover {
+    border-top-color: #008542;
+    background-color: #008542;
+  }
+  .navigation > li:nth-child(3) a {
+    /* 2 */
+    border-bottom-color: #0572a8;
+  }
+  .navigation > li:nth-child(3) a:hover {
+    border-top-color: #0572a8;
+    background-color: #0572a8;
+  }
+  .navigation > li:nth-child(4) a {
+    /* 3 */
+    border-bottom-color: #bd4f19;
+  }
+  .navigation > li:nth-child(4) a:hover {
+    border-top-color: #bd4f19;
+    background-color: #bd4f19;
+  }
+  .navigation > li:nth-child(5) a {
+    /* 4 */
+    border-bottom-color: #0c4987;
+  }
+  .navigation > li:nth-child(5) a:hover {
+    border-top-color: #0c4987;
+    background-color: #0c4987;
+  }
+  .navigation > li:nth-child(6) a {
+    /* 5 */
+    border-bottom-color: #6a7f10;
+  }
+  .navigation > li:nth-child(6) a:hover {
+    border-top-color: #6a7f10;
+    background-color: #6a7f10;
+  }
+  .navigation > li:nth-child(7) a {
+    /* 6 */
+    border-bottom-color: #d06f1a;
+  }
+  .navigation > li:nth-child(7) a:hover {
+    border-top-color: #d06f1a;
+    background-color: #d06f1a;
+  }
+  .navigation > li:nth-child(8) a {
+    /* 7 */
+    border-bottom-color: #e60505;
+  }
+  .navigation > li:nth-child(8) a:hover {
+    border-top-color: #e60505;
+    background-color: #e60505;
+  }
+  .navigation > li:nth-child(9) a {
+    /* 8 */
+    border-bottom-color: #6e757a;
+  }
+  .navigation > li:nth-child(9) a:hover {
+    border-top-color: #6e757a;
+    background-color: #6e757a;
+  }
+  .navigation > li:nth-child(10) a {
+    /* 9 */
+    border-bottom-color: #006B6E;  /* pDMIRS */
+  }
+  .navigation > li:nth-child(10) a:hover {
+    border-top-color: #006B6E;  /* pDMIRS */
+    background-color: #006B6E;  /* pDMIRS */
+  }
+  /**
+* Sectional internal styling
+* These colours denote the active page
+*
+*/
+  .section1 {
+    /* 1 */
+  }
+  .section1 .header .wrapper {
+    border-color: #008542;
+  }
+  .section1 .navigation > li:nth-child(2) > a {
+    background-color: #008542;
+    border-color: #008542;
+    color: #ffffff;
+  }
+  .section1 .navigation > li:nth-child(2) > a:after {
+    display: block;
+    border-top-color: #008542;
+  }
+  .section2 {
+    /* 2 */
+  }
+  .section2 .header .wrapper {
+    border-color: #0572a8;
+  }
+  .section2 .navigation > li:nth-child(3) > a {
+    background-color: #0572a8;
+    border-color: #0572a8;
+    color: #ffffff;
+  }
+  .section2 .navigation > li:nth-child(3) > a:after {
+    display: block;
+    border-top-color: #0572a8;
+  }
+  .section3 {
+    /* 3 */
+  }
+  .section3 .header .wrapper {
+    border-color: #bd4f19;
+  }
+  .section3 .navigation > li:nth-child(4) > a {
+    background-color: #bd4f19;
+    border-color: #bd4f19;
+    color: #ffffff;
+  }
+  .section3 .navigation > li:nth-child(4) > a:after {
+    display: block;
+    border-top-color: #bd4f19;
+  }
+  .section4 {
+    /* 4 */
+  }
+  .section4 .header .wrapper {
+    border-color: #0c4987;
+  }
+  .section4 .navigation > li:nth-child(5) > a {
+    background-color: #0c4987;
+    border-color: #0c4987;
+    color: #ffffff;
+  }
+  .section4 .navigation > li:nth-child(5) > a:after {
+    display: block;
+    border-top-color: #0c4987;
+  }
+  .section5 {
+    /* 5 */
+  }
+  .section5 .header .wrapper {
+    border-color: #6a7f10;
+  }
+  .section5 .navigation > li:nth-child(6) > a {
+    background-color: #6a7f10;
+    border-color: #6a7f10;
+    color: #ffffff;
+  }
+  .section5 .navigation > li:nth-child(6) > a:after {
+    display: block;
+    border-top-color: #6a7f10;
+  }
+  .section6 {
+    /* 6 */
+  }
+  .section6 .header .wrapper {
+    border-color: #d06f1a;
+  }
+  .section6 .navigation > li:nth-child(7) > a {
+    background-color: #d06f1a;
+    border-color: #d06f1a;
+    color: #ffffff;
+  }
+  .section6 .navigation > li:nth-child(7) > a:after {
+    display: block;
+    border-top-color: #d06f1a;
+  }
+  .section7 {
+    /* 7 */
+  }
+  .section7 .header .wrapper {
+    border-color: #e60505;
+  }
+  .section7 .navigation > li:nth-child(8) > a {
+    background-color: #e60505;
+    border-color: #e60505;
+    color: #ffffff;
+  }
+  .section7 .navigation > li:nth-child(8) > a:after {
+    display: block;
+    border-top-color: #e60505;
+  }
+  .section8 {
+    /* 8 */
+  }
+  .section8 .header .wrapper {
+    border-color: #6e757a;
+  }
+  .section8 .navigation > li:nth-child(9) > a {
+    background-color: #6e757a;
+    border-color: #6e757a;
+    color: #ffffff;
+  }
+  .section8 .navigation > li:nth-child(9) > a:after {
+    display: block;
+    border-top-color: #6e757a;
+  }
+  .section9 {
+    /* 9 */
+  }
+  .section9 .header .wrapper {
+    border-color: #006B6E;  /* pDMIRS */
+  }
+  .section9 .navigation > li:nth-child(10) > a {
+    background-color: #006B6E;  /* pDMIRS */
+    border-color: #006B6E;  /* pDMIRS */
+    color: #ffffff;
+  }
+  .section9 .navigation > li:nth-child(10) > a:after {
+    display: block;
+    border-top-color: #006B6E;  /* pDMIRS */
+  }
+}
+/* ==========================================================================
+   Header search
+   ========================================================================== */
+/**
+* Keyword search area.
+* This will tie into the search results page
+*
+* Related LESS files
+* - forms.less
+*/
+/**
+* Mobile search toggle
+*
+*/
+#search-toggle {
+  float: right;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -220px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  background-color: #00a6ab;  /* pDMIRS */
+}
+.search-container {
+  clear: both;
+  display: none;
+  background-color: #00a6ab;  /* pDMIRS */
+  padding: 15px;
+}
+/**
+* search layout
+*
+*/
+.search-container .search-wrapper {
+  position: relative;
+}
+.search-container label {
+  display: none!important;
+  visibility: hidden;
+}
+.search-container input[type="text"] {
+  border-color: #ffffff;
+  min-height: 48px;
+  line-height: 48px;
+  padding-right: 65px;
+  margin: 0;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.search-container input[type="text"]:focus {
+  border-color: #000000;
+}
+.search-container button[type="button"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  min-width: 0;
+  height: 50px;
+  border: 0 none;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -220px -50px;
+
+  text-indent: -9999px;
+  /* 1 */
+  background-color: #ffffff;
+  border-left: 1px solid #00a6ab;  /* pDMIRS */
+  padding: 0;
+  margin: 0;
+}
+.search-container a {
+  display: block;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 5px 0;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Mobile search toggle
+*
+*/
+  #search-toggle {
+    display: none!important;
+    visibility: hidden;
+  }
+  .search-container {
+    position: absolute;
+    top: 67px;
+    right: 20px;
+    display: block;
+    width: 315px;
+    background-color: #ffffff;
+    padding: 0;
+  }
+  .search-container input[type="text"] {
+    border-color: #ffffff;
+    border-bottom: 1px solid #bbbbbb;
+    min-height: 0;
+    height: 37px;
+    line-height: 28px;
+    font-size: 15px;
+    padding: 7px 45px 0 2px;
+  }
+  .search-container input[type="text"]:focus {
+    border-color: #bbbbbb;
+  }
+  .search-container button[type="button"] {
+    top: 1px;
+    right: 1px;
+    width: 35px;
+    height: 35px;
+    min-width: 0;
+    background-position: -199px -304px;
+    border-left: 0 none;
+  }
+  .search-container button[type="button"]:focus,
+  .search-container button[type="button"]:hover {
+    transition: none;
+    background-color: #00a6ab;  /* pDMIRS */
+    background-position: -164px -304px;
+  }
+  .search-container a {
+    color: #008b91;  /* pDMIRS */
+    text-decoration: none;
+  }
+  .search-container a:hover {
+    text-decoration: underline;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .search-container {
+    right: 48px;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  #search-toggle,
+  .search-container button[type="button"] {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/**
+* Footer
+* Header specific LESS
+*
+*/
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+/**
+* The footer is a global element that is used across the site.
+*
+* Related LESS files
+* - footer-contacts.less
+* - footer-quicklinks.less
+* - footer-legal.less
+ */
+footer {
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.home fotter {
+  border-top: 0 none;
+}
+.extended-footer {
+  padding: 20px 30px;
+  background: #ffffff;
+}
+.extended-footer a {
+  text-decoration: none;
+}
+.extended-footer a:hover {
+  text-decoration: underline;
+}
+/**
+* Back to top
+*
+*/
+#btn-top {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: -999px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Back to top
+*
+*/
+  #btn-top {
+    right: 0;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    font: 11px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    background: url(sprites.png) no-repeat;
+    background-position: -18px -55px;
+    background-color: #bbbbbb;
+    text-indent: -9999px;
+    /* 1 */
+    display: none;
+    text-indent: 0;
+    padding-top: 30px;
+  }
+  #btn-top:hover {
+    background-color: #636567;
+    -webkit-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    transition: all 300ms linear;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  #btn-top {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Expanded  Footer
+   ========================================================================== */
+/**
+* The expanded footer provides a global call to action across the site.
+* These are global elements that appear across the site.
+*
+*/
+/**
+* Contact icons
+*
+*/
+.phone:before,
+.email:before,
+.location:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: 0 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  content: '';
+}
+.phone:before {
+  background-position: -124px -299px;
+}
+.email:before {
+  background-position: -144px -299px;
+}
+.location:before {
+  background-position: -144px -319px;
+}
+/**
+* Contact list styles
+*
+*/
+.contact-details {
+  margin: 25px 0;
+}
+.phone,
+.email,
+.location {
+  position: relative;
+  list-style: none;
+  padding: 0 0 0 30px;
+  margin: 0 0 10px 0;
+}
+.phone a {
+  font-size: 15px;
+  font-weight: 700;
+}
+.phone a:hover {
+  text-decoration: none;
+}
+.gov-badge {
+  width: 63px;
+  height: 63px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -64px -215px;
+
+  text-indent: -9999px;
+  /* 1 */
+  margin-top: 22px;
+}
+/**
+* Quick links
+*
+*/
+.footer-quick-links h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 25px 0;
+}
+/* Tablet media query
+   ========================================================================== */
+/**
+* Quick links
+*
+*/
+.footer-quick-links a {
+  padding-right: 15px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .phone:before,
+  .email:before,
+  .location:before,
+  .gov-badge {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Legal Footer
+   ========================================================================== */
+/**
+* The legal footer is a global element that is used across the site.
+* It sits at the very end of the site and contains manditory information
+*
+*/
+.legal-footer {
+  background: #f0f0f0;
+  text-align: center;
+  font: 12px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 40px 20px;
+}
+.wa-gov a {
+  color: #333333;
+  text-decoration: none;
+  font-size: 16px;
+}
+.wa-gov a:hover {
+  text-decoration: underline;
+}
+.utility-links ul {
+  margin: 25px 0 7px 0;
+}
+.utility-links li {
+  display: inline-block;
+  border-right: 1px solid #008b91;  /* pDMIRS */
+  line-height: 13px;
+}
+.utility-links li:last-child {
+  border: 0 none;
+}
+.utility-links li a {
+  text-decoration: none;
+  padding: 0 5px;
+}
+.utility-links li a:hover {
+  text-decoration: underline;
+}
+.internal-url {
+  margin: 10px 0;
+}
+.internal-url li {
+  display: inline-block;
+}
+.internal-url a {
+  width: 15px;
+  height: 15px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: 0 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  margin: 0 3px;
+}
+.internal-url a.owa {
+  background-position: -204px -289px;
+}
+.internal-url a.xenapp {
+  background-position: -219px -289px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .legal-footer {
+    padding: 30px 40px;
+  }
+  .wa-gov {
+    text-align: left;
+  }
+  .utility-links ul {
+    margin-top: 0;
+  }
+  .internal-url ul {
+    float: right;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .internal-url a {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/**
+* Templates
+* Template specific LESS
+*
+*/
+/* ==========================================================================
+   Home
+   ========================================================================== */
+/**
+* The global less file contains elements that are displayed on the home page
+* of the site.
+*
+* Related LESS files
+* - shared/task.less
+* - shared/online-systems.less
+* - templates/home-recentlyviewed.less
+* - shared/latest-news.less
+*/
+.home h1 {
+  /* 1 */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/**
+* Quick links
+*
+*/
+.quick-links {
+  position: relative;
+}
+.quick-links > h2 {
+  display: none;
+}
+/**
+* Promtonal image
+*
+*/
+.promotion-image {
+  display: none;
+}
+/**
+* Home content
+*
+*/
+.home .content .columns:nth-child(2n-1) {
+  background-color: #f0f0f0;
+}
+.home .content .panel {
+  font: 25px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 10px 20px;
+}
+.home .content .panel p {
+  margin: 0.5em 0;
+}
+.home .content .content-container {
+  padding: 10px 25px;
+}
+/**
+* Resource Map
+*
+*/
+.resource-map {
+  display: none;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Quick links
+*
+*/
+  .quick-links > h2 {
+    display: block;
+    font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 60px;
+    color: #333333;
+    padding: 0 20px;
+    margin: 0;
+  }
+  /**
+* Promtonal image
+*
+*/
+  .promotion-image {
+    position: relative;
+    display: block;
+    float: left;
+    width: 75.00000%;
+    height: 480px;
+    overflow: hidden;
+    background: pink;
+  }
+  .promotion-image .caption {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    width: 80%;
+    font: 40px/44px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    color: #ffffff;
+    z-index: 1;
+  }
+  .promotion-image img {
+    display: block;
+    height: 480px;
+    max-width: none;
+  }
+  /**
+* Home content
+*
+*/
+  .home .content .columns {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #e0e0e0;
+    width: 37.5000%;
+    height: 270px;
+    overflow: hidden;
+  }
+  .home .content .columns.first {
+    width: 25%;
+  }
+  .home .content .columns.panel {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .home .content .columns .content-ellipsis {
+    height: 246px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+  }
+  /**
+* Resource Map
+* 1. map pop-up styles
+*
+*/
+  .resource-map {
+    display: block;
+  }
+  .resource-map h2 {
+    display: block;
+    font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 60px;
+    color: #333333;
+    padding: 0 20px;
+    margin: 0;
+  }
+  .resource-map .map-content {
+    width: 25%;
+    height: 480px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #f0f0f0;
+    padding: 30px 20px;
+  }
+  .resource-map .google-map {
+    width: 75%;
+    height: 480px;
+  }
+  .resource-map .gm-style-iw {
+    /* 1 */
+    width: 250px;
+    height: 150px;
+    line-height: 1.33;
+    color: #333333;
+  }
+  .resource-map .gm-style-iw h2 {
+    padding: 0;
+    line-height: 1.33;
+  }
+  .resource-map #map-canvas {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .resource-map #map-canvas img {
+    max-width: none;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Quick links
+*
+*/
+  .quick-links {
+    background: #e0e0e0;
+  }
+  .quick-links > h2 {
+    padding: 5px 20px;
+    background: #ffffff;
+  }
+  /**
+* Promtonal image
+* 1. six column grid width
+*/
+  .promotion-image {
+    width: 50.00000%;
+    /* 1 */
+  }
+  /**
+* Home content
+*
+*/
+  .home .content .columns {
+    width: 33.33332%;
+    height: 190px;
+  }
+  .home .content .columns.first {
+    width: 33.33332%;
+  }
+  .home .content .columns.panel {
+    font-size: 25px;
+    line-height: 30px;
+  }
+  .home .content .columns .content-ellipsis {
+    height: 158px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+  /**
+* Resource Map
+*
+*/
+  .resource-map h2 {
+    padding: 5px 20px;
+  }
+  .resource-map .map-content {
+    width: 16.66667%;
+    padding: 30px 20px;
+  }
+  .resource-map .google-map {
+    width: 83.33333%;
+  }
+}
+/* ==========================================================================
+   Recently View
+   ========================================================================== */
+/**
+* The online systems is a home toggle element that provides easy access to
+* viewed pages
+*
+*/
+/**
+* Recently Viewed
+*
+*/
+.recently-viewed h2 {
+  background-color: #939598;
+  font: 15px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #ffffff;
+  padding: 15px;
+  margin: 0;
+}
+.recently-viewed h2:before,
+.recently-viewed h2:after {
+  width: 30px;
+  height: 30px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: 0 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  content: '';
+}
+.recently-viewed h2:before {
+  background-position: -263px -245px;
+  float: left;
+  margin-right: 7px;
+}
+.recently-viewed h2:after {
+  background-position: -380px -10px;
+  float: right;
+}
+.recently-viewed h2.active:after {
+  background-position: -380px -60px;
+}
+.recently-viewed ul {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #707274;
+  padding: 15px 0;
+}
+.recently-viewed ul a {
+  display: block;
+  color: #000000;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 7px 20px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Recently Viewed
+*
+*/
+  .recently-viewed {
+    clear: both;
+  }
+  .recently-viewed h2:after {
+    display: none;
+  }
+  .recently-viewed ul {
+    display: block;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Recently Viewed
+* 1. four column grid width
+*
+*/
+  .recently-viewed {
+    clear: none;
+    float: right;
+    width: 33.33333%;
+    /* 1 */
+    margin-top: 60px;
+  }
+  .recently-viewed ul {
+    display: block;
+    height: 330px;
+    overflow: hidden;
+  }
+  .recently-viewed a:hover {
+    background-color: #636567;
+    -webkit-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    transition: all 300ms linear;
+    text-decoration: none;
+  }
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .recently-viewed h2:before,
+  .recently-viewed h2:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   News carousel
+   ========================================================================== */
+/**
+* The news carousel is a responsive carousel used on the home page.
+* It uses the Owl Carousel plugin
+* Relate files
+* - shared/latest-news.less
+*
+*/
+/**
+* News panel slider / layout
+* 1. Add ellipssi to web kit browsers
+* 2. hide controls
+*
+*/
+.latest-news-content {
+  background-color: #f0f0f0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 30px 25px;
+}
+.dmp-carousel {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.owl-controls {
+  display: none!important;
+  visibility: hidden;
+  /* 2 */
+}
+/* *
+* 	Core Owl Carousel default CSS
+*	v1.3.2
+*/
+/* clearfix */
+.owl-carousel .owl-wrapper:after {
+  zoom: 1;
+}
+.owl-carousel .owl-wrapper:after:before,
+.owl-carousel .owl-wrapper:after:after {
+  content: "";
+  display: table;
+}
+.owl-carousel .owl-wrapper:after:after {
+  clear: both;
+}
+/* display none until init */
+.owl-carousel {
+  display: none;
+  position: relative;
+  width: 100%;
+  -ms-touch-action: pan-y;
+}
+.owl-carousel .owl-wrapper {
+  display: none;
+  position: relative;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper-outer {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.owl-carousel .owl-wrapper-outer.autoHeight {
+  -webkit-transition: height 500ms ease-in-out;
+  -moz-transition: height 500ms ease-in-out;
+  -ms-transition: height 500ms ease-in-out;
+  -o-transition: height 500ms ease-in-out;
+  transition: height 500ms ease-in-out;
+}
+.owl-carousel .owl-item {
+  float: left;
+}
+.owl-controls .owl-page,
+.owl-controls .owl-buttons div {
+  cursor: pointer;
+}
+.owl-controls {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* mouse grab icon */
+
+/* fix */
+.owl-carousel .owl-wrapper,
+.owl-carousel .owl-item {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .owl-controls {
+    display: block!important;
+    visibility: visible;
+  }
+  .owl-controls .owl-prev,
+  .owl-controls .owl-next {
+    /* 3 */
+    position: absolute;
+    top: -60px;
+    right: 0;
+    width: 50px;
+    height: 60px;
+    content: '';
+    display: block;
+    background: url(sprites.png) no-repeat;
+    background-position: 0 0;
+
+    text-indent: -9999px;
+    /* 1 */
+  }
+  .owl-controls .owl-prev {
+    right: 60px;
+    background-position: -293px -215px;
+  }
+  .owl-controls .owl-next {
+    right: 10px;
+    background-position: -343px -215px;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .owl-controls .owl-prev,
+  .owl-controls .owl-next {
+    top: -65px;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .owl-controls .owl-prev,
+  .owl-controls .owl-next {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Internal
+   ========================================================================== */
+/**
+* The intenal css contains general CSS style that relates to the global intenal
+* elements
+*
+* Related LESS files
+* - internal-contentwidgets.less
+*/
+/**
+* Internal header
+* 1. create gradient between headers
+*/
+.main-body > header {
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+}
+.main-body > header:before {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 20px;
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #f5f5f5 0%, #ffffff 100%);
+  /* FF3.6+ */
+  background: -webkit-linear-gradient(top, #f5f5f5 0%, #ffffff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #f5f5f5 0%, #ffffff 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #f5f5f5 0%, #ffffff 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 100%);
+  /* W3C */
+  content: '';
+}
+.main-body > header h1 {
+  padding: 20px 15px;
+  margin: 0;
+}
+.main-body > header .breadcrumbs {
+  display: none;
+}
+/**
+* Generic page structure
+* 1. main content area
+* 2. supporting content area
+*
+*/
+.content {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+.generic .columns.content {
+  /* 1 */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #666666;
+  padding: 15px;
+}
+.generic .columns.supporting-content {
+  /* 2 */
+  background: #f0f0f0;
+}
+/**
+* Content images
+*
+*/
+.image-fullwidth,
+.image-left,
+.image-right {
+  display: block;
+}
+.image-fullwidth {
+  width: 100%;
+}
+.image-left {
+  float: left;
+  width: 48%;
+  margin: 0 15px 15px 0;
+}
+.image-right {
+  float: right;
+  width: 48%;
+  margin: 0 0 15px 15px;
+}
+.hidden-label {
+  /* 1 */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Internal header
+* 1. create gradient between headers
+*/
+  .main-body > header:before {
+    display: none;
+  }
+  .main-body > header h1 {
+    max-width: 66.66667%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 20px 10px 20px;
+    margin: 0;
+  }
+  .main-body > header .breadcrumbs {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    zoom: 1;
+    max-width: 66.66667%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 20px 20px 20px;
+  }
+  .main-body > header .breadcrumbs:before,
+  .main-body > header .breadcrumbs:after {
+    content: "";
+    display: table;
+  }
+  .main-body > header .breadcrumbs:after {
+    clear: both;
+  }
+  .main-body > header .breadcrumbs li {
+    float: left;
+    color: #707274;
+  }
+  .main-body > header .breadcrumbs li:last-child a {
+    color: #707274;
+  }
+  .main-body > header .breadcrumbs a {
+    display: block;
+    text-decoration: none;
+    padding-right: 10px;
+  }
+  .main-body > header .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  /**
+* Generic page structure
+* 1. main content area
+* 2. supporting content area
+*
+*/
+  .generic .columns.content {
+    /* 1 */
+    width: 66.66667%;
+    padding: 20px;
+  }
+  .generic .columns.content.fullwidth {
+    /* 1 */
+    width: 100%;
+    padding: 20px;
+  }
+  .generic .columns.supporting-content {
+    /* 2 */
+    width: 33.33332%;
+  }
+  /**
+* Content images
+*
+*/
+  .image-left {
+    width: auto;
+  }
+  .image-right {
+    width: auto;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Internal header
+* 1. create gradient between headers
+*/
+  .main-body > header h1 {
+    max-width: 75%;
+    padding: 20px 35px 10px 35px;
+  }
+  .main-body > header .breadcrumbs {
+    max-width: 75%;
+    padding: 0 35px 20px 35px;
+  }
+  /**
+* Generic page structure
+* 1. main content area
+* 2. supporting content area
+*
+*/
+  .generic .columns.content {
+    /* 1 */
+    width: 75%;
+    padding: 35px;
+  }
+  .generic .columns.content.fullwidth {
+    /* 1 */
+    padding: 35px;
+  }
+  .generic .columns.supporting-content {
+    /* 2 */
+    width: 25%;
+  }
+}
+/* ==========================================================================
+   Content widget
+   ========================================================================== */
+/**
+* Content widgets are the reuseable widgets that can be placed on pages throughout
+* to create page functionality
+*
+*/
+/**
+* On page navigation
+*
+*/
+.on-page-navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin: 1.0em 0;
+}
+.on-page-navigation a {
+  position: relative;
+  display: block;
+  padding-left: 30px;
+  text-decoration: none;
+}
+.on-page-navigation a:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -124px -319px;
+
+  text-indent: -9999px;
+  /* 1 */
+  content: '';
+}
+.on-page-navigation a:hover {
+  text-decoration: underline;
+}
+/**
+* Call to action box
+*
+*/
+.content-action {
+  background: #f0f0f0;
+  padding: 20px 23px;
+  margin: 1.0em 0;
+}
+/**
+* Content highlight
+*
+*/
+.content-highlight {
+  zoom: 1;
+  margin: 1.0em 0;
+}
+.content-highlight:before,
+.content-highlight:after {
+  content: "";
+  display: table;
+}
+.content-highlight:after {
+  clear: both;
+}
+.content-highlight .icon {
+  float: left;
+  width: 64px;
+  height: 64px;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: 0 -279px;
+
+  text-indent: -9999px;
+  /* 1 */
+  background-color: #f0f0f0;
+  margin: 0 1.0em 1.0em 0;
+}
+.content-highlight p {
+  margin: 0 0 1.0em 0;
+}
+.content-highlight .text-wrapper,
+.content-highlight p {
+  color: #000;
+}
+/**
+* Supporting content
+*
+*/
+.supporting-content section {
+  border-bottom: 1px solid #bbbbbb;
+}
+.article-list h2,
+.document-list h2 {
+  font-size: 18px;
+  border-bottom: 1px solid #bbbbbb;
+  padding: 20px 20px 60px;
+  margin: 0;
+}
+.article-list ul,
+.document-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.article-list li,
+.document-list li {
+  border-bottom: 1px solid #ffffff;
+}
+.article-list li:last-child,
+.document-list li:last-child {
+  border: 0 none;
+}
+.article-list a,
+.document-list a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333333;
+  background-color: #f0f0f0;
+}
+.article-list a:hover,
+.document-list a:hover {
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+  background-color: #e3e3e3;
+}
+.aside-content {
+  padding: 10px 20px;
+}
+.aside-content h2 {
+  font-size: 18px;
+}
+/**
+* Resposnsive tables
+* 1. Mobile only media query
+*
+*/
+h3.table-header {
+  margin-bottom: 0;
+  border-top: 1px solid #cccccc;
+  padding: 20px 0;
+}
+h3.table-header + .responsive-table {
+  margin-top: 0;
+}
+table.responsive-table {
+  border-top: 1px solid #cccccc;
+  width: 100%;
+  margin: 1.0em 0;
+}
+table.responsive-table tr:nth-child(even) {
+  background: #eaeaea;
+}
+table.responsive-table th {
+  text-align: left;
+  padding: 5px;
+}
+table.responsive-table td {
+  padding: 5px;
+  border-left: 1px dotted #cccccc;
+}
+table.responsive-table td:first-child {
+  border-left: 0 none;
+}
+/* Mobile media query
+   ========================================================================== */
+@media only screen and (max-width: 767px) {
+  /* 1 */
+  .responsive-table {
+    display: none;
+    margin: 0!important;
+  }
+  .responsive-table th:first-child,
+  .responsive-table td:first-child,
+  .responsive-table td:first-child,
+  .responsive-table.pinnedCells td {
+    display: none;
+  }
+  .responsive-table td,
+  .responsive-table th {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .tableWrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .tableWrapper .scrollableCells {
+    margin-left: 35%;
+  }
+  .tableWrapper .scrollableCells {
+    overflow: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tableWrapper .pinnedCells {
+    border-top: 1px solid #cccccc;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #ffffff;
+    width: 35%;
+    overflow: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tableWrapper .pinnedCells table {
+    border-right: none;
+    border-left: none;
+    width: 100%;
+  }
+  .tableWrapper .pinnedCells table th,
+  .tableWrapper .pinnedCells table td {
+    text-align: left;
+    white-space: nowrap;
+    padding: 5px;
+  }
+  .tableWrapper .pinnedCells table th:last-child,
+  .tableWrapper .pinnedCells table td:last-child {
+    border-bottom: 0;
+  }
+  .tableWrapper .pinnedCells tr:nth-child(even) {
+    background: #eaeaea;
+  }
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* Call to action box
+*
+*/
+  .content-action {
+    zoom: 1;
+  }
+  .content-action:before,
+  .content-action:after {
+    content: "";
+    display: table;
+  }
+  .content-action:after {
+    clear: both;
+  }
+  .content-action .content-action-description {
+    float: left;
+    width: 58.33333%;
+  }
+  .content-action .content-action-btn {
+    float: left;
+    text-align: right;
+    width: 41.66669%;
+  }
+  /**
+* Supporting content
+*
+*/
+  .supporting-content section:last-child {
+    border: 0 none;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* Call to action box
+*
+*/
+  .content-action .content-action-description {
+    width: 66.66667%;
+  }
+  .content-action .content-action-btn {
+    width: 33.33332%;
+  }
+}
+/* Media media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .on-page-navigation a:before,
+  .content-highlight .icon {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Landing
+   ========================================================================== */
+/**
+* The landing less file contain elements that are shared arcoss the site.
+* Related LESS
+* global-forms.less
+*
+*/
+/**
+*feature page display
+*
+*/
+.feature-page ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  zoom: 1;
+}
+.feature-page ul:before,
+.feature-page ul:after {
+  content: "";
+  display: table;
+}
+.feature-page ul:after {
+  clear: both;
+}
+.feature-page a:hover .feature-image img,
+.feature-page a:focus .feature-image img {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+.feature-page a,
+.feature-page span {
+  display: block;
+  text-decoration: none;
+}
+.feature-page .feature-image img {
+  width: 100%;
+  display: block;
+}
+.feature-page .feature-container {
+  font-size: 16px;
+  padding: 20px;
+}
+.feature-page .feature-container .feature-title {
+  font-weight: 700;
+  color: #006B6E; /* pDMIRS */
+  height: 22px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.feature-page .feature-container .feature-description {
+  color: #666666;
+  height: 88px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.feature-page .feature-container .view-more {
+  color: #006B6E;  /* pDMIRS */
+}
+/**
+* Subscription form area
+* This section can be used to dispay in page functionality
+*
+*/
+.subscription {
+  background: #f0f0f0;
+  width: 100%;
+}
+.subscription h2 {
+  position: relative;
+  display: block;
+  font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+}
+.subscription h2:after {
+  /* 3 */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -370px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.subscription h2.active:after {
+  background-position: -370px -50px;
+}
+.subscription .subscription-container {
+  padding: 15px;
+  display: none;
+}
+.subscription input[type="text"] {
+  border-color: #bbbbbb;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+*feature page display
+*
+*/
+  .feature-page li {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+  }
+  .feature-page li:nth-child(2n) .feature-container {
+    border-left: 1px solid #e0e0e0;
+  }
+  /**
+* landing structure
+*
+*/
+  .landing .subscription h2 {
+    padding-left: 20px;
+  }
+  .landing .subscription .subscription-container {
+    padding: 15px 20px;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+*feature page display
+*
+*/
+  .feature-page li {
+    width: 25%;
+  }
+  .feature-page li .feature-container {
+    border-left: 1px solid #e0e0e0;
+  }
+  .feature-page li:nth-child(4n+1) .feature-container {
+    border-left: 0 none;
+  }
+  /**
+* landing structure
+*
+*/
+  .landing .subscription {
+    width: 50%;
+  }
+  .landing .subscription h2 {
+    padding-left: 35px;
+  }
+  .landing .subscription h2:after {
+    display: none;
+  }
+  .landing .subscription .subscription-container {
+    padding: 15px 35px;
+    display: block!important;
+  }
+  .landing .news-listing {
+    width: 50%;
+    border-top: 1px solid #e0e0e0;
+  }
+  .landing .news-listing .listing-item {
+    width: 33.33332%;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .subscription h2:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Process - how do I page
+   ========================================================================== */
+/**
+* Process page - How do I page
+* Common html elements will be found here.
+*
+* Related LESS files
+* - filter.less
+
+*/
+/**
+* process navigation
+* links to related process explained pages
+*
+*/
+.process-navigation h2 {
+  position: relative;
+  display: block;
+  font: 18px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+}
+.process-navigation h2:after {
+  /* 3 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -365px 5px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.process-navigation h2.active:after {
+  background-position: -365px -45px;
+}
+.process-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+.process-navigation ul li {
+  border-bottom: 1px solid #ffffff;
+}
+.process-navigation ul a {
+  position: relative;
+  display: block;
+  font: 15px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  text-decoration: none;
+  padding: 15px 70px 15px 20px;
+  background: #939598;
+  color: #ffffff;
+}
+.process-navigation ul a:after {
+  /* 3 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -265px -45px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.process-navigation ul a:hover {
+  cursor: pointer;
+  background-color: #86888c;
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+.process-navigation ul a.active {
+  background-color: #707274;
+}
+/**
+* process explained content
+*
+*/
+.process-content h2 {
+  font: 18px/60px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  background-color: #f0f0f0;
+  padding: 0 15px;
+  margin: 0;
+}
+.process-content .noDocuments {
+  display: none;
+  font-style: italic;
+}
+/**
+* accordian body layout
+*
+*/
+.accordion {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.accordion li {
+  position: relative;
+  border-top: 1px solid #333333;
+}
+.accordion li:first-child {
+  border-top: 0 none;
+}
+.accordion li:before {
+  /* 3 */
+  position: absolute;
+  top: 5px;
+  right: inherit;
+  width: 50px;
+  height: 50px;
+  content: '';
+  left: 0;
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -370px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+  cursor: pointer;
+}
+.accordion li.open:before {
+  background-position: -370px -50px;
+}
+.accordion li .accordion-header {
+  position: relative;
+  display: block;
+  font: 15px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 15px 15px 15px 50px;
+  z-index: 1;
+  cursor: pointer;
+}
+.accordion li .accordion-body {
+  display: none;
+  padding: 15px;
+  padding-top: 0;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .process header {
+    border: 0 none;
+  }
+  /**
+* process navigation
+* links to related process explained pages
+*
+*/
+  .process-navigation {
+    float: left;
+    width: 25%;
+  }
+  .process-navigation h2 {
+    display: none;
+  }
+  .process-navigation ul {
+    display: block;
+  }
+  .process-navigation ul a {
+    font: 13px/18px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    padding: 20px 50px 20px 20px;
+  }
+  /**
+* process explained content
+*
+*/
+  .process-content {
+    float: left;
+    width: 73%;
+    margin: 0 1%;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* process navigation
+* links to related process explained pages
+*
+*/
+  .process-navigation ul a {
+    font: 15px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    padding: 15px 70px 15px 20px;
+  }
+  /**
+* process explained content
+*
+*/
+  .process-content {
+    float: left;
+    width: 73%;
+    margin: 0 1%;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .process-navigation h2:after,
+  .process-navigation ul a:after,
+  .accordion li:before {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Forms page
+   ========================================================================== */
+/**
+* Full width form layout
+*
+* Related LESS files
+* - global-forms.less
+*/
+.form .content {
+  padding: 10px 15px;
+}
+/*
+* step process
+* 1. width for a 3 step process
+* 2. width for a 4 step process
+* 3. width for a 5 step process
+* 4. width for a 6 step process
+*
+*/
+.step-process {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  zoom: 1;
+  margin: 1.0em 0;
+}
+.step-process:before,
+.step-process:after {
+  content: "";
+  display: table;
+}
+.step-process:after {
+  clear: both;
+}
+.step-process li {
+  float: left;
+}
+.step-process a {
+  display: block;
+  border-bottom: 5px solid #eaeaea;
+  text-indent: -9999px;
+  height: 0;
+}
+.step-process a.complete {
+  border-color: #00a6ab;  /* pDMIRS */
+  margin-left: 1px;
+}
+.step3 li {
+  /* 1 */
+  width: 33.33332%;
+}
+.step4 li {
+  /* 2 */
+  width: 25%;
+}
+.step5 li {
+  /* 3 */
+  width: 20%;
+}
+.step6 li {
+  /* 4 */
+  width: 16.66667%;
+}
+/**
+* Buttons
+*
+*/
+.form button[type="submit"].btn-secondary,
+.form button[type="submit"].btn-link {
+  float: left;
+  width: 50%;
+  margin-bottom: 15px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .form .content {
+    padding: 10px 20px;
+  }
+  /*
+* step process
+* 1. width for a 3 step process
+*
+*/
+  .step-process a {
+    font: 15px/30px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    text-decoration: none;
+    color: #707274;
+    text-indent: 0;
+    height: auto;
+    padding: 15px 0;
+  }
+  .step-process a.complete {
+    color: #008b91;  /* pDMIRS */
+  }
+  /**
+* Buttons
+*
+*/
+  .form button[type="submit"].btn-secondary,
+  .form button[type="submit"].btn-link {
+    float: none;
+    width: auto;
+    margin-bottom: 0;
+  }
+  .form button[type="submit"].btn-secondary {
+    float: left;
+  }
+}
+/* desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /*
+* step process
+* 1. width for a 3 step process
+*
+*/
+  .step-process {
+    width: 66.66667%;
+  }
+  /**
+* Full width form structure
+* This layout includes validation & messaging
+*
+*/
+  .form .content {
+    padding: 10px 35px;
+  }
+  /**
+* Buttons
+*
+*/
+  .form button[type="submit"] {
+    margin-right: 33.33332%;
+  }
+  .form button[type="submit"].btn-link,
+  .form button[type="submit"].btn-secondary {
+    margin-right: 0;
+  }
+}
+/* ==========================================================================
+   Search results
+   ========================================================================== */
+/**
+* Styling and structure for the search results
+*
+* Related LESS files
+* - global-forms.less
+
+*/
+/**
+* search results info box
+*
+*/
+.search-refinement-info {
+  border-top: #e0e0e0;
+  padding: 15px;
+}
+.search-refinement-info label {
+  /* 1 */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.search-refinement-info input {
+  margin: 5px 0;
+}
+.search-refinement-info h2 {
+  font: 18px/1.333 "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  margin-bottom: 5px;
+}
+.search-refinement-info p {
+  margin-top: 5px;
+}
+.search-refinement-info .sort ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  zoom: 1;
+}
+.search-refinement-info .sort ul:before,
+.search-refinement-info .sort ul:after {
+  content: "";
+  display: table;
+}
+.search-refinement-info .sort ul:after {
+  clear: both;
+}
+.search-refinement-info .sort ul li {
+  float: left;
+  border-left: 1px solid #000;
+  padding: 0 10px;
+}
+.search-refinement-info .sort ul li a {
+  color: #008b91;  /* pDMIRS */
+  display: block;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 0 2px;
+}
+.search-refinement-info .sort ul li a.active {
+  color: #333333;
+  font-weight: bold;
+}
+.search-refinement-info .sort ul li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+/**
+* search filters
+*
+*/
+.search-filter h2 {
+  position: relative;
+  border-top: 1px solid #e0e0e0;
+  font: 18px/60px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 0 15px;
+  margin: 0;
+}
+.search-filter h2:after {
+  /* 3 */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 60px;
+  height: 60px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -170px -50px;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.search-filter h2.active:after {
+  background-position: -120px -50px;
+}
+.search-filter .search-filter-container {
+  display: none;
+}
+.search-filter .filter-title {
+  position: relative;
+  border-top: 1px solid #e0e0e0;
+  font: 18px/60px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  padding: 0 15px;
+}
+.search-filter .filter-title:after {
+  /* 3 */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 60px;
+  height: 60px;
+  content: '';
+  display: block;
+  background: url(sprites.png) no-repeat;
+  background-position: -370px 0;
+
+  text-indent: -9999px;
+  /* 1 */
+}
+.search-filter .filter-title.active:after {
+  background-position: -370px -50px;
+}
+.search-filter .filter-type {
+  display: none;
+  padding: 0 15px;
+}
+/**
+* search results
+* pagination and text based returned results
+*
+*/
+.search-results-return {
+  border-top: 1px solid #e0e0e0;
+  padding: 15px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  /**
+* search results info box
+*
+*/
+  .search-refinement-info {
+    background: #f0f0f0;
+    border-top: #e0e0e0;
+    padding: 0;
+  }
+  .search-refinement-info .search-refinement-info-wrapper {
+    background: #ffffff;
+    margin-left: 25%;
+    padding: 20px;
+  }
+  .search-refinement-info input {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+  }
+  .search-refinement-info input[type="text"] {
+    width: 41.66669%;
+  }
+  .search-refinement-info input[type="submit"] {
+    margin-left: 30px;
+  }
+  /**
+* search filters
+*
+*/
+  .search-filter {
+    background: #f0f0f0;
+    width: 25%;
+  }
+  .search-filter h2 {
+    border-color: #bbbbbb;
+    padding: 0 20px;
+  }
+  .search-filter h2:after {
+    display: none;
+  }
+  .search-filter .search-filter-container {
+    padding: 0;
+    display: block;
+  }
+  .search-filter .search-filter-container .filter-title {
+    font-size: 14px;
+    line-height: 30px;
+    border-top: 0 none;
+    border-bottom: 1px solid #bbbbbb;
+    padding: 0 20px;
+  }
+  .search-filter .search-filter-container .filter-title:after {
+    display: none;
+  }
+  .search-filter .search-filter-container .filter-type {
+    display: block;
+    padding: 20px;
+  }
+  /**
+* search results
+* pagination and text based returned results
+*
+*/
+  .search-results-return {
+    width: 73%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px;
+    padding-top: 10px;
+    margin: 0 1%;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  /**
+* search results info box
+*
+*/
+  .search-refinement-info .search-refinement-info-wrapper {
+    padding: 35px;
+  }
+  /**
+* search results
+* pagination and text based returned results
+*
+*/
+  .search-results-return {
+    padding: 35px;
+    padding-top: 10px;
+  }
+}
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .search-filter h2:after,
+  .search-filter .filter-title:after,
+  .search-filter .filter-title.active:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Listing
+   ========================================================================== */
+/**
+* Styling for the listing page.
+* Used for templates such as the news landing
+*
+* Related LESS files
+* - shared/pagination.less
+* - shared/lastest-news.less
+* - shared/filter.less
+
+
+/**
+* listing structure
+*
+*/
+.listing .content h2 {
+  display: block;
+  font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+}
+.listing .content .listing-container {
+  border-top: 1px solid #e0e0e0;
+}
+.listing .content .listing-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+.listing .content .noListings {
+  padding: 20px;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .listing .content h2 {
+    display: block;
+    font: 25px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 60px;
+    color: #333333;
+    padding: 0 20px;
+    margin: 0;
+    float: left;
+  }
+  .listing .content .pagination {
+    float: right;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+/* Retina media query
+   ========================================================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dppx) {
+  .search-filter h2:after {
+    background-image: url(sprites3x.png);
+    background-size: 534px 600px; /* Updated to 534 from 420 for the DMIRS */
+    /* 2 */
+  }
+}
+/* ==========================================================================
+   Documents
+   ========================================================================== */
+/**
+* The documents landing page displays a list of promiment documents within the site.
+*
+*/
+.document-overview h2 {
+  display: block;
+  font: 20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 60px;
+  color: #333333;
+  padding: 0 15px;
+  margin: 0;
+}
+.document-overview ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.document-overview ul a {
+  display: block;
+  text-decoration: none;
+}
+.document-overview ul a:hover img {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+.document-overview ul img {
+  display: block;
+  width: 100%;
+}
+.document-overview ul .document-container {
+  display: block;
+  padding: 15px;
+  height: 130px;
+  overflow: hidden;
+}
+.document-overview ul .document-container .document-title {
+  display: block;
+  font: 16px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+.document-overview ul .document-container .document-description {
+  display: block;
+  font: 12px/20px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #333333;
+}
+/* Tablet media query
+   ========================================================================== */
+@media only screen and (min-width:768px) {
+  .document-overview h2 {
+    display: block;
+    font: 24px "Arimo", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 60px;
+    color: #333333;
+    padding: 0 20px;
+    margin: 0;
+  }
+  .document-overview ul {
+    zoom: 1;
+  }
+  .document-overview ul:before,
+  .document-overview ul:after {
+    content: "";
+    display: table;
+  }
+  .document-overview ul:after {
+    clear: both;
+  }
+  .document-overview ul li {
+    float: left;
+    width: 50%;
+  }
+  .document-overview .document-container {
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+  }
+}
+/* Desktop media query
+   ========================================================================== */
+@media only screen and (min-width:1024px) {
+  .document-overview ul li {
+    width: 25%;
+  }
+}
+
+.support-navigation {
+  font-size: 0.8rem!important;
+  display: flex;
+  flex-direction: row;
+}
+
+ul.support-navigation > :last-child {
+  margin-top: auto;
+}
+/*# sourceMappingURL=styles.css.map */
