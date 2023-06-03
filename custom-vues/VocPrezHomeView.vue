@@ -18,19 +18,19 @@ const links = [
 
 <template>
   <FlavourHome flavour="VocPrez" :links="links">
-    <h2>GSQ's Vocabulary System</h2>
+    <h2>GSWA's Vocabulary System</h2>
     <p>
       Welcome to the
       <a
-        href="https://www.business.qld.gov.au/industries/mining-energy-water/resources/geoscience-information/gsq"
-        >Geological Survey of Queensland (GSQ)'s</a
+        href="https://dmp.wa.gov.au/Geological-Survey/Geological-Survey-262.aspx"
+        >Geological Survey of Western Australia (GSWA)'s</a
       >
       instance of VocPrez, a read-only web delivery system for Simple Knowledge
       Organization System (SKOS)-formulated RDF vocabularies.
     </p>
     <p>
       VocPrez presents different views, or profiles, of vocabularies which, in
-      this system's case, it gets from GSQ's graph database of vocabularies and
+      this system's case, it gets from GSWA's graph database of vocabularies and
       other
       <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a>
       content.
@@ -46,12 +46,12 @@ const links = [
       <RouterLink to="/v/vocab">list of vocabularies</RouterLink>.
     </p>
     <p>
-      Note that GSQ's vocabularies are also available as text files from their
+      Note that GSWA's vocabularies are also available as text files from their
       point-of-truth code repository:
     </p>
     <ul>
-      <a href="https://github.com/geological-survey-of-queensland/vocabularies/"
-        >GSQ's vocabulary source files on GitHub</a
+      <a href="https://github.com/kurrawong/gswa-vocabs/"
+        >GSWA's vocabulary source files on GitHub</a
       >
     </ul>
     <p>
@@ -60,7 +60,7 @@ const links = [
 
     <h3>Vocabulary profile</h3>
     <p>
-      All of GSQ's vocabularies are managed by testing their conformance to a
+      All of GSWA's vocabularies are managed by testing their conformance to a
       profile of SKOS, the so-called
       <a href="https://w3id.orf/profile/vocpub">VocPub Profile</a> .
     </p>
@@ -82,9 +82,9 @@ const links = [
 
     <h3>All-vocabulary dataset</h3>
     <p>
-      To access metadata for GSQ's total set of vocabularies as a single
+      To access metadata for GSWA's total set of vocabularies as a single
       dataset, follow the Alternate Profiles link to the right. The dataset view
-      of these vocabularies allows GSQ's total holdings to be referred to and
+      of these vocabularies allows GSWA's total holdings to be referred to and
       represented in other catalogues.
     </p>
     <p>

@@ -17,16 +17,13 @@ RUN git init && \
 
 COPY public/ /app/public
 
-# Strip out Prez UI header and footer placeholders.
-RUN sed -i 's+<header id="header"></header>+<div id="header"></div>+g' /app/index.html
-RUN sed -i 's+<footer id="footer"></footer>+<div id="footer"></div>+g' /app/index.html
-
 # Add custom header and footer.
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
-COPY App.vue /app/src/App.vue
+COPY custom-vues/App.vue /app/src/App.vue
 
-# Add custom VocPrez page.
-COPY VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
+# Add custom pages
+COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
+COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
 
 RUN rm .env
 

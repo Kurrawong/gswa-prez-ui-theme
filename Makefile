@@ -32,3 +32,9 @@ stack-down:
 
 stack-ui:
 	docker-compose build prez-ui && docker-compose stop prez-ui && docker-compose rm -f prez-ui && make stack-up
+
+stack-ui-start:
+	docker-compose build prez-ui && docker-compose --profile ui up -d
+
+# stack-ui-restart:
+#     docker-compose --profile ui down && docker-compose build prez-ui && docker-compose --profile ui up -d

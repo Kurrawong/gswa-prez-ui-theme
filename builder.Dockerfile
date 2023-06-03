@@ -18,6 +18,6 @@ RUN git init && \
 COPY public/ /app/public
 
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
-COPY App.vue /app/src/App.vue
+COPY custom-vues/App.vue /app/src/App.vue
 
 RUN npm ci
