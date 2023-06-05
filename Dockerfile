@@ -17,11 +17,15 @@ RUN git init && \
 
 COPY public/ /app/public
 
-# Add custom header and footer.
+# Add custom header and footer
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
 COPY custom-vues/App.vue /app/src/App.vue
 
 # Add custom pages
+COPY custom-vues/AdvancedSearch.vue /app/src/components/search/AdvancedSearch.vue
+COPY custom-vues/GlobalSearch.vue /app/src/components/search/GlobalSearch.vue
+COPY custom-vues/MainNav.vue /app/src/components/navs/MainNav.vue
+COPY custom-vues/SearchView.vue /app/src/views/SearchView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
 
