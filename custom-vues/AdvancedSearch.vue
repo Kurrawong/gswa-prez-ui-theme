@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<{
 const defaultSearchMethod = "exactMatch";
 
 const expanded = ref(false);
-const prez = ref(props.flavour ? props.flavour : (props.query ? props.query.prez || "all" : "all"));
+const prez = ref('VocPrez');//ref(props.flavour ? props.flavour : (props.query ? props.query.prez || "all" : "all"));
 const searchTerm = ref(props.query ? props.query.term : "");
 const searchMethod = ref(props.query ? (props.query.method ? props.query.method : defaultSearchMethod) : defaultSearchMethod);
 const searchOptions = ref<{[key: string]: string}>({});

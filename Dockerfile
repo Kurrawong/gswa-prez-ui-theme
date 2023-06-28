@@ -28,6 +28,7 @@ COPY custom-vues/MainNav.vue /app/src/components/navs/MainNav.vue
 COPY custom-vues/SearchView.vue /app/src/views/SearchView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
+COPY custom-vues/ItemListView.vue /app/src/views/ItemListView.vue
 
 RUN rm .env
 

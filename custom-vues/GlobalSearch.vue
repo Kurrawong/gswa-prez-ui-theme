@@ -17,11 +17,14 @@ function submit() {
 function clearSearch() {
     searchTerm.value = "";
 }
+
+const configSearch = false
+
 </script>
 
 <template>
     <div class="search-bar-container">
-        <div class="search-bar">
+        <div v-if="configSearch" class="search-bar">
             <input
                 type="search"
                 name="term"
@@ -32,8 +35,8 @@ function clearSearch() {
                 @keypress.enter="submit()"
             >
             <button type="button" @click="clearSearch()" class="clear-btn"><i class="fa-regular fa-xmark"></i></button>
+            <button type="submit" class="btn submit-btn" @click="submit()"><i class="fa-regular fa-magnifying-glass"></i></button>
         </div>
-        <button type="submit" class="btn submit-btn" @click="submit()"><i class="fa-regular fa-magnifying-glass"></i></button>
     </div>
 </template>
 

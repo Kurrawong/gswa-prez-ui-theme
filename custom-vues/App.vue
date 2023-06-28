@@ -50,20 +50,7 @@ import PrezApp from "./PrezApp.vue";
                         </p>
                         <div>
                             <span>Email:&nbsp;</span>
-                            <span><a href="mailto:">minedex@dmirs.wa.gov.au</a></span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>
-                            Technical support accessing the Department's online systems.
-                        </p>
-                        <div>
-                            <span>Phone:&nbsp;</span>
-                            <span><a href="tel:+">+61 8 9222 0777</a></span>
-                        </div>
-                        <div>
-                            <span>Email:&nbsp;</span>
-                            <span><a href="mailto:">IT.servicedesk@dmirs.wa.gov.au</a></span>
+                            <span><a href="mailto:">GSWA.vocabularies@dmirs.wa.gov.au</a></span>
                         </div>
                     </div>
                 </div>
@@ -112,7 +99,12 @@ import PrezApp from "./PrezApp.vue";
   .prez-card {
     background-color: rgb(230, 232, 230)!important;
   }
-  .prez-card h4 {
+
+  a.nav-link.active {
+    color: #fff !important;
+  }
+
+  .prez-card h4 :not(.active) {
     color: rgb(112, 112, 112)!important;
   }
 
@@ -124,7 +116,8 @@ import PrezApp from "./PrezApp.vue";
     color: white!important;
   }
 
-  .router-link-active,
+  .nav-item .router-link-active,
+  .mediatypes .router-link-active,
   .nav-item a:hover {
     color:white!important;
   }
