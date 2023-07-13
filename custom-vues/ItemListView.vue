@@ -316,8 +316,8 @@ onMounted(() => {
     <ProfilesTable v-if="isAltView" :profiles="profiles" :path="route.path" />
     <template v-else>
         <h1 class="page-title">{{ itemType.label }}</h1>
-        <p>A list of <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">{{ itemType.label }}.</a></p>
         <p v-if="items.length > 0">{{ itemType.label }} managed by the Geological Survey of Western Australia. Showing {{ items.length }} of {{ count }} items.</p>
+        <p>A list of <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">{{ itemType.label }}.</a></p>
         <template v-if="error">
             <ErrorMessage :message="error" />
         </template>

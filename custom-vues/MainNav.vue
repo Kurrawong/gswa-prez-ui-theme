@@ -21,7 +21,7 @@ const routes: {[key: string]: any[]} = {
             "to": "/v/profiles"
         },
         {
-            "label": "About VocPrez",
+            "label": "About Prez",
             "to": "/v/about"
         },
     ],
