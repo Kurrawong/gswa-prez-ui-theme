@@ -94,44 +94,45 @@ onMounted(() => {
 
 <template>
     <h1 class="page-title">Search</h1>
-    <AdvancedSearch :query="query" fullPage/>
-    <template v-if="error">
-        <ErrorMessage :message="error" />
-    </template>
-    <template v-else-if="loading">
-        <h3>Loading...</h3>
-        <span class="loading-icon"></span>
-    </template>
-    <template v-else-if="route.query && route.query.term">
-        <div class="container">
-            <div class="left-panel">
-                <h2>Results</h2>
-                <div class="results-cols">
-                    <span>Title</span>
-                    <span>Source</span>
+    <div class="adv-search">
+        <AdvancedSearch :query="query" fullPage/>
+        <template v-if="error">
+            <ErrorMessage :message="error" />
+        </template>
+        <template v-else-if="loading">
+            <h3>Loading...</h3>
+            <span class="loading-icon"></span>
+        </template>
+        <template v-else-if="route.query && route.query.term">
+            <div class="container">
+                <div class="left-panel">
+                    <h2>Results</h2>
+                    <div class="results-cols">
+                        <span>Title</span>
+                        <span>Source</span>
+                    </div>
+                    <div v-if="results.length > 0" class="results">
+                        <RouterLink v-for="result in results" class="result" :to="`/object?uri=${encodeURIComponent(result.uri)}`">
+                            <span>{{ result.label || result.uri }}</span>
+                            <span :style="{ color: 'black' }">{{ result.source }}</span>
+                        </RouterLink>
+                    </div>
+                    <p v-else>No results found.</p>
                 </div>
-                <div v-if="results.length > 0" class="results">
-                    <RouterLink v-for="result in results" class="result" :to="`/object?uri=${encodeURIComponent(result.uri)}`">
-                        <span>{{ result.label || result.uri }}</span>
-                        <span :style="{ color: 'black' }">{{ result.source }}</span>
-                    </RouterLink>
+                <div v-if="geoResults.length" class="right-panel">
+                    <div class="results-title">Spatial Results</div>
+                    <MapClient v-if="geoResults.length"
+                        ref="searchMapRef" 
+                        :geo-w-k-t="geoResults"
+                    />
                 </div>
-                <p v-else>No results found.</p>
             </div>
-            <div v-if="geoResults.length" class="right-panel">
-                <div class="results-title">Spatial Results</div>
-                <MapClient v-if="geoResults.length"
-                    ref="searchMapRef" 
-                    :geo-w-k-t="geoResults"
-                />
-            </div>
-        </div>
-    </template>
+        </template>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/sass/_variables.scss";
-
 
 .container {
     display: grid;

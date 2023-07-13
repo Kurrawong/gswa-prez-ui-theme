@@ -29,5 +29,6 @@ COPY custom-vues/SearchView.vue /app/src/views/SearchView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
 COPY custom-vues/ItemListView.vue /app/src/views/ItemListView.vue
+COPY custom-vues/Breadcrumbs.vue /app/src/components/Breadcrumbs.vue
 
 RUN npm ci

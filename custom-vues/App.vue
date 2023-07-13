@@ -100,9 +100,9 @@ import PrezApp from "./PrezApp.vue";
     background-color: rgb(230, 232, 230)!important;
   }
 
-  a.nav-link.active {
+  /* a.nav-link.active {
     color: #fff !important;
-  }
+  } */
 
   .prez-card h4 :not(.active) {
     color: rgb(112, 112, 112)!important;
@@ -116,10 +116,22 @@ import PrezApp from "./PrezApp.vue";
     color: white!important;
   }
 
-  .nav-item .router-link-active,
+  /* .nav-item .router-link-active,
   .mediatypes .router-link-active,
   .nav-item a:hover {
     color:white!important;
+  } */
+
+  .nav-item .router-link-active,
+  .mediatypes .router-link-active,
+  .nav-item a {
+    background-color: transparent !important;
+    font-weight: 100;
+    padding-left:1.5rem !important;
+    padding-right:1.5rem !important;
+    flex-grow: 0 !important;
+    color: var(--navColor) !important;
+    font-size:1.125rem;
   }
 
   .page-title {
@@ -141,7 +153,8 @@ import PrezApp from "./PrezApp.vue";
     --footerColor: black;
     --navBg: #ededed;
     --navColor: var(--secondary);
-    --subNavBg: #d9d9d9;
+/*    --subNavBg: #d9d9d9; */
+    --subNavBg: #fff; /* match GSWA */
     --linkColor: var(--primary);
     --cardBg: var(--navBg);
     --tableBg: var(--navBg);
@@ -155,6 +168,126 @@ import PrezApp from "./PrezApp.vue";
     /* fonts */
     --headingFont: Arial, Helvetica, sans-serif;
     --bodyFont: Arial, Helvetica, sans-serif;
+}
+
+/* GSWA specific */
+
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #000000;
+  --secondary: #d14210;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #cc0000;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-family-monospace: Menlo, Consolas, "Liberation Mono", "Courier New", monospace;  
+
+  --primary: #000!important;
+  --secondary: #000!important;
+  --navBg: #fff;
+  --navColor: var(--secondary);
+
+  /* fonts */
+  --headingFont: Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --bodyFont: Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+
+* {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+header #header-content {
+  display:none !important;
+}
+
+#main-nav .nav-item {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  flex-grow: 0 !important;
+}
+
+#main-nav > .nav-item {
+  border-top:7px solid transparent;
+}
+
+#main-nav > .nav-item:hover {
+  border-top:7px solid #d14210!important
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+  font-weight: 900 !important;
+  line-height: 132%;
+  display:none; /* GSWA */
+}
+
+
+
+/* GSWA Tables */
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0 !important;
+}
+
+.table thead tr {
+    min-height: 56px;
+    height: 56px;
+    background-color: #d0d0d0;
+}
+
+.table thead th {
+  font-weight: 500;
+}
+
+tr:nth-child(even) {
+    background-color: #f5f5f5 !important;
+}
+
+.table tr {
+    border-spacing: 0;
+}
+
+.table tbody tr:hover {
+    color: #000;
+    background-color: #dfdfdf !important;
+}
+
+.table td {
+  box-shadow: inset -1px 0 #21252920;
+}
+
+.table tr td:last-child {
+  box-shadow: none; 
 }
 
 </style>

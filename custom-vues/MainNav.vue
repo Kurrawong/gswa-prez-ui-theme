@@ -237,8 +237,8 @@ nav#main-nav {
         @include transition(color, background-color);
 
         &:hover {
-            background-color: var(--navColor);
-            color: white;
+            /*background-color: var(--navColor);  --> GSWA */
+            /*color: white;  --> GSWA */
         }
     }
 }
@@ -247,8 +247,29 @@ nav#main-nav {
     display: flex;
     background-color: var(--subNavBg);
 
+    /* GSWA */
+    margin-top:1px;
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,.15);
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,.15);
+    box-shadow: 0 3px 5px #00000026;
+    z-index:2;
+
+    .nav-item, .nav-item:hover {
+        border:0 !important;
+    }
+
+    .nav-item {
+        padding-bottom: 15px;
+    }
+
     a.nav-link {
-        font-size: 1rem !important;
+        font-weight:500;
+        font-size: 0.9rem !important;
+        text-decoration: none;
+    }
+
+    a.nav-link:hover {
+        color:#d14210 !important;
     }
 
     &.row {
@@ -282,4 +303,60 @@ nav#main-nav {
         }
     }
 }
+
+
+/* GSWA custom */
+
+.nav-item {
+
+    a.nav-link {
+        &:hover {
+            background-color: transparent;
+            color: var(--navColor);
+        }
+    }
+}
+
+</style>
+<style>
+
+#content {
+  margin-bottom: 4rem;
+}
+
+#content-body {
+    line-height: 160%;
+}
+
+#content-body a:hover {
+    color:#d14210 !important;
+    border-bottom: 2px solid #d14210 !important;
+}
+
+#content-body a, #content-body a:link, #content-body a:visited {
+    border:0;
+    border-bottom: 2px dotted #707070;
+    font-weight: 500;
+    border-radius: 0;
+}
+
+/* GSWA */
+#right-nav {
+    margin-top:180px;
+    margin-left:25px;
+}
+
+#right-nav a:hover {
+    color:#d14210 !important;
+}
+
+.home-page-links {
+    display: none !important;
+}
+
+h1.page-title {
+    margin-bottom:80px !important;
+    z-index:1;
+}
+
 </style>

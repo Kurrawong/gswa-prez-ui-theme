@@ -1,9 +1,12 @@
+/* Match GSWA font library */
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900";
+
 :root {
     /* colours */
     --primary: #d14210;
     --secondary: #d14210;
     --tertiary: #d14210;
-    --link: #707070;
+    --link: #4d4d4d;
     --link-hover: var(--primary);
     --btn-hover: #c53e0d;
     --nav-color: black;
@@ -164,3 +167,4 @@ footer p, #footer-contact-container {
         flex-direction: column;
     }
 }
+

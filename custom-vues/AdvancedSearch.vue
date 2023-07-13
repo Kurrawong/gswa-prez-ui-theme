@@ -203,4 +203,14 @@ function camelToTitleCase(s: string): string {
         }
     }
 }
+
+/* GSWA */
+.search-form {
+    display:none;
+}
+.adv-search .search-form {
+    display:flex;
+}
+
+
 </style>
