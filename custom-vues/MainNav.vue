@@ -21,7 +21,7 @@ const routes: {[key: string]: any[]} = {
             "to": "/v/profiles"
         },
         {
-            "label": "About Prez",
+            "label": "About VocPrez",
             "to": "/v/about"
         },
     ],
@@ -153,7 +153,7 @@ onUnmounted(() => {
             <div class="nav-item"><RouterLink to="/search" class="nav-link">Search</RouterLink></div>
             <div class="nav-item"><RouterLink to="/sparql" class="nav-link">SPARQL</RouterLink></div>
             <div class="nav-item"><RouterLink to="/profiles" :class="`nav-link ${route.path.startsWith('/profiles') ? 'active' : ''}`">Profiles</RouterLink></div>
-            <div class="nav-item"><RouterLink to="/about" class="nav-link">About VocPrez</RouterLink></div>
+            <div class="nav-item"><RouterLink to="/about" class="nav-link">About Prez</RouterLink></div>
             <div class="nav-item"><RouterLink to="/docs" class="nav-link">API Documentation</RouterLink></div>
             <div v-if="props.sidenav" class="bottom-nav-items">
                 <a href="https://github.com/RDFLib/prez-ui" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Prez UI v{{ props.version }}</a>

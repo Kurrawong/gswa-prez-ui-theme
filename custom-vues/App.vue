@@ -41,7 +41,11 @@ import PrezApp from "./PrezApp.vue";
                 </p>
             </div>
             <div id="footer-contact">
-                <h3>Contact the Department of Mines, Industry Regulation and Safety</h3>
+                <h3>
+                  Contact the Department of Mines, 
+                  Industry Regulation and
+                  Safety
+                </h3>
                 <div id="footer-contact-container">
                     <div>
                         <p>
@@ -66,7 +70,7 @@ import PrezApp from "./PrezApp.vue";
             </div>
             <div>
                 <p>
-                    © Government of Western Australia 2021
+                    © Government of Western Australia 2021-2023
                     <br/>
                     Department of Mines, Industry Regulation and <Safety></Safety>
                 </p>
@@ -113,7 +117,13 @@ import PrezApp from "./PrezApp.vue";
   }
 
   footer a {
+    text-decoration: none !important;
     color: white!important;
+    border-bottom-style: dashed !important;
+  }
+
+  footer a:hover {
+    border-bottom-style: solid !important;
   }
 
   /* .nav-item .router-link-active,
