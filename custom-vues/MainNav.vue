@@ -334,16 +334,31 @@ nav#main-nav {
 }
 
 #content-body a, #content-body a:link, #content-body a:visited {
+    color: #4d4d4d !important;
     border:0;
     border-bottom: 2px dotted #707070;
     font-weight: 500;
     border-radius: 0;
 }
 
+#content-body .concepts a {
+    color: inherit !important;
+    border-color: transparent;
+}
+
 /* GSWA */
 #right-nav {
     margin-top:180px;
     margin-left:25px;
+}
+
+#right-nav i {
+    font-size:12px;
+    display:inherit;
+}
+
+#right-nav .badge {
+    margin-top:-3px;
 }
 
 #right-nav a:hover {
@@ -357,6 +372,30 @@ nav#main-nav {
 h1.page-title {
     margin-bottom:80px !important;
     z-index:1;
+    font-size: 2.75rem;
+    font-weight: 900;
+    line-height:2rem;
 }
+
+h1.page-title small:first-child {
+    margin-top:80px;
+}
+
+h1.page-title small:last-child {
+    margin-bottom:-50px;
+}
+
+h1.page-title small {
+    font-size:1rem !important;
+}
+
+#content-body .pagination-buttons a {
+    border-bottom:0 !important;
+}
+#content-body .pagination-buttons a:hover {
+    border-bottom:0 !important;
+    color:#d14210 !important;
+}
+
 
 </style>

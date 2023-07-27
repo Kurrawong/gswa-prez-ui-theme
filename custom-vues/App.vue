@@ -14,12 +14,15 @@ import PrezApp from "./PrezApp.vue";
               <img src="/public/WAGovLogo.svg" alt="WA Gov logo">
           </a>
         </div>
-        <div>
-          <h1 style="color:white;">GSWA Vocabularies</h1>
+        <div class="header-heading">
+          <h1>GSWA Vocabularies</h1>
         </div>
-        <div>
-          <a class="header-logo-link" href="https://www.dmp.wa.gov.au/Geological-Survey/Geological-Survey-262.aspx">
-              <img src="/public/gswa-logo.png" alt="GSWA logo">
+        <div class="header-links">
+          <a class="link" href="https://www.dmirs.wa.gov.au/accessibility">
+            Accessibility
+          </a>
+          <a class="link" href="https://www.dmirs.wa.gov.au/contact">
+            Contact us
           </a>
         </div>
       </div>
@@ -33,6 +36,7 @@ import PrezApp from "./PrezApp.vue";
     <div id="footer-content" style="max-width:1260px; margin: 0 auto; text-align: left;">
         <div id="footer-content-top">
             <div>
+                <p></p>
                 <h3>Acknowledgement of Country</h3>
                 <p>
                     The Government of Western Australia acknowledges the traditional custodians throughout Western
@@ -52,27 +56,27 @@ import PrezApp from "./PrezApp.vue";
                             Provide feedback / corrections or request further information and support when using this
                             application.
                         </p>
-                        <div>
+                        <p>
                             <span>Email:&nbsp;</span>
                             <span><a href="mailto:">GSWA.vocabularies@dmirs.wa.gov.au</a></span>
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <div id="footer-content-bottom">
             <div id="footer-nav">
-                <a href="">WA.gov.au</a>
-                <a href="">Copyright</a>
-                <a href="">Disclaimer</a>
-                <a href="">Privacy</a>
-                <a href="">About</a>
+                <a href="https://www.wa.gov.au/">WA.gov.au</a>
+                <a href="https://www.dmirs.wa.gov.au/copyright/">Copyright</a>
+                <a href="https://www.dmirs.wa.gov.au/disclaimer/">Disclaimer</a>
+                <a href="https://www.dmirs.wa.gov.au/privacy/">Privacy</a>
+                <a href="https://www.dmirs.wa.gov.au/about-dmirs">About</a>
             </div>
             <div>
                 <p>
                     © Government of Western Australia 2021-2023
                     <br/>
-                    Department of Mines, Industry Regulation and <Safety></Safety>
+                    Department of Mines, Industry Regulation and Safety
                 </p>
             </div>
         </div>
@@ -116,13 +120,33 @@ import PrezApp from "./PrezApp.vue";
     color: rgb(112, 112, 112)!important;
   }
 
-  footer a {
+  header .header-links {
+    flex-direction: row;
+    display: flex;
+    gap: 50px;
+    place-content: center;
+  }
+
+  header .header-heading {
+    width:100% !important;
+  }
+
+  header .header-logo-link img {
+    width:300px;
+  }
+
+  #title-header-content div {
+    width:auto;
+  }
+
+  footer a, header a.link {
     text-decoration: none !important;
     color: white!important;
     border-bottom-style: dashed !important;
+    font-weight:500;
   }
 
-  footer a:hover {
+  footer a:hover, header a.link:hover {
     border-bottom-style: solid !important;
   }
 
@@ -256,16 +280,15 @@ header h1 {
   margin-bottom: 0.5rem;
   font-weight: 900 !important;
   line-height: 132%;
-  display:none; /* GSWA */
+  color:white;
+  white-space:nowrap;
 }
-
-
 
 /* GSWA Tables */
 
 .table {
   width: 100%;
-  table-layout: fixed;
+  table-layout: inherit;
   border-spacing: 0 !important;
 }
 
@@ -277,6 +300,7 @@ header h1 {
 
 .table thead th {
   font-weight: 500;
+  max-width: max-content;
 }
 
 tr:nth-child(even) {
@@ -298,6 +322,77 @@ tr:nth-child(even) {
 
 .table tr td:last-child {
   box-shadow: none; 
+}
+
+#content-body iframe {
+  min-height: 800px;
+}
+
+/* GSWA uses % widths as the screen grows */
+@media (min-width: 1200px) {
+  header #title-header-content, main, footer #footer-content {
+    width: 83.33333333% !important;
+    max-width: 83.33333333% !important;
+  }
+}
+
+#profiles .profile .profile-title-container .profile-title h5 {
+  width: 155px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.9rem !important;
+  color:#4d4d4d !important;
+}
+
+#right-nav h4 {
+  color:initial;
+}
+
+#profiles .profile .mediatypes {
+  display:block !important;
+}
+
+#profiles .profile .mediatypes a {
+  padding:0 !important;
+}
+
+#profiles .profile .mediatypes a:not(:last-child)::after {
+  content: "•"; /* Separator character */
+  margin-left: 5px; /* Adjust the spacing between the link and separator */  
+  padding-right: 5px;
+}
+
+p {
+  margin-top:0;
+  margin-bottom:1rem;
+}
+
+h2, h3 {
+  font-weight:900;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+footer p {
+  font-size: .87rem !important;  
+}
+footer h3 {
+  font-size: 1.25rem !important;  
+  font-weight: 700 !important;
+}
+#footer-nav {
+  justify-content: space-between;
+  min-width:40%;
+  font-size:0.87rem;
+}
+#footer-contact {
+  padding:2rem !important;
 }
 
 </style>

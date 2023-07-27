@@ -30,5 +30,8 @@ COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
 COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
 COPY custom-vues/ItemListView.vue /app/src/views/ItemListView.vue
 COPY custom-vues/Breadcrumbs.vue /app/src/components/Breadcrumbs.vue
+COPY custom-vues/PropTableView.vue /app/src/views/PropTableView.vue
+COPY custom-vues/PaginationComponent.vue /app/src/components/PaginationComponent.vue
+
 
 RUN npm ci

@@ -54,6 +54,14 @@ const childrenConfig = ref({
     buttonLink: ""
 });
 
+const currentPerPage = computed(() => {
+    if (route.query && route.query.page) {
+        return parseInt(route.query.per_page as string);
+    } else {
+        return 20;
+    }
+});
+
 const currentPageNumber = computed(() => {
     if (route.query && route.query.page) {
         return parseInt(route.query.page as string);
@@ -61,6 +69,7 @@ const currentPageNumber = computed(() => {
         return 1;
     }
 });
+
 
 function configByType(type: string) {
     itemType.value.uri = type;
@@ -95,12 +104,12 @@ function configByType(type: string) {
             // search?
             break;
         case qname("skos:ConceptScheme"):
-            itemType.value.label = "Vocabularies";
-            // searchEnabled.value = true;
-            // searchDefaults.value = { vocab: item.value.iri };
+            itemType.value.label = "SKOS Vocabularies";
+            searchEnabled.value = true;
+            searchDefaults.value = { vocab: itemType.value.iri };
             break;
         case qname("skos:Collection"):
-            itemType.value.label = "Collections";
+            itemType.value.label = "SKOS Collections";
             break;
         case qname("prof:Profile"):
         case qname("prez:CatPrezProfile"):
@@ -327,7 +336,7 @@ onMounted(() => {
         <template v-else-if="items.length > 0">
             <SortableTabularList v-if="flavour === 'VocPrez'" :items="items" :predicates="['description', 'status', 'derivationMode']" />
             <ItemList v-else :items="items" :childName="childrenConfig.buttonTitle" :childLink="childrenConfig.buttonLink" />
-            <PaginationComponent :url="route.path" :totalCount="count" :currentPage="currentPageNumber" />
+            <PaginationComponent :url="route.path" :totalCount="count" :currentPage="currentPageNumber" :perPage="currentPerPage" />
         </template>
         <template v-else>No {{ itemType.label }} found.</template>
         <Teleport v-if="searchEnabled && flavour" to="#right-bar-content">

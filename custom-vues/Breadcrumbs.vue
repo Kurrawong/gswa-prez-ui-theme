@@ -77,6 +77,14 @@ const ui = useUiStore();
 
 }
 
+/* GSWA uses % widths as the screen grows */
+@media (min-width: 1200px) {
+  #breadcrumbs-inner {
+    width: 83.33333333% !important;
+    max-width: 83.33333333%;
+  }
+}
+
 #breadcrumbs-after {
   height: 60px;
 }

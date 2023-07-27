@@ -211,6 +211,12 @@ function camelToTitleCase(s: string): string {
 .adv-search .search-form {
     display:flex;
 }
+#right-nav .search-form {
+    display:flex;
+}
+#right-nav button i {
+    display:initial;
+}
 
 
 </style>

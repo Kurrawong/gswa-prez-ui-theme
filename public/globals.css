@@ -53,6 +53,7 @@ footer a, footer a:hover {
 
 #title-header-content div {
     width: 300px;
+    min-width: 300px;
 }
 
 .header-logo-link {
