@@ -106,7 +106,7 @@ function configByType(type: string) {
         case qname("skos:ConceptScheme"):
             itemType.value.label = "SKOS Vocabularies";
             searchEnabled.value = true;
-            searchDefaults.value = { vocab: itemType.value.iri };
+            //searchDefaults.value = { vocab: item.value.iri };
             break;
         case qname("skos:Collection"):
             itemType.value.label = "SKOS Collections";
