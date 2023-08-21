@@ -32,6 +32,7 @@ COPY custom-vues/ItemListView.vue /app/src/views/ItemListView.vue
 COPY custom-vues/Breadcrumbs.vue /app/src/components/Breadcrumbs.vue
 COPY custom-vues/PropTableView.vue /app/src/views/PropTableView.vue
 COPY custom-vues/PaginationComponent.vue /app/src/components/PaginationComponent.vue
+COPY custom-vues/AltNav.vue /app/src/components/navs/AltNav.vue
 
 
 RUN npm ci

@@ -104,12 +104,12 @@ function configByType(type: string) {
             // search?
             break;
         case qname("skos:ConceptScheme"):
-            itemType.value.label = "SKOS Vocabularies";
+            itemType.value.label = "Vocabularies";
             searchEnabled.value = true;
             //searchDefaults.value = { vocab: item.value.iri };
             break;
         case qname("skos:Collection"):
-            itemType.value.label = "SKOS Collections";
+            itemType.value.label = "Collections";
             break;
         case qname("prof:Profile"):
         case qname("prez:CatPrezProfile"):
@@ -326,7 +326,7 @@ onMounted(() => {
     <template v-else>
         <h1 class="page-title">{{ itemType.label }}</h1>
         <p v-if="items.length > 0">{{ itemType.label }} managed by the Geological Survey of Western Australia. Showing {{ items.length }} of {{ count }} items.</p>
-        <p>View a description of the <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">{{ itemType.label }}</a>.</p>
+        <p>View a description of the <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">SKOS {{ itemType.label }}</a>.</p>
         <template v-if="error">
             <ErrorMessage :message="error" />
         </template>
@@ -340,7 +340,7 @@ onMounted(() => {
         </template>
         <template v-else>No {{ itemType.label }} found.</template>
         <Teleport v-if="searchEnabled && flavour" to="#right-bar-content">
-            <AdvancedSearch :flavour="flavour" :query="searchDefaults" />
+            <AdvancedSearch :expanded="false" :flavour="flavour" :query="searchDefaults" />
         </Teleport>
     </template>
 </template>

@@ -14,13 +14,14 @@ const props = withDefaults(defineProps<{
     flavour?: PrezFlavour;
     query?: {[key: string]: string};
     fullPage?: boolean;
+    expanded: boolean;
 }>(), {
     fullPage: false
 });
 
 const defaultSearchMethod = "exactMatch";
 
-const expanded = ref(false);
+const expanded = ref('expanded' in props ? props.expanded : true);
 const prez = ref('VocPrez');//ref(props.flavour ? props.flavour : (props.query ? props.query.prez || "all" : "all"));
 const searchTerm = ref(props.query ? props.query.term : "");
 const searchMethod = ref(props.query ? (props.query.method ? props.query.method : defaultSearchMethod) : defaultSearchMethod);

@@ -395,4 +395,9 @@ footer h3 {
   padding:2rem !important;
 }
 
+hr {
+  width: 100% !important;
+}
+
+
 </style>

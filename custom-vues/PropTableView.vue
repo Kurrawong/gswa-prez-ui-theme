@@ -18,6 +18,7 @@ import SortableTabularList from "@/components/SortableTabularList.vue";
 
 const { namedNode } = DataFactory;
 
+let tmpBreadCrumbLabel = undefined; // GSWA temp fix until next release
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
 const route = useRoute();
 const ui = useUiStore();
@@ -211,7 +212,7 @@ function getBreadcrumbs(): Breadcrumb[] {
                 case "vocab":
                     crumbs.push({ name: "Vocabularies", url: "/v/vocab" });
                     if (index + 1 !== pathSegments.length) {
-                        crumbs.push({ name: "Vocabulary", url: `/v/vocab/${route.params.vocabId}` });
+                        crumbs.push({ name: (tmpBreadCrumbLabel ? tmpBreadCrumbLabel : "Vocabulary"), url: `/v/vocab/${route.params.vocabId}` });
                         skipSegment = true;
                     }
                     break;
@@ -458,6 +459,13 @@ onMounted(() => {
         } else {
             ui.rightNavConfig = { enabled: true, profiles: profiles.value, currentUrl: route.path };
         }
+        const matches = [...data.value.matchAll(/\n<[^>]*?>(?:(?!\n\n)[\s\S])*?skos:prefLabel\s+"(.*?)"@en/gm)].map(match => match[1]);
+
+        if(matches.length > 0) {
+            tmpBreadCrumbLabel = matches.pop();
+        }
+
+//        console.log("PARSE INTO", data.value, matches, tmpBreadCrumbLabel)
 
         parseIntoStore(data.value);
         getProperties();
@@ -530,7 +538,7 @@ onMounted(() => {
             <ErrorMessage :message="error" />
         </template>
         <Teleport v-if="searchEnabled" to="#right-bar-content">
-            <AdvancedSearch v-if="flavour" :flavour="flavour" :query="searchDefaults" />
+            <AdvancedSearch :expanded="false" v-if="flavour" :flavour="flavour" :query="searchDefaults" />
         </Teleport>
     </template>
 </template>

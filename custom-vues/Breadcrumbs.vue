@@ -5,16 +5,17 @@ import { useUiStore } from "@/stores/ui";
 const MAX_LENGTH = 50;
 
 const ui = useUiStore();
+
 </script>
 
 <template>
     <div id="breadcrumbs">
       <div id="breadcrumbs-inner">
         <RouterLink to="/" class="breadcrumb">Home</RouterLink>
-        <span v-if="ui.breadcrumbs.length > 0" class="breadcrumb-separator"><i class="fa-regular fa-chevron-right"></i></span>
-        <template v-for="(breadcrumb, index) in ui.breadcrumbs">
+        <span v-if="ui.breadcrumbs.filter(bc=>bc.url != '/v').length > 0" class="breadcrumb-separator"><i class="fa-regular fa-chevron-right"></i></span>
+        <template v-for="(breadcrumb, index) in ui.breadcrumbs.filter(bc=>bc.url != '/v')">
             <RouterLink :to="breadcrumb.url" class="breadcrumb">{{ breadcrumb.name.length >= MAX_LENGTH ? breadcrumb.name.slice(0, MAX_LENGTH) + "..." : breadcrumb.name }}</RouterLink>
-            <span v-if="index < ui.breadcrumbs.length - 1" class="breadcrumb-separator"><i class="fa-regular fa-chevron-right"></i></span>
+            <span v-if="index < ui.breadcrumbs.filter(bc=>bc.url != '/v').length - 1" class="breadcrumb-separator"><i class="fa-regular fa-chevron-right"></i></span>
         </template>
       </div>
     </div>

@@ -328,12 +328,12 @@ nav#main-nav {
     line-height: 160%;
 }
 
-#content-body a:hover {
+#content-body a:hover, #right-nav a:hover {
     color:#d14210 !important;
     border-bottom: 2px solid #d14210 !important;
 }
 
-#content-body a, #content-body a:link, #content-body a:visited {
+#right-nav a, #content-body a, #content-body a:link, #content-body a:visited {
     color: #4d4d4d !important;
     border:0;
     border-bottom: 2px dotted #707070;
