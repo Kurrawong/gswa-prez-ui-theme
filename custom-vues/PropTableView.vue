@@ -18,7 +18,7 @@ import SortableTabularList from "@/components/SortableTabularList.vue";
 
 const { namedNode } = DataFactory;
 
-let tmpBreadCrumbLabel = undefined; // GSWA temp fix until next release
+let tmpBreadCrumbLabel = ''; // GSWA temp fix until next release
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
 const route = useRoute();
 const ui = useUiStore();
@@ -212,7 +212,7 @@ function getBreadcrumbs(): Breadcrumb[] {
                 case "vocab":
                     crumbs.push({ name: "Vocabularies", url: "/v/vocab" });
                     if (index + 1 !== pathSegments.length) {
-                        crumbs.push({ name: (tmpBreadCrumbLabel ? tmpBreadCrumbLabel : "Vocabulary"), url: `/v/vocab/${route.params.vocabId}` });
+                        crumbs.push({ name: (tmpBreadCrumbLabel != '' ? tmpBreadCrumbLabel : "Vocabulary"), url: `/v/vocab/${route.params.vocabId}` });
                         skipSegment = true;
                     }
                     break;
@@ -464,8 +464,6 @@ onMounted(() => {
         if(matches.length > 0) {
             tmpBreadCrumbLabel = matches.pop();
         }
-
-//        console.log("PARSE INTO", data.value, matches, tmpBreadCrumbLabel)
 
         parseIntoStore(data.value);
         getProperties();

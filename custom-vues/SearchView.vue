@@ -95,7 +95,7 @@ onMounted(() => {
 <template>
     <h1 class="page-title">Search</h1>
     <div class="adv-search">
-        <AdvancedSearch :query="query" fullPage/>
+        <AdvancedSearch :query="query" :expanded="true" fullPage/>
         <template v-if="error">
             <ErrorMessage :message="error" />
         </template>

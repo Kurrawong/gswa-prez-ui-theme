@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
     flavour?: PrezFlavour;
     query?: {[key: string]: string};
     fullPage?: boolean;
-    expanded: boolean;
+    expanded?: boolean;
 }>(), {
     fullPage: false
 });
