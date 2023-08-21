@@ -462,7 +462,7 @@ onMounted(() => {
         const matches = [...data.value.matchAll(/\n<[^>]*?>(?:(?!\n\n)[\s\S])*?skos:prefLabel\s+"(.*?)"@en/gm)].map(match => match[1]);
 
         if(matches.length > 0) {
-            tmpBreadCrumbLabel = matches.pop();
+            tmpBreadCrumbLabel = matches.pop()!;
         }
 
         parseIntoStore(data.value);
