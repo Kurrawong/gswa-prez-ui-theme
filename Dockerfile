@@ -17,22 +17,14 @@ RUN git init && \
 
 COPY public/ /app/public
 
-# Add custom header and footer
+# Move project's App.vue to PrezApp.vue so it can be extended
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
-COPY custom-vues/App.vue /app/src/App.vue
 
-# Add custom pages
-COPY custom-vues/AdvancedSearch.vue /app/src/components/search/AdvancedSearch.vue
-COPY custom-vues/GlobalSearch.vue /app/src/components/search/GlobalSearch.vue
-COPY custom-vues/MainNav.vue /app/src/components/navs/MainNav.vue
-COPY custom-vues/SearchView.vue /app/src/views/SearchView.vue
-COPY custom-vues/VocPrezHomeView.vue /app/src/views/HomeView.vue
-COPY custom-vues/VocPrezHomeView.vue /app/src/views/vocprez/VocPrezHomeView.vue
-COPY custom-vues/ItemListView.vue /app/src/views/ItemListView.vue
-COPY custom-vues/Breadcrumbs.vue /app/src/components/Breadcrumbs.vue
-COPY custom-vues/PropTableView.vue /app/src/views/PropTableView.vue
-COPY custom-vues/PaginationComponent.vue /app/src/components/PaginationComponent.vue
-COPY custom-vues/AltNav.vue /app/src/components/navs/AltNav.vue
+# Copy all files in the custom-vue overrides
+# Note:
+#  - this is a recursive copy
+#  - custom-vues must follow the same project folder structure
+COPY custom-vues/ /app/src/
 
 RUN rm .env
 
