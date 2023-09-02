@@ -3,7 +3,7 @@ ui-build:
 	docker build -t gswa-vocprez-builder -f builder.Dockerfile .
 
 ui-output:
-	docker run --rm --name gswa-vocprez-builder -e VITE_ENABLED_PREZS=VocPrez -e VITE_SIDENAV=false -e VITE_API_BASE_URL=https://api.gswa.dev.kurrawong.ai -v ${PWD}/dist:/app/dist gswa-vocprez-builder npm run build-only
+	docker run --rm --name gswa-vocprez-builder -e VITE_ENABLED_PREZS=VocPrez -e VITE_SIDENAV=false -e VITE_API_BASE_URL=http://localhost:8000 -v ${PWD}/dist:/app/dist gswa-vocprez-builder npm run build-only
 
 ui-view:
 	docker run --rm -it --name gswa-prez-ui -v ${PWD}/dist:/app -v ${PWD}/entrypoint.sh:/entrypoint.sh --entrypoint='./entrypoint.sh' -p 8000:8000 python:3-alpine
