@@ -62,7 +62,15 @@ const currentPerPage = computed(() => {
     if (route.query && route.query.page) {
         return parseInt(route.query.per_page as string);
     } else {
-        return perPage > 0 ? perPage : 20;
+        return perPage.value > 0 ? perPage.value : 20;
+    }
+});
+
+const currentPageNumber = computed(() => {
+    if (route.query && route.query.page) {
+        return parseInt(route.query.page as string);
+    } else {
+        return 1;
     }
 });
 
