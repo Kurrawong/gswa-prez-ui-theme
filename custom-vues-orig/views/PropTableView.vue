@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, inject, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
-import { BlankNode, DataFactory, Quad, Store, Literal } from "n3";
+import { BlankNode, DataFactory, Quad, Store } from "n3";
 import { useUiStore } from "@/stores/ui";
 import { useRdfStore } from "@/composables/rdfStore";
 import { useGetRequest } from "@/composables/api";
-import { apiBaseUrlConfigKey, conceptPerPageConfigKey, enableScoresKey, type ListItem, type AnnotatedQuad, type Breadcrumb, type Concept, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
+import { apiBaseUrlConfigKey, type ListItem, type AnnotatedQuad, type Breadcrumb, type Concept, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
 import PropTable from "@/components/proptable/PropTable.vue";
 import ConceptComponent from "@/components/ConceptComponent.vue";
 import AdvancedSearch from "@/components/search/AdvancedSearch.vue";
@@ -15,29 +15,20 @@ import { getPrezSystemLabel } from "@/util/prezSystemLabelMapping";
 import MapClient from "@/components/MapClient.vue";
 import type { WKTResult } from "@/stores/mapSearchStore.d";
 import SortableTabularList from "@/components/SortableTabularList.vue";
-import LoadingMessage from "@/components/LoadingMessage.vue";
-import { ensureProfiles, titleCase } from "@/util/helpers";
-import ScoreWidget from "@/components/scores/ScoreWidget.vue";
 
 const { namedNode } = DataFactory;
 
-let tmpBreadCrumbLabel = ''; // GSWA temp fix until full breadcrumb fix is in place
-
+let tmpBreadCrumbLabel = ''; // GSWA temp fix until next release
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
-const enableScores = inject(enableScoresKey) as boolean;
-const conceptPerPage = inject(conceptPerPageConfigKey) as number;
 const route = useRoute();
 const ui = useUiStore();
-const { store, prefixes, parseIntoStore, qnameToIri, iriToQname } = useRdfStore();
-const { store: conceptStore, parseIntoStore: conceptParseIntoStore, qnameToIri: conceptQnameToIri, clearStore: conceptClearStore } = useRdfStore();
+const { store, prefixes, parseIntoStore, qname } = useRdfStore();
 const { data, profiles, loading, error, doRequest } = useGetRequest();
-const { data: countData, loading: countLoading, error: countError, doRequest: countDoRequest } = useGetRequest();
-const { data: conceptData, loading: conceptLoading, error: conceptError, doRequest: conceptDoRequest } = useGetRequest();
 
-const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
-const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description")];
-const DEFAULT_GEO_PREDICATES = [qnameToIri("geo:hasBoundingBox"), qnameToIri("geo:hasGeometry")];
-const DEFAULT_CHILDREN_PREDICATES = [qnameToIri("rdfs:member"), qnameToIri("skos:member"), qnameToIri("dcterms:hasPart")];
+const DEFAULT_LABEL_PREDICATES = [qname("rdfs:label")];
+const DEFAULT_DESC_PREDICATES = [qname("dcterms:description"), qname("skos:definition")];
+const DEFAULT_GEO_PREDICATES = [qname("geo:hasBoundingBox"), qname("geo:hasGeometry")];
+const DEFAULT_CHILDREN_PREDICATES = [qname("rdfs:member"), qname("skos:member"), qname("dcterms:hasPart")];
 const RECURSION_LIMIT = 5; // limit on recursive search of blank nodes
 const ALT_PROFILES_TOKEN = "lt-prfl:alt-profile";
 
@@ -55,12 +46,9 @@ const searchEnabled = ref(false);
 const searchDefaults = ref<{[key: string]: string}>({});
 const childrenPredicate = ref("");
 const hiddenPredicates = ref<string[]>([
-    qnameToIri("a"),
-    qnameToIri("dcterms:identifier"),
-    qnameToIri("prez:count"),
-    qnameToIri("prez:childrenCount"),
-    qnameToIri("prez:link"),
-    "https://linked.data.gov.au/def/scores/hasScore"
+    qname("a"),
+    qname("dcterms:identifier"),
+    qname("prez:count")
 ]);
 const defaultProfile = ref<Profile | null>(null);
 const childrenConfig = ref({
@@ -70,14 +58,11 @@ const childrenConfig = ref({
     buttonTitle: "",
     buttonLink: ""
 });
-const hasScores = ref(false);
-const scores = ref<{[key: string]: {[key: string]: number}}>({}); // {fair: {f: 0, a: 0, i: 0, r: 0}, ...}
-const hasFewChildren = ref(false); // only for vocab
 
-function configByBaseClass(baseClass: string) {
-    item.value.baseClass = baseClass;
-    switch (baseClass) {
-        case qnameToIri("dcat:Catalog"):
+function configByType(type: string) {
+    item.value.type = type;
+    switch (type) {
+        case qname("dcat:Catalog"):
             searchEnabled.value = true;
             searchDefaults.value = { catalog: item.value.iri };
             childrenConfig.value = {
@@ -86,9 +71,9 @@ function configByBaseClass(baseClass: string) {
                 childrenTitle: "Resources"
             };
             break;
-        case qnameToIri("dcat:Resource"):
+        case qname("dcat:Resource"):
             break;
-        case qnameToIri("dcat:Dataset"):
+        case qname("dcat:Dataset"):
             searchEnabled.value = true;
             searchDefaults.value = { dataset: item.value.iri };
             childrenConfig.value = {
@@ -99,7 +84,7 @@ function configByBaseClass(baseClass: string) {
                 buttonLink: "/collections"
             };
             break;
-        case qnameToIri("geo:FeatureCollection"):
+        case qname("geo:FeatureCollection"):
             searchEnabled.value = true;
             searchDefaults.value = { collection: item.value.iri };
             childrenConfig.value = {
@@ -110,24 +95,24 @@ function configByBaseClass(baseClass: string) {
                 buttonLink: "/items"
             };
             break;
-        case qnameToIri("geo:Feature"):
+        case qname("geo:Feature"):
             break;
-        case qnameToIri("skos:ConceptScheme"):
+        case qname("skos:ConceptScheme"):
             searchEnabled.value = true;
             searchDefaults.value = { vocab: item.value.iri };
-            hiddenPredicates.value.push(qnameToIri("skos:hasTopConcept"));
+            hiddenPredicates.value.push(qname("skos:hasTopConcept"));
             childrenConfig.value.showChildren = true;
             break;
-        case qnameToIri("skos:Collection"):
+        case qname("skos:Collection"):
             childrenConfig.value = {
                 ...childrenConfig.value,
                 showChildren: true,
                 childrenTitle: "Concepts"
             };
             break;
-        case qnameToIri("skos:Concept"):
+        case qname("skos:Concept"):
             break;
-        case qnameToIri("prof:Profile"):
+        case qname("prof:Profile"):
             break;
         default:
     }
@@ -135,11 +120,8 @@ function configByBaseClass(baseClass: string) {
 
 function getProperties() {
     // find subject
-    const subject = isObjectView.value ? namedNode(route.query.uri as string) : store.value.getSubjects(namedNode(qnameToIri("a")), namedNode(item.value.baseClass!), null)[0];
-    item.value = {
-        iri: subject.id,
-        types: []
-    };
+    const subject = isObjectView.value ? namedNode(route.query.uri as string) : store.value.getSubjects(namedNode(qname("a")), namedNode(item.value.type!), null)[0];
+    item.value.iri = subject.id;
 
     // get label & description predicates
     const labelPredicates = defaultProfile.value!.labelPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_LABEL_PREDICATES;
@@ -155,18 +137,8 @@ function getProperties() {
         } else if (DEFAULT_CHILDREN_PREDICATES.includes(q.predicate.value)) {
             childrenPredicate.value = q.predicate.value;
             hiddenPredicates.value.push(q.predicate.value);
-        } else if (q.predicate.value === qnameToIri("a")) {
-            configByBaseClass(q.object.value); // might not be needed anymore with the /object changes
-            const typeLabel = store.value.getObjects(q.object, namedNode(qnameToIri("rdfs:label")), null);
-            const typeDesc = store.value.getObjects(q.object, namedNode(qnameToIri("dcterms:description")), null);
-            const typeQname = iriToQname(q.object.value);
-
-            item.value.types!.push({
-                value: q.object.value,
-                qname: typeQname !== "" ? typeQname : undefined,
-                label: typeLabel.length > 0 ? typeLabel[0].value : undefined,
-                description: typeDesc.length > 0 ? typeDesc[0].value : undefined,
-            });
+        } else if (q.predicate.value === qname("a") && isObjectView.value) {
+            configByType(q.object.value);
         } else if (DEFAULT_GEO_PREDICATES.indexOf(q.predicate.value) >= 0) {
             store.value.forEach(geoQ => {
                 geoResults.value.push({
@@ -176,11 +148,7 @@ function getProperties() {
                     uri: item.value.iri,
                     link: `/object?uri=${item.value.iri}`
                 })
-            }, q.object, namedNode(qnameToIri("geo:asWKT")), null, null)
-        } else if (q.predicate.value === "https://linked.data.gov.au/def/scores/hasScore" && enableScores && !hasScores.value) {
-            hasScores.value = true;
-        } else if (q.predicate.value === qnameToIri("prez:childrenCount")) {
-            item.value.childrenCount = Number(q.object.value);
+            }, q.object, namedNode(qname("geo:asWKT")), null, null)
         }
 
         if (!isAltView.value) {
@@ -192,40 +160,10 @@ function getProperties() {
         }
     }, subject, null, null, null);
 
-    if (hasScores.value) {
-        getScores();
-    }
-
     // set the item title after the item title has been set
     geoResults.value.forEach(result => {
         result.label = item.value.title ? item.value.title : item.value.iri
     });
-}
-
-function getScore(scoreName: string, normalised: boolean = false): {[key: string]: number} {
-    const scores: {[key: string]: number} = {};
-
-    store.value.forObjects(o => {
-        store.value.forEach(q => {
-            store.value.forObjects(o2 => {
-                store.value.forEach(q2 => {
-                    const match = q2.predicate.value.match(`https:\/\/linked.data.gov.au\/def\/scores\/${scoreName}([A-Z]){1}Score${normalised ? "Normalised" : ""}`);
-                    if (match) {
-                        scores[match[1].toLowerCase()] = Number(q2.object.value);
-                    }
-                }, o2, null, null, null);
-            }, q.subject, namedNode("http://purl.org/linked-data/cube#observation"), null);
-        }, o, namedNode(qnameToIri("a")), namedNode(`https://linked.data.gov.au/def/scores/${titleCase(scoreName)}Score${normalised ? "Normalised" : ""}`), null);
-    }, namedNode(item.value.iri), namedNode("https://linked.data.gov.au/def/scores/hasScore"), null);
-
-    return scores;
-}
-
-function getScores() {
-    scores.value = {
-        fair: getScore("fair"),
-        care: getScore("care"),
-    };
 }
 
 function getBreadcrumbs(): Breadcrumb[] {
@@ -274,7 +212,6 @@ function getBreadcrumbs(): Breadcrumb[] {
                 case "vocab":
                     crumbs.push({ name: "Vocabularies", url: "/v/vocab" });
                     if (index + 1 !== pathSegments.length) {
-//                        crumbs.push({ name: "Vocabulary", url: `/v/vocab/${route.params.vocabId}` });
                         crumbs.push({ name: (tmpBreadCrumbLabel != '' ? tmpBreadCrumbLabel : "Vocabulary"), url: `/v/vocab/${route.params.vocabId}` });
                         skipSegment = true;
                     }
@@ -312,12 +249,8 @@ function getIRILocalName(iri: string) {
 }
 
 function getChildren() {
-    if (item.value.baseClass === qnameToIri("skos:ConceptScheme")) {
-        if (hasFewChildren.value) {
-            getAllConcepts();
-        } else {
-            getTopConcepts();
-        }
+    if (item.value.type === qname("skos:ConceptScheme")) {
+        getConcepts();
     } else {
         const labelPredicates = defaultProfile.value!.labelPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_LABEL_PREDICATES;
 
@@ -330,27 +263,27 @@ function getChildren() {
             store.value.forEach(q => {
                 if (labelPredicates.includes(q.predicate.value)) {
                     child.title = q.object.value;
-                } else if (q.predicate.value === qnameToIri("prez:link")) {
+                } else if (q.predicate.value === qname("prez:link")) {
                     child.link = q.object.value;
-                } else if (q.predicate.value === qnameToIri("a")) {
-                    child.baseClass = q.object.value;
-                } else if (item.value.baseClass === qnameToIri("dcat:Catalog") && q.predicate.value === qnameToIri("dcterms:publisher")) {
+                } else if (q.predicate.value === qname("a")) {
+                    child.type = q.object.value;
+                } else if (item.value.type === qname("dcat:Catalog") && q.predicate.value === qname("dcterms:publisher")) {
                     const publisher: ListItemSortable = { iri: q.object.value, label: getIRILocalName(q.object.value) };
 
                     store.value.forObjects(result => {
                         publisher.label = result.value;
-                    }, q.object, qnameToIri("rdfs:label"), null);
+                    }, q.object, qname("rdfs:label"), null);
 
                     child.extras.publisher = publisher;
-                } else if (item.value.baseClass === qnameToIri("dcat:Catalog") && q.predicate.value === qnameToIri("dcterms:creator")) {
+                } else if (item.value.type === qname("dcat:Catalog") && q.predicate.value === qname("dcterms:creator")) {
                     const creator: ListItemSortable = { iri: q.object.value, label: getIRILocalName(q.object.value) };
 
                     store.value.forObjects(result => {
                         creator.label = result.value;
-                    }, q.object, qnameToIri("rdfs:label"), null);
+                    }, q.object, qname("rdfs:label"), null);
                     
                     child.extras.creator = creator;
-                } else if (item.value.baseClass === qnameToIri("dcat:Catalog") && q.predicate.value === qnameToIri("dcterms:issued")) {
+                } else if (item.value.type === qname("dcat:Catalog") && q.predicate.value === qname("dcterms:issued")) {
                     const issued: ListItemSortable = { label: q.object.value };
                     child.extras.issued = issued;
                 } 
@@ -374,7 +307,7 @@ function getChildren() {
     }
 }
 
-function getAllConcepts() {
+function getConcepts() {
     let conceptArray: Concept[] = [];
     
     store.value.forSubjects(subject => {
@@ -383,28 +316,25 @@ function getAllConcepts() {
             narrower: [],
             broader: "",
             title: "",
-            link: "",
-            childrenCount: 0,
-            children: []
+            link: ""
         };
         store.value.forEach(q => {
-            if (q.predicate.value === qnameToIri("skos:prefLabel")) {
+            if (q.predicate.value === qname("skos:prefLabel")) {
                 c.title = q.object.value;
-            } else if (q.predicate.value === qnameToIri("prez:link")) {
+            } else if (q.predicate.value === qname("prez:link")) {
                 c.link = q.object.value;
-            } else if (q.predicate.value === qnameToIri("skos:narrower")) {
-                c.narrower!.push(q.object.value);
-            } else if (q.predicate.value === qnameToIri("skos:broader")) {
+            } else if (q.predicate.value === qname("skos:narrower")) {
+                c.narrower.push(q.object.value);
+            } else if (q.predicate.value === qname("skos:broader")) {
                 c.broader = q.object.value;
             }
         }, subject, null, null, null);
-        c.childrenCount = c.narrower!.length;
         conceptArray.push(c);
-    }, namedNode(qnameToIri("skos:inScheme")), namedNode(item.value.iri), null);
+    }, namedNode(qname("skos:inScheme")), namedNode(item.value.iri), null);
 
     // get top concepts
-    const hasTopConcepts = store.value.getObjects(namedNode(item.value.iri), namedNode(qnameToIri("skos:hasTopConcept")), null).map(o => o.id);
-    const topConceptsOf = store.value.getSubjects(namedNode(qnameToIri("skos:topConceptOf")), namedNode(item.value.iri), null).map(s => s.id);
+    const hasTopConcepts = store.value.getObjects(namedNode(item.value.iri), namedNode(qname("skos:hasTopConcept")), null).map(o => o.id);
+    const topConceptsOf = store.value.getSubjects(namedNode(qname("skos:topConceptOf")), namedNode(item.value.iri), null).map(s => s.id);
     const topConcepts = [...new Set([...hasTopConcepts, ...topConceptsOf])]; // merge & remove duplicates
 
     // build concept hierarchy tree
@@ -415,10 +345,8 @@ function getAllConcepts() {
 
     let conceptsList: Concept[] = [];
     conceptArray.forEach(c => {
-        if (c.narrower!.length > 0) {
-            c.narrower!.forEach(n => {
-                conceptArray[indexMap[n]].broader = c.iri;
-            });
+        if (c.narrower.length > 0) {
+            c.narrower.forEach(n => conceptArray[indexMap[n]].broader = c.iri);
         }
 
         if (topConcepts.includes(c.iri)) {
@@ -426,94 +354,13 @@ function getAllConcepts() {
             return;
         }
 
-        if (!!c.broader && c.broader !== "") {
+        if (!!c.broader) {
             const parent = conceptArray[indexMap[c.broader]];
             parent.children = [...(parent.children || []), c].sort((a, b) => a.title.localeCompare(b.title));
-            parent.childrenCount = parent.children.length;
         }
     });
     conceptsList.sort((a, b) => a.title.localeCompare(b.title));
     concepts.value = conceptsList;
-}
-
-function getTopConcepts(page: number = 1) {
-    conceptClearStore();
-
-    conceptDoRequest(`${apiBaseUrl}${route.path}/top-concepts?page=${page}&per_page=${conceptPerPage}`, () => {
-        conceptParseIntoStore(conceptData.value);
-
-        conceptStore.value.forObjects(object => {
-            let c: Concept = {
-                iri: object.id,
-                title: "",
-                link: "",
-                childrenCount: 0,
-                children: [],
-                color: "",
-            };
-            conceptStore.value.forEach(q => {
-                if (q.predicate.value === conceptQnameToIri("skos:prefLabel")) {
-                    c.title = q.object.value;
-                } else if (q.predicate.value === conceptQnameToIri("prez:link")) {
-                    c.link = q.object.value;
-                } else if (q.predicate.value === conceptQnameToIri("prez:childrenCount")) {
-                    c.childrenCount = Number(q.object.value);
-                } else if (q.predicate.value === conceptQnameToIri("sdo:color")) {
-                    c.color = q.object.value;
-                }
-            }, object, null, null, null);
-            concepts.value.push(c);
-        }, namedNode(item.value.iri), namedNode(conceptQnameToIri("skos:hasTopConcept")), null);
-
-        concepts.value.sort((a, b) => a.title.localeCompare(b.title));
-    });
-}
-
-function getNarrowers({ iriPath, link, page = 1 }: { iriPath: string, link: string, page: number }) {
-    conceptClearStore();
-
-    conceptDoRequest(`${apiBaseUrl}${link}/narrowers?page=${page}&per_page=${conceptPerPage}`, () => {
-        // find parent to add narrowers to in hierarchy
-        let parent: Concept | undefined;
-        iriPath.split("|").forEach((iri, index) => {
-            if (index === 0) {
-                parent = concepts.value.find(c => c.iri === iri);
-            } else {
-                parent = parent!.children.find(c => c.iri === iri);
-            }
-
-            if (!parent) {
-                // error
-            }
-        });
-
-        conceptParseIntoStore(conceptData.value);
-
-        conceptStore.value.forObjects(object => {
-            let c: Concept = {
-                iri: object.id,
-                title: "",
-                link: "",
-                childrenCount: 0,
-                children: [],
-                color: "",
-            };
-            conceptStore.value.forEach(q => {
-                if (q.predicate.value === conceptQnameToIri("skos:prefLabel")) {
-                    c.title = q.object.value;
-                } else if (q.predicate.value === conceptQnameToIri("prez:link")) {
-                    c.link = q.object.value;
-                } else if (q.predicate.value === conceptQnameToIri("prez:childrenCount")) {
-                    c.childrenCount = Number(q.object.value);
-                } else if (q.predicate.value === conceptQnameToIri("sdo:color")) {
-                    c.color = q.object.value;
-                }
-            }, object, null, null, null);
-            parent!.children.push(c);
-        }, namedNode(parent!.iri), namedNode(conceptQnameToIri("skos:narrower")), null);
-
-        parent!.children.sort((a, b) => a.title.localeCompare(b.title));
-    });
 }
 
 function createAnnoQuad(q: Quad, store: Store): AnnotatedQuad {
@@ -525,14 +372,7 @@ function createAnnoQuad(q: Quad, store: Store): AnnotatedQuad {
             id: q.predicate.id,
             annotations: store.getQuads(q.predicate, null, null, null)
         },
-        object: {
-            termType: q.object.termType,
-            value: q.object.value,
-            id: q.object.id,
-            datatype: q.object instanceof Literal ? q.object.datatype : undefined,
-            language: q.object instanceof Literal ? q.object.language : undefined,
-            annotations: store.getQuads(q.object, null, null, null)
-        },
+        object: q.object,
         value: q.value,
         graph: q.graph,
         termType: q.termType,
@@ -559,39 +399,39 @@ onBeforeMount(() => {
     if (route.path.startsWith("/c/")) {
         flavour.value = "CatPrez";
         if (route.path.match(/c\/profiles\/.+/)) {
-            configByBaseClass(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/c\/catalogs\/.+\/.+/)) {
-            configByBaseClass(qnameToIri("dcat:Resource"));
+            configByType(qname("dcat:Resource"));
         } else if (route.path.match(/c\/catalogs\/.+/)) {
-            configByBaseClass(qnameToIri("dcat:Catalog"));
+            configByType(qname("dcat:Catalog"));
         }
     } else if (route.path.startsWith("/s/")) {
         flavour.value = "SpacePrez";
         if (route.path.match(/s\/profiles\/.+/)) {
-            configByBaseClass(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/s\/datasets\/.+\/collections\/.+\/items\/.+/)) {
-            configByBaseClass(qnameToIri("geo:Feature"));
+            configByType(qname("geo:Feature"));
         } else if (route.path.match(/s\/datasets\/.+\/collections\/.+/)) {
-            configByBaseClass(qnameToIri("geo:FeatureCollection"));
+            configByType(qname("geo:FeatureCollection"));
         } else if (route.path.match(/s\/datasets\/.+/)) {
-            configByBaseClass(qnameToIri("dcat:Dataset"));
+            configByType(qname("dcat:Dataset"));
         }
     } else if (route.path.startsWith("/v/")) {
         flavour.value = "VocPrez";
         if (route.path.match(/v\/profiles\/.+/)) {
-            configByBaseClass(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/v\/vocab\/.+\/.+/)) {
-            configByBaseClass(qnameToIri("skos:Concept"));
+            configByType(qname("skos:Concept"));
         } else if (route.path.match(/v\/collection\/.+\/.+/)) {
             // concept in collection
-            configByBaseClass(qnameToIri("skos:Concept"));
+            configByType(qname("skos:Concept"));
         } else if (route.path.match(/v\/vocab\/.+/)) {
-            configByBaseClass(qnameToIri("skos:ConceptScheme"));
+            configByType(qname("skos:ConceptScheme"));
         } else if (route.path.match(/v\/collection\/.+/)) {
-            configByBaseClass(qnameToIri("skos:Collection"));
+            configByType(qname("skos:Collection"));
         }
     } else if (route.path.startsWith("/profiles/")) {
-        configByBaseClass(qnameToIri("prof:Profile"));
+        configByType(qname("prof:Profile"));
     } else if (route.path.startsWith("/object")) {
         isObjectView.value = true;
     }
@@ -602,8 +442,8 @@ onBeforeMount(() => {
     }
 });
 
-function getData() {
-    doRequest(`${apiBaseUrl}${hasFewChildren.value ? route.path + "/all" + window.location.search : route.fullPath}`, () => {
+onMounted(() => {
+    doRequest(`${apiBaseUrl}${route.fullPath}`, () => {
         // find the current/default profile
         defaultProfile.value = ui.profiles[profiles.value.find(p => p.default)!.uri];
         
@@ -625,7 +465,6 @@ function getData() {
             tmpBreadCrumbLabel = matches.pop()!;
         }
 
-
         parseIntoStore(data.value);
         getProperties();
         if (!isAltView.value && childrenConfig.value.showChildren) {
@@ -634,25 +473,6 @@ function getData() {
 
         document.title = item.value.title ? `${item.value.title} | Prez` : "Prez";
         ui.breadcrumbs = getBreadcrumbs();
-    });
-}
-
-onMounted(() => {
-    loading.value = true;
-    // wait for profiles to be set in Pinia
-    ensureProfiles().then(() => {
-        console.log("profiles ready")
-
-        if (item.value.baseClass === qnameToIri("skos:ConceptScheme")) {
-            countDoRequest(`${apiBaseUrl}/count?curie=${route.path.split("/").slice(-1)[0]}&inbound=${encodeURIComponent(qnameToIri("skos:inScheme"))}`, () => {
-                if (parseInt(countData.value.replace('"', "")) <= conceptPerPage) {
-                    hasFewChildren.value = true;
-                }
-                getData();
-            });
-        } else {
-            getData();
-        }
     });
 });
 </script>
@@ -663,37 +483,21 @@ onMounted(() => {
         <PropTable v-if="properties.length > 0" :item="item" :properties="properties" :blankNodes="blankNodes" :prefixes="prefixes" :hiddenPreds="hiddenPredicates">
             <template #map>
                 <MapClient v-if="geoResults.length"
-                    ref="searchMapRef" 
-                    :geo-w-k-t="geoResults"
-                />
+                        ref="searchMapRef" 
+                        :geo-w-k-t="geoResults"
+                    />
             </template>
-            <template v-if="item.baseClass === qnameToIri('skos:ConceptScheme')" #top>
+            <template v-if="item.type === qname('skos:ConceptScheme')" #top>
                 <tr>
                     <th>Concepts</th>
                     <td>
                         <div class="concepts">
-                            <button v-if="hasFewChildren" id="collapse-all-btn" @click="collapseConcepts = !collapseConcepts" class="btn">
+                            <button id="collapse-all-btn" @click="collapseConcepts = !collapseConcepts" class="btn">
                                 <template v-if="collapseConcepts"><i class="fa-regular fa-plus"></i> Expand all</template>
                                 <template v-else><i class="fa-regular fa-minus"></i> Collapse all</template>
                             </button>
-                            <ConceptComponent
-                                v-for="concept in concepts"
-                                v-bind="concept"
-                                :baseUrl="route.path"
-                                :collapseAll="collapseConcepts"
-                                parentPath=""
-                                :doNarrowerEmits="!hasFewChildren"
-                                @getNarrowers="getNarrowers($event)"
-                            />
+                            <ConceptComponent v-for="concept in concepts" v-bind="concept" :baseUrl="route.path" :collapseAll="collapseConcepts" />
                         </div>
-                        <button
-                            v-if="!hasFewChildren && concepts.length > 0 && item.childrenCount! > concepts.length"
-                            class="btn outline sm"
-                            @click="getTopConcepts(Math.round(concepts.length / conceptPerPage) + 1)"
-                            :style="{marginLeft: '26px'}"
-                        >
-                            Load more
-                        </button>
                     </td>
                 </tr>
                 <tr>
@@ -705,7 +509,7 @@ onMounted(() => {
                 <tr>
                     <th>{{ childrenConfig.childrenTitle }}</th>
                     <SortableTabularList
-                        v-if="item.baseClass === qnameToIri('dcat:Catalog')"
+                        v-if="item.type === qname('dcat:Catalog')"
                         :items="children"
                         :predicates="['publisher', 'creator', 'issued']"
                     />
@@ -725,13 +529,14 @@ onMounted(() => {
                 </tr>
             </template>
         </PropTable>
-        <LoadingMessage v-else-if="loading" />
-        <ErrorMessage v-else-if="error" :message="error" />
-        <Teleport v-if="searchEnabled" to="#search-teleport">
+        <template v-else-if="loading">
+            <i class="fa-regular fa-spinner-third fa-spin"></i> Loading...
+        </template>
+        <template v-else-if="error">
+            <ErrorMessage :message="error" />
+        </template>
+        <Teleport v-if="searchEnabled" to="#right-bar-content">
             <AdvancedSearch :expanded="false" v-if="flavour" :flavour="flavour" :query="searchDefaults" />
-        </Teleport>
-        <Teleport v-if="enableScores && hasScores" to="#score-teleport">
-            <ScoreWidget v-for="([name, score]) in Object.entries(scores)" :name="name" :score="score" />
         </Teleport>
     </template>
 </template>

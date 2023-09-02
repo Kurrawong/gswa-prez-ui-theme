@@ -5,7 +5,7 @@ import { DataFactory, type Quad_Object, type Quad_Subject } from "n3";
 import { useUiStore } from "@/stores/ui";
 import { useRdfStore } from "@/composables/rdfStore";
 import { useGetRequest } from "@/composables/api";
-import { apiBaseUrlConfigKey, perPageConfigKey, type Breadcrumb, type ListItem, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
+import { apiBaseUrlConfigKey, type Breadcrumb, type ListItem, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
 import ItemList from "@/components/ItemList.vue";
 import AdvancedSearch from "@/components/search/AdvancedSearch.vue";
 import ProfilesTable from "@/components/ProfilesTable.vue";
@@ -13,29 +13,26 @@ import ErrorMessage from "@/components/ErrorMessage.vue";
 import PaginationComponent from "@/components/PaginationComponent.vue";
 import { getPrezSystemLabel } from "@/util/prezSystemLabelMapping";
 import SortableTabularList from "@/components/SortableTabularList.vue";
-import LoadingMessage from "@/components/LoadingMessage.vue";
-import { ensureProfiles } from "@/util/helpers";
 
 const { namedNode } = DataFactory;
 
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
-const defaultPerPage = inject(perPageConfigKey) as number;
 const route = useRoute();
 const ui = useUiStore();
-const { store, parseIntoStore, qnameToIri } = useRdfStore();
+const { store, parseIntoStore, qname } = useRdfStore();
 const { data, profiles, loading, error, doRequest } = useGetRequest();
 
-const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
-const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description")];
+const DEFAULT_LABEL_PREDICATES = [qname("rdfs:label")];
+const DEFAULT_DESC_PREDICATES = [qname("dcterms:description")];
 const TOP_LEVEL_TYPES = [
-    qnameToIri("dcat:Catalog"),
-    qnameToIri("dcat:Dataset"),
-    qnameToIri("skos:ConceptScheme"),
-    qnameToIri("skos:Collection"),
-    qnameToIri("prof:Profile"),
-    qnameToIri("prez:CatPrezProfile"),
-    qnameToIri("prez:SpacePrezProfile"),
-    qnameToIri("prez:VocPrezProfile"),
+    qname("dcat:Catalog"),
+    qname("dcat:Dataset"),
+    qname("skos:ConceptScheme"),
+    qname("skos:Collection"),
+    qname("prof:Profile"),
+    qname("prez:CatPrezProfile"),
+    qname("prez:SpacePrezProfile"),
+    qname("prez:VocPrezProfile"),
 ];
 const ALT_PROFILES_TOKEN = "lt-prfl:alt-profile";
 
@@ -56,25 +53,33 @@ const childrenConfig = ref({
     buttonTitle: "",
     buttonLink: ""
 });
-const perPage = ref(Number(defaultPerPage));
 
 const currentPerPage = computed(() => {
     if (route.query && route.query.page) {
         return parseInt(route.query.per_page as string);
     } else {
-        return perPage > 0 ? perPage : 20;
+        return 20;
     }
 });
+
+const currentPageNumber = computed(() => {
+    if (route.query && route.query.page) {
+        return parseInt(route.query.page as string);
+    } else {
+        return 1;
+    }
+});
+
 
 function configByType(type: string) {
     itemType.value.uri = type;
     switch (type) {
-        case qnameToIri("dcat:Catalog"):
+        case qname("dcat:Catalog"):
             itemType.value.label = "Catalogs";
             // searchEnabled.value = true;
             // searchDefaults.value = { catalog: item.value.iri };
             break;
-        case qnameToIri("dcat:Dataset"):
+        case qname("dcat:Dataset"):
             itemType.value.label = "Datasets";
             // searchEnabled.value = true;
             // searchDefaults.value = { dataset: item.value.iri };
@@ -84,7 +89,7 @@ function configByType(type: string) {
                 buttonLink: "/collections"
             };
             break;
-        case qnameToIri("geo:FeatureCollection"):
+        case qname("geo:FeatureCollection"):
             itemType.value.label = "Feature Collections";
             // searchEnabled.value = true;
             // searchDefaults.value = { collection: item.value.iri };
@@ -94,22 +99,22 @@ function configByType(type: string) {
                 buttonLink: "/items"
             };
             break;
-        case qnameToIri("geo:Feature"):
+        case qname("geo:Feature"):
             itemType.value.label = "Features";
             // search?
             break;
-        case qnameToIri("skos:ConceptScheme"):
+        case qname("skos:ConceptScheme"):
             itemType.value.label = "Vocabularies";
             searchEnabled.value = true;
-            // searchDefaults.value = { vocab: item.value.iri };
+            //searchDefaults.value = { vocab: item.value.iri };
             break;
-        case qnameToIri("skos:Collection"):
+        case qname("skos:Collection"):
             itemType.value.label = "Collections";
             break;
-        case qnameToIri("prof:Profile"):
-        case qnameToIri("prez:CatPrezProfile"):
-        case qnameToIri("prez:SpacePrezProfile"):
-        case qnameToIri("prez:VocPrezProfile"):
+        case qname("prof:Profile"):
+        case qname("prez:CatPrezProfile"):
+        case qname("prez:SpacePrezProfile"):
+        case qname("prez:VocPrezProfile"):
             itemType.value.label = "Profiles";
             break;
         default:
@@ -173,14 +178,14 @@ function getBreadcrumbs(): Breadcrumb[] {
 function getProperties() {
     // find subject & handle top-level vs feature collections & features
     let nodeList: (Quad_Subject | Quad_Object)[] = [];
-    const countQuad = store.value.getQuads(null, namedNode(qnameToIri("prez:count")), null, null)[0];
+    const countQuad = store.value.getQuads(null, namedNode(qname("prez:count")), null, null)[0];
     count.value = parseInt(countQuad.object.value);
     if (TOP_LEVEL_TYPES.includes(countQuad.subject.value)) {
-        nodeList = store.value.getSubjects(namedNode(qnameToIri("a")), countQuad.subject, null);
+        nodeList = store.value.getSubjects(namedNode(qname("a")), countQuad.subject, null);
 
         // for /c/profiles, etc. need to look for prez:CatPrezProfile, etc.
     } else {
-        nodeList = store.value.getObjects(countQuad.subject, namedNode(qnameToIri("rdfs:member")), null);
+        nodeList = store.value.getObjects(countQuad.subject, namedNode(qname("rdfs:member")), null);
     }
 
     // get label & description predicates
@@ -199,29 +204,29 @@ function getProperties() {
                 c.title = q.object.value;
             } else if (descPredicates.includes(q.predicate.value)) {
                 c.description = q.object.value;
-            } else if (q.predicate.value === qnameToIri("prez:link")) {
+            } else if (q.predicate.value === qname("prez:link")) {
                 c.link = q.object.value;
-            } else if (flavour.value === "VocPrez" && q.predicate.value === qnameToIri("reg:status")) {
+            } else if (flavour.value === "VocPrez" && q.predicate.value === qname("reg:status")) {
                 const status: ListItemSortable = {iri: q.object.value, label: getIRILocalName(q.object.value)};
 
                 store.value.forObjects(result => {
                     status.label = result.value;
-                }, q.object, qnameToIri("rdfs:label"), null);
+                }, q.object, qname("rdfs:label"), null);
 
                 store.value.forObjects(result => {
                     status.color = result.value;
-                }, q.object, qnameToIri("sdo:color"), null);
+                }, q.object, qname("sdo:color"), null);
                 c.extras.status = status;
-            } else if (flavour.value === "VocPrez" && q.predicate.value === qnameToIri("prov:qualifiedDerivation")) {
+            } else if (flavour.value === "VocPrez" && q.predicate.value === qname("prov:qualifiedDerivation")) {
                 store.value.forObjects(result => {
                     const mode: ListItemSortable = {iri: result.value, label: getIRILocalName(result.value)};
 
                     store.value.forObjects(innerResult => {
                         mode.label = innerResult.value;
-                    }, result,qnameToIri("rdfs:label"), null);
+                    }, result,qname("rdfs:label"), null);
 
                     c.extras.derivationMode = mode;
-                }, q.object, qnameToIri("prov:hadRole"), null);
+                }, q.object, qname("prov:hadRole"), null);
             }
         }, member, null, null, null);
         items.value.push(c);
@@ -256,72 +261,62 @@ onBeforeMount(() => {
     if (route.path.startsWith("/c/")) {
         flavour.value = "CatPrez";
         if (route.path.match(/c\/profiles/)) {
-            configByType(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/c\/catalogs/)) {
-            configByType(qnameToIri("dcat:Catalog"));
+            configByType(qname("dcat:Catalog"));
         }
     } else if (route.path.startsWith("/s/")) {
         flavour.value = "SpacePrez";
         if (route.path.match(/s\/profiles/)) {
-            configByType(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/s\/datasets\/.+\/collections\/.+\/items/)) {
-            configByType(qnameToIri("geo:Feature"));
+            configByType(qname("geo:Feature"));
         } else if (route.path.match(/s\/datasets\/.+\/collections/)) {
-            configByType(qnameToIri("geo:FeatureCollection"));
+            configByType(qname("geo:FeatureCollection"));
         } else if (route.path.match(/s\/datasets/)) {
-            configByType(qnameToIri("dcat:Dataset"));
+            configByType(qname("dcat:Dataset"));
         }
     } if (route.path.startsWith("/v/")) {
         flavour.value = "VocPrez";
         if (route.path.match(/v\/profiles/)) {
-            configByType(qnameToIri("prof:Profile"));
+            configByType(qname("prof:Profile"));
         } else if (route.path.match(/v\/vocab/)) {
-            configByType(qnameToIri("skos:ConceptScheme"));
+            configByType(qname("skos:ConceptScheme"));
         } else if (route.path.match(/v\/collection/)) {
-            configByType(qnameToIri("skos:Collection"));
+            configByType(qname("skos:Collection"));
         }
     } else if (route.path.startsWith("/profiles")) {
-        configByType(qnameToIri("prof:Profile"));
+        configByType(qname("prof:Profile"));
     }
 
     // check if alt profile & no mediatype, then show alt profiles page
     if (route.query._profile === ALT_PROFILES_TOKEN && !route.query._mediatype) {
         isAltView.value = true;
     }
-
-    if (route.query.per_page) {
-        perPage.value = Number(route.query.per_page);
-    }
 });
 
 onMounted(() => {
-    loading.value = true;
+    doRequest(`${apiBaseUrl}${route.fullPath}`, () => {
+        defaultProfile.value = ui.profiles[profiles.value.find(p => p.default)!.uri];
+        
+        // if specify mediatype, or profile is not default or alt, redirect to API
+        if ((route.query && route.query._profile) &&
+            (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILES_TOKEN].includes(route.query._profile as string))) {
+                window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
+        }
 
-    let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${perPage.value}`;
+        // disable right nav if AltView
+        if (isAltView.value) {
+            ui.rightNavConfig = { enabled: false };
+        } else {
+            ui.rightNavConfig = { enabled: true, profiles: profiles.value, currentUrl: route.path };
+        }
 
-    ensureProfiles().then(() => {
-        doRequest(`${apiBaseUrl}${fullPath}`, () => {
-            defaultProfile.value = ui.profiles[profiles.value.find(p => p.default)!.uri];
-            
-            // if specify mediatype, or profile is not default or alt, redirect to API
-            if ((route.query && route.query._profile) &&
-                (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILES_TOKEN].includes(route.query._profile as string))) {
-                    window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
-            }
+        parseIntoStore(data.value);
+        getProperties();
 
-            // disable right nav if AltView
-            if (isAltView.value) {
-                ui.rightNavConfig = { enabled: false };
-            } else {
-                ui.rightNavConfig = { enabled: true, profiles: profiles.value, currentUrl: route.path };
-            }
-
-            parseIntoStore(data.value);
-            getProperties();
-
-            document.title = `${itemType.value.label} | Prez`;
-            ui.breadcrumbs = getBreadcrumbs();
-        });
+        document.title = `${itemType.value.label} | Prez`;
+        ui.breadcrumbs = getBreadcrumbs();
     });
 });
 </script>
@@ -332,15 +327,19 @@ onMounted(() => {
         <h1 class="page-title">{{ itemType.label }}</h1>
         <p v-if="items.length > 0">{{ itemType.label }} managed by the Geological Survey of Western Australia. Showing {{ items.length }} of {{ count }} items.</p>
         <p>View a description of the <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">SKOS {{ itemType.label }}</a>.</p>
-        <ErrorMessage v-if="error" :message="error" />
-        <LoadingMessage v-else-if="loading" />
+        <template v-if="error">
+            <ErrorMessage :message="error" />
+        </template>
+        <template v-else-if="loading">
+            <i class="fa-regular fa-spinner-third fa-spin"></i> Loading...
+        </template>
         <template v-else-if="items.length > 0">
             <SortableTabularList v-if="flavour === 'VocPrez'" :items="items" :predicates="['description', 'status', 'derivationMode']" />
             <ItemList v-else :items="items" :childName="childrenConfig.buttonTitle" :childLink="childrenConfig.buttonLink" />
             <PaginationComponent :url="route.path" :totalCount="count" :currentPage="currentPageNumber" :perPage="currentPerPage" />
         </template>
         <template v-else>No {{ itemType.label }} found.</template>
-        <Teleport v-if="searchEnabled && flavour" to="#search-teleport">
+        <Teleport v-if="searchEnabled && flavour" to="#right-bar-content">
             <AdvancedSearch :expanded="false" :flavour="flavour" :query="searchDefaults" />
         </Teleport>
     </template>
