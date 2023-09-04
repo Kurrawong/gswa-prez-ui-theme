@@ -305,7 +305,9 @@ onBeforeMount(() => {
 onMounted(() => {
     loading.value = true;
 
-    let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${currentPerPage.value}`;
+    const defPerPage = isNaN(currentPerPage.value) ? currentPerPage : isNaN(defaultPerPage) ? defaultPerPage : 20;
+
+    let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${defPerPage}`;
 
     ensureProfiles().then(() => {
         doRequest(`${apiBaseUrl}${fullPath}`, () => {
