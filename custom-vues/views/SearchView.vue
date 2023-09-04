@@ -61,7 +61,7 @@ function getResults() {
                     } else if (q.predicate.value === qnameToIri("prez:searchResultSource")) {
                         resultSource = q.object.value.replace(qnameToIri("prez:"), "");
                     } else if (q.predicate.value === qnameToIri("prez:searchResultWeight")) {
-                        resultWeight = q.object.value.replace(qnameToIri("prez:"), "");
+                        resultWeight = parseFloat(q.object.value.replace(qnameToIri("prez:"), ""));
                     } else if (q.predicate.value === qnameToIri("geo:hasGeometry")) {
                         store.value.forEach(geometryTriple => {
                             resultCoordinates = geometryTriple.object.value;
