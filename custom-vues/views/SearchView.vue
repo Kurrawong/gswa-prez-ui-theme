@@ -98,7 +98,9 @@ const sortFunc = (a:SearchResult, b:SearchResult) => {
         return -1;
     } else {
         // If weights are equal, compare by label
-        return a.label?.localeCompare(b.label || '');
+        const labelA = a.label || '';
+        const labelB = b.label || '';
+        return labelA.localeCompare(labelB);
     }
 };
 
