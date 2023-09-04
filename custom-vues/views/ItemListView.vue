@@ -56,7 +56,7 @@ const childrenConfig = ref({
     buttonTitle: "",
     buttonLink: ""
 });
-const perPage = ref(Number(defaultPerPage));
+const perPage = ref(isNaN(defaultPerPage) ? 20 : Number(defaultPerPage));
 
 const currentPerPage = computed(() => {
     if (route.query && route.query.page) {
@@ -305,7 +305,7 @@ onBeforeMount(() => {
 onMounted(() => {
     loading.value = true;
 
-    let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${perPage.value}`;
+    let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${currentPerPage.value}`;
 
     ensureProfiles().then(() => {
         doRequest(`${apiBaseUrl}${fullPath}`, () => {
@@ -337,6 +337,7 @@ onMounted(() => {
 <template>
     <ProfilesTable v-if="isAltView" :profiles="profiles" :path="route.path" />
     <template v-else>
+        <h2>PER PAGE </h2>
         <h1 class="page-title">{{ itemType.label }}</h1>
         <p v-if="items.length > 0">{{ itemType.label }} managed by the Geological Survey of Western Australia. Showing {{ items.length }} of {{ count }} items.</p>
         <p>View a description of the <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">SKOS {{ itemType.label }}</a>.</p>
