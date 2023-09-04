@@ -90,7 +90,7 @@ function getResults() {
     }
 }
 
-const sortFunc = (a, b) => {
+const sortFunc = (a:SearchResult, b:SearchResult) => {
     // Compare by weight first
     if (a.weight < b.weight) {
         return 1;

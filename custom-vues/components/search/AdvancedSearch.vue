@@ -40,7 +40,6 @@ function submit() {
         query: {
             term: searchTerm.value,
             prez: prez.value !== "all" ? prez.value : undefined,
-            method: searchMethod.value || undefined,
             ...searchOptions.value
         }
     });
