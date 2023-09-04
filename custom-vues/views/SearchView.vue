@@ -48,6 +48,7 @@ function getResults() {
         doRequest(`${apiBaseUrl}${route.fullPath}`, () => {
             parseIntoStore(data.value);
             const labelPredicateIris = LABEL_PREDICATES.map(p => qnameToIri(p));
+
             store.value.forSubjects(subject => {
                 let resultUri = subject.value;
                 let resultLabel = undefined;
@@ -58,6 +59,8 @@ function getResults() {
                 store.value.forEach(q => {
                     if (labelPredicateIris.includes(q.predicate.value)) {
                         resultLabel = q.object.value;
+                    } else if (q.predicate.value === qnameToIri("prez:searchResultURI")) {
+                        resultUri = q.object.value;
                     } else if (q.predicate.value === qnameToIri("prez:searchResultSource")) {
                         resultSource = q.object.value.replace(qnameToIri("prez:"), "");
                     } else if (q.predicate.value === qnameToIri("prez:searchResultWeight")) {
