@@ -15,6 +15,7 @@ import MapClient from "@/components/MapClient.vue";
 const { namedNode } = DataFactory;
 
 const LABEL_PREDICATES = [
+    "prez:searchResultMatch",
     "skos:prefLabel",
     "dcterms:title",
     "rdfs:label",
@@ -25,6 +26,7 @@ interface SearchResult {
     label?: string;
     uri: string;
     source: string;
+    weight: number;
 };
 
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
@@ -46,18 +48,20 @@ function getResults() {
         doRequest(`${apiBaseUrl}${route.fullPath}`, () => {
             parseIntoStore(data.value);
             const labelPredicateIris = LABEL_PREDICATES.map(p => qnameToIri(p));
-
             store.value.forSubjects(subject => {
                 let resultUri = subject.value;
                 let resultLabel = undefined;
                 let resultSource = "";
                 let resultCoordinates = undefined;
+                let resultWeight = 0;
 
                 store.value.forEach(q => {
                     if (labelPredicateIris.includes(q.predicate.value)) {
                         resultLabel = q.object.value;
                     } else if (q.predicate.value === qnameToIri("prez:searchResultSource")) {
                         resultSource = q.object.value.replace(qnameToIri("prez:"), "");
+                    } else if (q.predicate.value === qnameToIri("prez:searchResultWeight")) {
+                        resultWeight = q.object.value.replace(qnameToIri("prez:"), "");
                     } else if (q.predicate.value === qnameToIri("geo:hasGeometry")) {
                         store.value.forEach(geometryTriple => {
                             resultCoordinates = geometryTriple.object.value;
@@ -68,7 +72,8 @@ function getResults() {
                 results.value.push({
                     uri: resultUri,
                     label: resultLabel,
-                    source: resultSource
+                    source: resultSource,
+                    weight: resultWeight
                 });
 
                 if (resultCoordinates) {
@@ -84,6 +89,18 @@ function getResults() {
         });
     }
 }
+
+const sortFunc = (a, b) => {
+    // Compare by weight first
+    if (a.weight < b.weight) {
+        return 1;
+    } else if (a.weight > b.weight) {
+        return -1;
+    } else {
+        // If weights are equal, compare by label
+        return a.label?.localeCompare(b.label || '');
+    }
+};
 
 watch(() => route.query, (newValue, oldValue) => {
     if (Object.keys(newValue).length > 0 && newValue !== oldValue) {
@@ -108,7 +125,7 @@ onMounted(() => {
         <AdvancedSearch :query="query" :expanded="true" fullPage />
         <ErrorMessage v-if="error" :message="error" />
         <template v-else-if="loading">
-            <h3>Loading...</h3>
+            <!--<h3>Loading...</h3>-->
             <LoadingMessage />
         </template>
         <template v-else-if="route.query && route.query.term">
@@ -120,9 +137,9 @@ onMounted(() => {
                         <span>Source</span>
                     </div>
                     <div v-if="results.length > 0" class="results">
-                        <RouterLink v-for="result in results" class="result"
+                        <RouterLink v-for="result in results.sort(sortFunc)" class="result"
                             :to="`/object?uri=${encodeURIComponent(result.uri)}`">
-                            <span>{{ result.label || result.uri }}</span>
+                            <span class="result-label">{{ result.label || result.uri }}</span>
                             <span :style="{ color: 'black' }">{{ result.source }}</span>
                         </RouterLink>
                     </div>
@@ -157,6 +174,13 @@ onMounted(() => {
     margin-bottom: 6px;
 }
 
+.result-label {
+    display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display before ellipsis */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* Media query for small screens */
 @media (max-width: 1024px) {
     .container {

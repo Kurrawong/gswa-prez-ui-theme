@@ -82,13 +82,6 @@ function camelToTitleCase(s: string): string {
                         <option v-for="prezFlavour in enabledPrezs" :value="prezFlavour">{{ prezFlavour }}</option>
                     </select>
                 </div>
-                <div v-if="prez !== 'all'">
-                    <label for="search-method">Search Method</label>
-                    <br/>
-                    <select name="search-method" id="search-method" v-model="searchMethod">
-                        <option v-for="method in ui.searchMethods[prez]" :value="method">{{ camelToTitleCase(method) }}</option>
-                    </select>
-                </div>
                 <button v-if="prez !== 'all'" type="button" class="collapse-btn" @click.prevent="expanded = !expanded">
                     <template v-if="expanded">Collapse <i class="fa-regular fa-chevron-up"></i></template>
                     <template v-else>Expand <i class="fa-regular fa-chevron-down"></i></template>

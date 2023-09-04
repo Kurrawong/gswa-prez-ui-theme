@@ -35,7 +35,7 @@ const { data: countData, loading: countLoading, error: countError, doRequest: co
 const { data: conceptData, loading: conceptLoading, error: conceptError, doRequest: conceptDoRequest } = useGetRequest();
 
 const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
-const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description")];
+const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description"), qnameToIri("skos:definition")];
 const DEFAULT_GEO_PREDICATES = [qnameToIri("geo:hasBoundingBox"), qnameToIri("geo:hasGeometry")];
 const DEFAULT_CHILDREN_PREDICATES = [qnameToIri("rdfs:member"), qnameToIri("skos:member"), qnameToIri("dcterms:hasPart")];
 const RECURSION_LIMIT = 5; // limit on recursive search of blank nodes
@@ -417,7 +417,9 @@ function getAllConcepts() {
     conceptArray.forEach(c => {
         if (c.narrower!.length > 0) {
             c.narrower!.forEach(n => {
-                conceptArray[indexMap[n]].broader = c.iri;
+                if(n in indexMap) {
+                    conceptArray[indexMap[n]].broader = c.iri;
+                }
             });
         }
 
@@ -619,12 +621,11 @@ function getData() {
         } else {
             ui.rightNavConfig = { enabled: true, profiles: profiles.value, currentUrl: route.path };
         }
-        const matches = [...data.value.matchAll(/\n<[^>]*?>(?:(?!\n\n)[\s\S])*?skos:prefLabel\s+"(.*?)"@en/gm)].map(match => match[1]);
+        const matches = [...data.value.matchAll(/\n\S*?(?:(?!\n\n)[\s\S])*?skos:prefLabel\s+"(.*?)"@en/gm)].map(match => match[1]);
 
         if(matches.length > 0) {
             tmpBreadCrumbLabel = matches.pop()!;
         }
-
 
         parseIntoStore(data.value);
         getProperties();
