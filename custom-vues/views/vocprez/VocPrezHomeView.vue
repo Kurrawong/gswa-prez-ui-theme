@@ -66,8 +66,8 @@ const links = [
     </p>
     <p>
       This profile sets requirements for basic annotations of elements of SKOS,
-      for example, ensuring that all <code>Concept</code> instances have labels
-      and are placed within the <code>ConceptScheme</code>'s concept hierarchy.
+      for example, ensuring that all Concept instances have labels
+      and are placed within the ConceptScheme's concept hierarchy.
     </p>
     <p>
       This profile has all of its requirements documented in a

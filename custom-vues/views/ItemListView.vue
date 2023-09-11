@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, onBeforeMount, ref, computed, inject } from "vue";
 import { useRoute } from "vue-router";
-import { DataFactory, type Quad_Object, type Quad_Subject } from "n3";
+import { DataFactory, type Quad_Object, type Quad_Subject, type Literal } from "n3";
 import { useUiStore } from "@/stores/ui";
 import { useRdfStore } from "@/composables/rdfStore";
 import { useGetRequest } from "@/composables/api";
-import { apiBaseUrlConfigKey, perPageConfigKey, type Breadcrumb, type ListItem, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
+import { apiBaseUrlConfigKey, perPageConfigKey, type Breadcrumb, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable, type languageLabel } from "@/types";
 import ItemList from "@/components/ItemList.vue";
 import AdvancedSearch from "@/components/search/AdvancedSearch.vue";
 import ProfilesTable from "@/components/ProfilesTable.vue";
@@ -14,7 +14,7 @@ import PaginationComponent from "@/components/PaginationComponent.vue";
 import { getPrezSystemLabel } from "@/util/prezSystemLabelMapping";
 import SortableTabularList from "@/components/SortableTabularList.vue";
 import LoadingMessage from "@/components/LoadingMessage.vue";
-import { ensureProfiles } from "@/util/helpers";
+import { ensureProfiles, sortByTitle, getLanguagePriority } from "@/util/helpers";
 
 const { namedNode } = DataFactory;
 
@@ -195,6 +195,7 @@ function getProperties() {
     const labelPredicates = defaultProfile.value!.labelPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_LABEL_PREDICATES;
     const descPredicates = defaultProfile.value!.descriptionPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_DESC_PREDICATES;
 
+
     // fill out item list & handle vocprez items
     nodeList.forEach(member => {
         let c: ListItemExtra = {
@@ -202,9 +203,15 @@ function getProperties() {
             extras: {}
         };
 
+        const labels: languageLabel[] = [];
         store.value.forEach(q => {
             if (labelPredicates.includes(q.predicate.value)) {
-                c.title = q.object.value;
+                let language = (q.object as Literal).language;
+                labels.push({
+                    value: q.object.value,
+                    language: language || undefined,
+                    priority: getLanguagePriority(language)
+                });                
             } else if (descPredicates.includes(q.predicate.value)) {
                 c.description = q.object.value;
             } else if (q.predicate.value === qnameToIri("prez:link")) {
@@ -232,6 +239,10 @@ function getProperties() {
                 }, q.object, qnameToIri("prov:hadRole"), null);
             }
         }, member, null, null, null);
+        // sort labels by language priority
+        labels.sort((a, b) => a.priority - b.priority);
+        // set title to highest priority language tag
+        c.title = labels.length > 0 ? labels[0].value : undefined;
         items.value.push(c);
     });
 
@@ -339,7 +350,6 @@ onMounted(() => {
 <template>
     <ProfilesTable v-if="isAltView" :profiles="profiles" :path="route.path" />
     <template v-else>
-        <h2>PER PAGE </h2>
         <h1 class="page-title">{{ itemType.label }}</h1>
         <p v-if="items.length > 0">{{ itemType.label }} managed by the Geological Survey of Western Australia. Showing {{ items.length }} of {{ count }} items.</p>
         <p>View a description of the <a :href="itemType.uri" target="_blank" rel="noopener noreferrer">SKOS {{ itemType.label }}</a>.</p>

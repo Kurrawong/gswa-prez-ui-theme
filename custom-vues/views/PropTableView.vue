@@ -5,7 +5,7 @@ import { BlankNode, DataFactory, Quad, Store, Literal } from "n3";
 import { useUiStore } from "@/stores/ui";
 import { useRdfStore } from "@/composables/rdfStore";
 import { useGetRequest } from "@/composables/api";
-import { apiBaseUrlConfigKey, conceptPerPageConfigKey, enableScoresKey, type ListItem, type AnnotatedQuad, type Breadcrumb, type Concept, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable } from "@/types";
+import { apiBaseUrlConfigKey, conceptPerPageConfigKey, enableScoresKey, type ListItem, type AnnotatedQuad, type Breadcrumb, type Concept, type PrezFlavour, type Profile, type ListItemExtra, type ListItemSortable, type languageLabel } from "@/types";
 import PropTable from "@/components/proptable/PropTable.vue";
 import ConceptComponent from "@/components/ConceptComponent.vue";
 import AdvancedSearch from "@/components/search/AdvancedSearch.vue";
@@ -16,7 +16,7 @@ import MapClient from "@/components/MapClient.vue";
 import type { WKTResult } from "@/stores/mapSearchStore.d";
 import SortableTabularList from "@/components/SortableTabularList.vue";
 import LoadingMessage from "@/components/LoadingMessage.vue";
-import { ensureProfiles, titleCase } from "@/util/helpers";
+import { ensureProfiles, titleCase, sortByTitle, getLanguagePriority } from "@/util/helpers";
 import ScoreWidget from "@/components/scores/ScoreWidget.vue";
 
 const { namedNode } = DataFactory;
@@ -144,12 +144,18 @@ function getProperties() {
     // get label & description predicates
     const labelPredicates = defaultProfile.value!.labelPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_LABEL_PREDICATES;
     const descPredicates = defaultProfile.value!.descriptionPredicates.length > 0 ? defaultProfile.value!.labelPredicates : DEFAULT_DESC_PREDICATES;
-    hiddenPredicates.value.push(...[...labelPredicates, ...descPredicates]);
+    hiddenPredicates.value.push(...descPredicates);
+    const labels: languageLabel[] = [];
 
     // get attributes for item object, fill out properties
     store.value.forEach(q => {
         if (labelPredicates.includes(q.predicate.value)) {
-            item.value.title = q.object.value;
+            let language = (q.object as Literal).language;
+            labels.push({
+                value: q.object.value,
+                language: language || undefined,
+                priority: getLanguagePriority(language)
+            });
         } else if (descPredicates.includes(q.predicate.value)) {
             item.value.description = q.object.value;
         } else if (DEFAULT_CHILDREN_PREDICATES.includes(q.predicate.value)) {
@@ -191,6 +197,14 @@ function getProperties() {
             findBlankNodes(q, store.value, recursionCounter);
         }
     }, subject, null, null, null);
+    
+    // sort labels by language priority
+    labels.sort((a, b) => a.priority - b.priority);
+    // set title to highest priority language tag
+    item.value.title = labels.length > 0 ? labels[0].value : undefined;
+    if (labels.length === 1) { // hide label property in table if there is only one label
+        hiddenPredicates.value.push(...labelPredicates);
+    }
 
     if (hasScores.value) {
         getScores();
@@ -327,9 +341,15 @@ function getChildren() {
                 extras: {}
             };
 
+            const labels: languageLabel[] = [];
             store.value.forEach(q => {
                 if (labelPredicates.includes(q.predicate.value)) {
-                    child.title = q.object.value;
+                    let language = (q.object as Literal).language;
+                    labels.push({
+                        value: q.object.value,
+                        language: language || undefined,
+                        priority: getLanguagePriority(language)
+                    });                    
                 } else if (q.predicate.value === qnameToIri("prez:link")) {
                     child.link = q.object.value;
                 } else if (q.predicate.value === qnameToIri("a")) {
@@ -356,6 +376,10 @@ function getChildren() {
                 } 
             }, obj, null, null, null);
 
+            // sort labels by language priority
+            labels.sort((a, b) => a.priority - b.priority);
+            // set title to highest priority language tag
+            child.title = labels.length > 0 ? labels[0].value : undefined;
             children.value.push(child);
         }, namedNode(item.value.iri), namedNode(childrenPredicate.value), null);
 
@@ -387,9 +411,15 @@ function getAllConcepts() {
             childrenCount: 0,
             children: []
         };
+        const labels: languageLabel[] = [];
         store.value.forEach(q => {
             if (q.predicate.value === qnameToIri("skos:prefLabel")) {
-                c.title = q.object.value;
+                let language = (q.object as Literal).language;
+                labels.push({
+                    value: q.object.value,
+                    language: language || undefined,
+                    priority: getLanguagePriority(language)
+                });                
             } else if (q.predicate.value === qnameToIri("prez:link")) {
                 c.link = q.object.value;
             } else if (q.predicate.value === qnameToIri("skos:narrower")) {
@@ -398,6 +428,11 @@ function getAllConcepts() {
                 c.broader = q.object.value;
             }
         }, subject, null, null, null);
+        // sort labels by language priority
+        labels.sort((a, b) => a.priority - b.priority);
+        // set title to highest priority language tag
+        c.title = labels.length > 0 ? labels[0].value : "";
+                
         c.childrenCount = c.narrower!.length;
         conceptArray.push(c);
     }, namedNode(qnameToIri("skos:inScheme")), namedNode(item.value.iri), null);
@@ -453,9 +488,15 @@ function getTopConcepts(page: number = 1) {
                 children: [],
                 color: "",
             };
+            const labels: languageLabel[] = [];
             conceptStore.value.forEach(q => {
                 if (q.predicate.value === conceptQnameToIri("skos:prefLabel")) {
-                    c.title = q.object.value;
+                    let language = (q.object as Literal).language;
+                    labels.push({
+                        value: q.object.value,
+                        language: language || undefined,
+                        priority: getLanguagePriority(language)
+                    });
                 } else if (q.predicate.value === conceptQnameToIri("prez:link")) {
                     c.link = q.object.value;
                 } else if (q.predicate.value === conceptQnameToIri("prez:childrenCount")) {
@@ -464,6 +505,10 @@ function getTopConcepts(page: number = 1) {
                     c.color = q.object.value;
                 }
             }, object, null, null, null);
+            // sort labels by language priority
+            labels.sort((a, b) => a.priority - b.priority);
+            // set title to highest priority language tag
+            c.title = labels.length > 0 ? labels[0].value : "";            
             concepts.value.push(c);
         }, namedNode(item.value.iri), namedNode(conceptQnameToIri("skos:hasTopConcept")), null);
 
@@ -500,9 +545,15 @@ function getNarrowers({ iriPath, link, page = 1 }: { iriPath: string, link: stri
                 children: [],
                 color: "",
             };
+            const labels: languageLabel[] = [];
             conceptStore.value.forEach(q => {
                 if (q.predicate.value === conceptQnameToIri("skos:prefLabel")) {
-                    c.title = q.object.value;
+                    let language = (q.object as Literal).language;
+                    labels.push({
+                        value: q.object.value,
+                        language: language || undefined,
+                        priority: getLanguagePriority(language)
+                    });                    
                 } else if (q.predicate.value === conceptQnameToIri("prez:link")) {
                     c.link = q.object.value;
                 } else if (q.predicate.value === conceptQnameToIri("prez:childrenCount")) {
@@ -511,6 +562,10 @@ function getNarrowers({ iriPath, link, page = 1 }: { iriPath: string, link: stri
                     c.color = q.object.value;
                 }
             }, object, null, null, null);
+            // sort labels by language priority
+            labels.sort((a, b) => a.priority - b.priority);
+            // set title to highest priority language tag
+            c.title = labels.length > 0 ? labels[0].value : "";            
             parent!.children.push(c);
         }, namedNode(parent!.iri), namedNode(conceptQnameToIri("skos:narrower")), null);
 
