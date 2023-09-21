@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, inject, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
-import { BlankNode, DataFactory, Quad, Store, Literal, Quad_Object } from "n3";
+import { BlankNode, DataFactory, Quad, Store, Literal, type Quad_Object } from "n3";
 import { useUiStore } from "@/stores/ui";
 import { useRdfStore } from "@/composables/rdfStore";
 import { useGetRequest } from "@/composables/api";
