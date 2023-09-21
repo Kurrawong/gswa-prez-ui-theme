@@ -397,5 +397,8 @@ h1.page-title small {
     color:#d14210 !important;
 }
 
+#content-body > p > em {
+    font-style: normal;
+}
 
 </style>

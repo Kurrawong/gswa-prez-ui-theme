@@ -31,7 +31,7 @@ const orderedProfiles = computed(() => {
 <template>
     <div>
         <h4>Alternate Profiles</h4>
-        <RouterLink :to="`${props.currentUrl}?_profile=lt-prfl:alt-profile`"><p>View alternate views &amp; formats</p></RouterLink>
+        <RouterLink :to="`${props.currentUrl}?_profile=altr-ext:alt-profile`"><p>View alternate views &amp; formats</p></RouterLink>
         <div id="profiles">
             <div v-for="profile in orderedProfiles" class="profile">
                 <div class="profile-title-container">
