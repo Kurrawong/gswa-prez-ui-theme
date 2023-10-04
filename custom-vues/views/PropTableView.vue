@@ -19,6 +19,8 @@ import LoadingMessage from "@/components/LoadingMessage.vue";
 import { ensureProfiles, titleCase, sortByTitle, getLanguagePriority } from "@/util/helpers";
 import ScoreWidget from "@/components/scores/ScoreWidget.vue";
 
+import { ALT_PROFILE_CURIE } from "@/util/consts";
+
 const { namedNode } = DataFactory;
 
 let tmpBreadCrumbLabel = ''; // GSWA temp fix until full breadcrumb fix is in place
@@ -310,7 +312,7 @@ function getBreadcrumbs(): Breadcrumb[] {
 
     crumbs.push({ name: item.value.title || item.value.iri, url: route.path });
     if (isAltView.value) {
-        crumbs.push({ name: "Alternate Profiles", url: `${route.path}?_profile=${ALT_PROFILES_TOKEN}` });
+        crumbs.push({ name: "Alternate Profiles", url: `${route.path}?_profile=${ALT_PROFILE_CURIE}` });
     }
     return crumbs;
 }
@@ -666,19 +668,19 @@ onBeforeMount(() => {
     }
 
     // check if alt profile & no mediatype, then show alt profiles page
-    if (route.query._profile === ALT_PROFILES_TOKEN && !route.query._mediatype) {
+    if (route.query._profile === ALT_PROFILE_CURIE && !route.query._mediatype) {
         isAltView.value = true;
     }
 });
 
-function getData() {
-    doRequest(`${apiBaseUrl}${hasFewChildren.value ? route.path + "/all" + window.location.search : route.fullPath}`, () => {
+function getData(url:string) {
+    doRequest(url, () => {
         // find the current/default profile
         defaultProfile.value = ui.profiles[profiles.value.find(p => p.default)!.uri];
         
         // if specify mediatype, or profile is not default or alt, redirect to API
         if ((route.query && route.query._profile) &&
-            (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILES_TOKEN].includes(route.query._profile as string))) {
+            (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILE_CURIE].includes(route.query._profile as string))) {
                 window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
         }
 
@@ -716,11 +718,36 @@ onMounted(() => {
                 if (parseInt(countData.value.replace('"', "")) <= conceptPerPage) {
                     hasFewChildren.value = true;
                 }
-                getData();
+                getData(`${apiBaseUrl}${hasFewChildren.value ? route.path + "/all" + window.location.search : route.fullPath}`);
             });
         } else {
-            getData();
+            let fullPath = "";
+            if (hasFewChildren.value) {
+                fullPath = `${apiBaseUrl}${route.path}/all${window.location.search}`;
+            } else {
+                fullPath = `${apiBaseUrl}${route.fullPath}`;
+            }
+            if (Object.keys(route.query).length > 0) {
+                if (isAltView.value) { // remove alt profile qsa to get title for breadcrumbs - already have profile info in pinia/link headers
+                    fullPath = fullPath.replace(`_profile=${ALT_PROFILE_CURIE}`, "");
+                }
+            }
+            getData(fullPath);
         }
+
+        // doRequest(fullPath, ()=>{
+        //     if (data && profiles.length > 0 && !error.value) {
+        //         // find the current/default profile
+        //         defaultProfile.value = ui.profiles[profiles.find(p => p.current)!.uri];
+                
+        //         // if specify mediatype, or profile is not default or alt, redirect to API
+        //         if ((route.query && route.query._profile) &&
+        //             (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILE_CURIE].includes(route.query._profile as string))) {
+        //                 window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
+        //         }
+        //     }
+        // })
+    
     });
 });
 </script>

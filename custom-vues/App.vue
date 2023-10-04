@@ -58,7 +58,7 @@ import PrezApp from "./PrezApp.vue";
                         </p>
                         <p>
                             <span>Email:&nbsp;</span>
-                            <span><a href="mailto:">GSWA.vocabularies@dmirs.wa.gov.au</a></span>
+                            <span><a href="mailto:GSWA.vocabularies@dmirs.wa.gov.au">GSWA.vocabularies@dmirs.wa.gov.au</a></span>
                         </p>
                     </div>
                 </div>

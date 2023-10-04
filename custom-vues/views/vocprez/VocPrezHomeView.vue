@@ -50,9 +50,10 @@ const links = [
       point-of-truth code repository:
     </p>
     <ul>
-      <a href="https://github.com/kurrawong/gswa-vocabs/"
-        >GSWA's vocabulary source files on GitHub</a
-      >
+      <li>
+      <a href="https://github.com/Geological-Survey-of-Western-Australia/Vocabularies">
+        GSWA's vocabulary source files on GitHub</a>
+      </li>
     </ul>
     <p>
       The vocabularies listed there are automatically loaded into this system
@@ -62,7 +63,7 @@ const links = [
     <p>
       All of GSWA's vocabularies are managed by testing their conformance to a
       profile of SKOS, the so-called
-      <a href="https://w3id.orf/profile/vocpub">VocPub Profile</a> .
+      <a href="https://w3id.org/profile/vocpub">VocPub Profile</a> .
     </p>
     <p>
       This profile sets requirements for basic annotations of elements of SKOS,
@@ -71,9 +72,9 @@ const links = [
     </p>
     <p>
       This profile has all of its requirements documented in a
-      <a href="https://w3id.orf/profile/vocpub/spec">Specification Document</a>
+      <a href="https://w3id.org/profile/vocpub/spec">Specification Document</a>
       and also provides a
-      <a href="https://w3id.orf/profile/vocpub/validator">
+      <a href="https://w3id.org/profile/vocpub/validator">
         constraints language validator</a
       >
       to assist vocabulary publishers in getting their vocabularies conformant
