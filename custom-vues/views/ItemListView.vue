@@ -16,6 +16,8 @@ import SortableTabularList from "@/components/SortableTabularList.vue";
 import LoadingMessage from "@/components/LoadingMessage.vue";
 import { ensureProfiles, sortByTitle, getLanguagePriority } from "@/util/helpers";
 
+import { ALT_PROFILE_CURIE } from "@/util/consts";
+
 const { namedNode } = DataFactory;
 
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
@@ -173,7 +175,7 @@ function getBreadcrumbs(): Breadcrumb[] {
     });
 
     if (isAltView.value) {
-        crumbs.push({ name: "Alternate Profiles", url: `${route.path}?_profile=${ALT_PROFILES_TOKEN}` });
+        crumbs.push({ name: "Alternate Profiles", url: `${route.path}?_profile=${ALT_PROFILE_CURIE}` });
     }
     return crumbs;
 }
@@ -304,7 +306,7 @@ onBeforeMount(() => {
     }
 
     // check if alt profile & no mediatype, then show alt profiles page
-    if (route.query._profile === ALT_PROFILES_TOKEN && !route.query._mediatype) {
+    if (route.query._profile === ALT_PROFILE_CURIE && !route.query._mediatype) {
         isAltView.value = true;
     }
 
@@ -320,13 +322,25 @@ onMounted(() => {
 
     let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${defPerPage}`;
 
+    if (Object.keys(route.query).length > 0) {
+        fullPath = route.fullPath;
+        if (isAltView.value) { // remove alt profile qsa to get title for breadcrumbs - already have profile info in pinia/link headers
+            fullPath = fullPath.replace(`_profile=${ALT_PROFILE_CURIE}`, "");
+        }
+        if (!route.query.per_page) {
+            fullPath += `&per_page=${perPage.value}`;
+        }
+    } else {
+        fullPath = `${route.path}?per_page=${perPage.value}`;
+    }    
+
     ensureProfiles().then(() => {
         doRequest(`${apiBaseUrl}${fullPath}`, () => {
             defaultProfile.value = ui.profiles[profiles.value.find(p => p.default)!.uri];
             
             // if specify mediatype, or profile is not default or alt, redirect to API
             if ((route.query && route.query._profile) &&
-                (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILES_TOKEN].includes(route.query._profile as string))) {
+                (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILE_CURIE].includes(route.query._profile as string))) {
                     window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
             }
 

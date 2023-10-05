@@ -735,19 +735,6 @@ onMounted(() => {
             getData(fullPath);
         }
 
-        // doRequest(fullPath, ()=>{
-        //     if (data && profiles.length > 0 && !error.value) {
-        //         // find the current/default profile
-        //         defaultProfile.value = ui.profiles[profiles.find(p => p.current)!.uri];
-                
-        //         // if specify mediatype, or profile is not default or alt, redirect to API
-        //         if ((route.query && route.query._profile) &&
-        //             (route.query._mediatype || ![defaultProfile.value.token, ALT_PROFILE_CURIE].includes(route.query._profile as string))) {
-        //                 window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);
-        //         }
-        //     }
-        // })
-    
     });
 });
 </script>
