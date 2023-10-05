@@ -139,13 +139,11 @@ onMounted(() => {
                     <h2>Results</h2>
                     <div class="results-cols">
                         <span>Title</span>
-                        <span>Source</span>
                     </div>
                     <div v-if="results.length > 0" class="results">
                         <RouterLink v-for="result in results.sort(sortFunc)" class="result"
                             :to="`/object?uri=${encodeURIComponent(result.uri)}`">
                             <span class="result-label">{{ result.label || result.uri }}</span>
-                            <span :style="{ color: 'black' }">{{ result.source }}</span>
                         </RouterLink>
                     </div>
                     <p v-else>No results found.</p>
@@ -206,7 +204,7 @@ onMounted(() => {
 
 %resultsColumns {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 8px;
 }
 
