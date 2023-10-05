@@ -20,14 +20,76 @@ const links = [
   <FlavourHome flavour="VocPrez" :links="links">
     <h2>GSWA's Vocabulary System</h2>
     <p>
-      Welcome to the
-      <a
-        href="https://dmp.wa.gov.au/Geological-Survey/Geological-Survey-262.aspx"
-        >Geological Survey of Western Australia (GSWA)'s</a
-      >
-      instance of VocPrez, a read-only web delivery system for Simple Knowledge
-      Organization System (SKOS)-formulated RDF vocabularies.
+      Welcome to the public vocabulary registry of the Geological Survey of Western Australia 
+      (<a href="http://www.dmirs.wa.gov.au/gswa">GSWA</a>) 
+      registry aims to build a controlled geoscience vocabulary for GSWA that includes unified, 
+      standardized and externally aligned terminology defining the key scientific terms, relationships 
+      and actions that underpin our data/systems.
     </p>
+
+    <p>
+    The vocabularies listed here are GSWA’s indexes for internal and external use. They cover a wide 
+    range of geological, scientific and administrative themes.
+    </p>
+
+    <p>Each individual vocabulary includes:<br/>
+      <ul>
+        <li>
+          a concept scheme defining the theme of the vocabulary, with provenance notes
+        </li>
+        <li>
+          a hierarchical list of concepts (or preferred labels), with alternate labels and notations where applicable
+        </li>
+        <li>
+          for each concept, a definition describing the term as it is used by the geological community, together with notes about provenance and links to the main sources consulted
+        </li>
+        <li>
+          if applicable, collections that represent meaningful groupings of terms
+        </li>
+        <li>
+          static Uniform Resource Identifiers (URIs) that uniquely identify both the concept scheme and individual concepts.
+        </li>
+      </ul>
+    </p>
+
+
+    <p>
+      Each vocabulary has been compiled and reviewed by GSWA’s subject matter experts, with or without external consultation, 
+      and edited prior to publication. A governance process ensures vocabularies can be updated when the need arises.
+    </p>
+    <p>
+      Vocabularies published by other organizations that GSWA has elected to use partly or in full are also included in this 
+      registry — see the Derivation Mode vocabulary for an explanation of possible usage modes.
+    </p>
+
+    <p>
+      A <RouterLink to="/search">search page</RouterLink> allows querying within one vocabulary or across all vocabularies.      
+    </p>
+
+    <p>
+      GSWA’s vocabularies are formulated according to the 
+      <a href="https://www.w3.org/2001/sw/wiki/SKOS">Simple Knowledge Organization System (SKOS) W3C web standard</a>, 
+      which provides a standard way to represent knowledge organization systems using the Resource Description Framework (RDF). 
+      This means that vocabulary information can be passed between computer applications in an interoperable way — making GSWA’s 
+      vocabularies machine readable.      
+    </p>
+
+    <p>
+      The vocabularies are prepared using the Excel template-based tool <a href="https://github.com/surroundaustralia/VocExcel">VocExcel</a>,
+      and are published via <a href="https://github.com/RDFLib/VocPrez/">VocPrez</a>, 
+      a read-only web delivery system for SKOS-formulated RDF vocabularies. VocPrez enables human readability of the 
+      vocabularies, via web pages and searches, and also machine readability via a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
+      and also a <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL service</a>. 
+      GSWA's vocabularies are also available as text files from their point-of-truth code repository 
+      <a href="https://github.com/Geological-Survey-of-Western-Australia/Vocabularies">GSWA's vocabulary source 
+      files on GitHub</a>. The vocabularies listed there are automatically loaded into this system.      
+    </p>
+
+    <p>
+      GSWA’s vocabularies are also published for general discovery in the <a href="https://ardc.edu.au/">Australian Research Data Commons (ARDC)'s 
+      Research Vocabularies Australia (RVA) Portal</a>.
+    </p>
+
     <p>
       VocPrez presents different views, or profiles, of vocabularies which, in
       this system's case, it gets from GSWA's graph database of vocabularies and
@@ -35,89 +97,19 @@ const links = [
       <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a>
       content.
     </p>
+
     <p>
-      See the <RouterLink to="/v/about">About page</RouterLink> for more
-      information about this system.
+      For more information or to provide feedback, contact <a href="mailto:GSWA.vocabularies@dmirs.wa.gov.au">GSWA.vocabularies@dmirs.wa.gov.au</a>
     </p>
 
-    <h3>Vocabularies</h3>
-    <p>
-      See this system's
-      <RouterLink to="/v/vocab">list of vocabularies</RouterLink>.
-    </p>
-    <p>
-      Note that GSWA's vocabularies are also available as text files from their
-      point-of-truth code repository:
-    </p>
-    <ul>
-      <li>
-      <a href="https://github.com/Geological-Survey-of-Western-Australia/Vocabularies">
-        GSWA's vocabulary source files on GitHub</a>
-      </li>
-    </ul>
-    <p>
-      The vocabularies listed there are automatically loaded into this system
-    </p>
-
-    <h3>Vocabulary profile</h3>
-    <p>
-      All of GSWA's vocabularies are managed by testing their conformance to a
-      profile of SKOS, the so-called
-      <a href="https://w3id.org/profile/vocpub">VocPub Profile</a> .
-    </p>
-    <p>
-      This profile sets requirements for basic annotations of elements of SKOS,
-      for example, ensuring that all Concept instances have labels
-      and are placed within the ConceptScheme's concept hierarchy.
-    </p>
-    <p>
-      This profile has all of its requirements documented in a
-      <a href="https://w3id.org/profile/vocpub/spec">Specification Document</a>
-      and also provides a
-      <a href="https://w3id.org/profile/vocpub/validator">
-        constraints language validator</a
-      >
-      to assist vocabulary publishers in getting their vocabularies conformant
-      with it.
-    </p>
-
-    <h3>All-vocabulary dataset</h3>
-    <p>
-      To access metadata for GSWA's total set of vocabularies as a single
-      dataset, follow the Alternate Profiles link to the right. The dataset view
-      of these vocabularies allows GSWA's total holdings to be referred to and
-      represented in other catalogues.
-    </p>
-    <p>
-      This system provides Alternate Profiles links on all pages - list of
-      vocabularies, individual vocabularies, Concepts within a vocabulary - as
-      each of these items have different information and formats available.
-    </p>
-
-    <h3>Collections</h3>
-    <p>
-      Collections are a grouping of terms (or Concepts), represented as a flat
-      listing of Concepts.
-    </p>
-    <p>
-      See the <RouterLink to="/v/collection">Collections page</RouterLink> for a
-      list of collections this instance of VocPrez knows about.
-    </p>
-    <h2>Concepts</h2>
-    <p>
-      Vocabulary terms (or Concepts) are listed within a vocabulary's home page.
-      Each vocabulary presents both a concept hierarchy (tree) view and a link
-      to a flat list of its concepts.
-    </p>
-    <h2>Search and Querying</h2>
-    <p>
-      You can search for Concepts within one vocabularies or across all vocabs by using
-      the
-      <RouterLink to="/search">Search page</RouterLink>, or perform
-      SPARQL queries using the
-      <RouterLink to="/sparql">SPARQL page</RouterLink>.
-    </p>
   </FlavourHome>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ul {
+  margin-top:0;
+}
+li {
+  padding-top:5px;
+}
+</style>
