@@ -43,8 +43,8 @@ onMounted(() => {
     <p>Prez is licensed using the <a href="https://github.com/rdflib/prez/blob/main/LICENSE" target="_blank"
             rel="noopener noreferrer">BSD 3-Clause licence</a>.</p>
     <h2>Documentation</h2>
-    <p>See <a href="https://kurrawong.ai/supported-products/prez/" target="_blank" rel="noopener noreferrer">https://kurrawong.ai/supported-products/prez/</a> for
-        detailed Prez documentation.</p>
+    <p>See the <a href="https://github.com/RDFLib/prez-ui" target="_blank" rel="noopener noreferrer">Prez project page</a> for
+        details.</p>
 </template>
 
 <style lang="scss" scoped></style>

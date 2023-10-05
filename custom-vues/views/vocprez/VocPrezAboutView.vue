@@ -20,8 +20,8 @@ onMounted(() => {
             target="_blank" rel="noopener noreferrer">Content Negotiation by Profile</a>.
     </p>
     <p>
-        Many instances of VocPrez are public and in production. See the <a href="https://kurrawong.ai/supported-products/prez/">Prez
-            documentation</a> for details.
+        Many instances of VocPrez are public and in production. See the <a href="https://github.com/RDFLib/prez-ui">Prez
+            project page</a> for details.
     </p>
     <h2>Use</h2>
     <p>
