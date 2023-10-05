@@ -112,8 +112,8 @@ const links = [
     <h2>Search and Querying</h2>
     <p>
       You can search for Concepts within one vocabularies or across all vocabs by using
-      the search bar below or the
-      <RouterLink to="/search">Advanced Search page</RouterLink>, or perform
+      the
+      <RouterLink to="/search">Search page</RouterLink>, or perform
       SPARQL queries using the
       <RouterLink to="/sparql">SPARQL page</RouterLink>.
     </p>
