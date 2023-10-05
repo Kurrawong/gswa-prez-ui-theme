@@ -51,18 +51,6 @@ onMounted(() => {
             options.value.push(option);
         }, namedNode(qnameToIri("a")), namedNode(qnameToIri("skos:ConceptScheme")), null);
 
-        options.sort((a, b) => {
-          const titleA = a.title.toUpperCase();
-          const titleB = b.title.toUpperCase();
-
-          if (titleA < titleB) {
-            return -1;
-          } else if (titleA > titleB) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
     });
 });
 </script>
