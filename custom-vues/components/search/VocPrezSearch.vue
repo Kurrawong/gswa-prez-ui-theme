@@ -4,6 +4,7 @@ import { DataFactory } from "n3";
 import { apiBaseUrlConfigKey } from "@/types";
 import { useGetRequest } from "@/composables/api";
 import { useRdfStore } from "@/composables/rdfStore";
+import { useRoute } from "vue-router";
 
 const { namedNode } = DataFactory;
 
@@ -11,12 +12,14 @@ const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
 const { data, loading, error, doRequest } = useGetRequest();
 const { store, parseIntoStore, qnameToIri } = useRdfStore();
 
+const route = useRoute();
+
 const props = defineProps<{
     defaultSelected?: string;
 }>();
 
 const emit = defineEmits<{
-    (e: "updateOptions", options: {vocab: string}): void;
+    (e: "updateOptions", options: {"focus-to-filter[skos:inScheme]": string}): void;
 }>();
 
 interface VocabOption {
@@ -54,7 +57,6 @@ onMounted(() => {
         options.value.sort((a:VocabOption, b:VocabOption) => {
           const titleA = a.title!.toUpperCase();
           const titleB = b.title!.toUpperCase();
-            console.log(titleA, titleB)
           if (titleA < titleB) {
             return -1;
           } else if (titleA > titleB) {
@@ -63,6 +65,19 @@ onMounted(() => {
             return 0;
           }
         });
+
+        // Check if the query parameter exists and is not empty
+        if (route.value.query["focus-to-filter[skos:inScheme]"]) {
+            const queryParamValue = route.value.query["focus-to-filter[skos:inScheme]"];
+
+            // Find the option whose iri matches the query parameter value
+            const selectedOption = options.value.find(option => option.iri === queryParamValue);
+
+            // If a matching option is found, set it as selected
+            if (selectedOption) {
+                selected.value = [selectedOption.iri];
+            }
+        }        
     });
 });
 </script>
@@ -70,7 +85,7 @@ onMounted(() => {
 <template>
     <div class="search-form">
         <label for="vocab">Vocabs</label>
-        <select name="vocab" id="vocab" v-model="selected" @change="emit('updateOptions', {vocab: selected.join(',')})" multiple>
+        <select name="vocab" id="vocab" v-model="selected" @change="emit('updateOptions', {'focus-to-filter[skos:inScheme]': selected.join(',')})" multiple>
             <option v-for="option in options" :value="option.iri">{{ option.title || option.iri }}</option>
         </select>
     </div>

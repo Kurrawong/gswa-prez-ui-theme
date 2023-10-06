@@ -711,7 +711,6 @@ onMounted(() => {
     loading.value = true;
     // wait for profiles to be set in Pinia
     ensureProfiles().then(() => {
-        console.log("profiles ready")
 
         if (item.value.baseClass === qnameToIri("skos:ConceptScheme")) {
             countDoRequest(`${apiBaseUrl}/count?curie=${route.path.split("/").slice(-1)[0]}&inbound=${encodeURIComponent(qnameToIri("skos:inScheme"))}`, () => {
