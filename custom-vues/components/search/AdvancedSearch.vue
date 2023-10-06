@@ -98,7 +98,7 @@ function camelToTitleCase(s: string): string {
             </template>
             <template v-if="!props.flavour || (props.flavour === 'VocPrez')">
                 <div v-show="prez === 'VocPrez' && expanded">
-                    <VocPrezSearch @updateOptions="searchOptions = $event" :defaultSelected="props.query?.vocab" />
+                    <VocPrezSearch @updateOptions="searchOptions = $event" :defaultSelected="props.query?.['focus-to-filter[skos:inScheme]']" />
                 </div>
             </template>
             <button v-if="expanded" type="submit" class="btn submit-btn">Search <i class="fa-regular fa-magnifying-glass"></i></button>

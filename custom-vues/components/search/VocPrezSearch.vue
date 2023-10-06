@@ -33,7 +33,7 @@ const selected = ref(props.defaultSelected?.split(",") || []);
 watch(() => props.defaultSelected, (newValue, oldValue) => {
     if (newValue && newValue !== "") {
         selected.value = newValue.split(",");
-        emit('updateOptions', {vocab: selected.value.join(',')})
+        emit('updateOptions', {"focus-to-filter[skos:inScheme]": selected.value.join(',')})
     }
 });
 
