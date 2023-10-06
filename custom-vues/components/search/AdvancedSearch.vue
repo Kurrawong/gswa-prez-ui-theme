@@ -40,7 +40,8 @@ function submit() {
         query: {
             term: searchTerm.value,
             prez: prez.value !== "all" ? prez.value : undefined,
-            ...searchOptions.value
+            ...searchOptions.value,
+            "focus-to-filter[rdf:type]": "skos:Concept,skos:ConceptScheme,skos:Collection"
         }
     });
 }

@@ -66,18 +66,6 @@ onMounted(() => {
           }
         });
 
-        // Check if the query parameter exists and is not empty
-        if (route.value.query["focus-to-filter[skos:inScheme]"]) {
-            const queryParamValue = route.value.query["focus-to-filter[skos:inScheme]"];
-
-            // Find the option whose iri matches the query parameter value
-            const selectedOption = options.value.find(option => option.iri === queryParamValue);
-
-            // If a matching option is found, set it as selected
-            if (selectedOption) {
-                selected.value = [selectedOption.iri];
-            }
-        }        
     });
 });
 </script>
