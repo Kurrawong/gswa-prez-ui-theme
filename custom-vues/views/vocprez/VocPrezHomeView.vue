@@ -18,10 +18,10 @@ const links = [
 
 <template>
   <FlavourHome flavour="VocPrez" :links="links">
-    <h2>GSWA's Vocabulary System</h2>
+    <h2>GSWA Vocabularies</h2>
     <p>
       Welcome to the public vocabulary registry of the Geological Survey of Western Australia 
-      (<a href="http://www.dmirs.wa.gov.au/gswa">GSWA</a>) 
+      (<a target="_blank" href="http://www.dmirs.wa.gov.au/gswa">GSWA</a>). The
       registry aims to build a controlled geoscience vocabulary for GSWA that includes unified, 
       standardized and externally aligned terminology defining the key scientific terms, relationships 
       and actions that underpin our data/systems.
@@ -63,41 +63,35 @@ const links = [
     </p>
 
     <p>
-      A <RouterLink to="/search">search page</RouterLink> allows querying within one vocabulary or across all vocabularies.      
+      A <RouterLink to="/search">search page</RouterLink> allows querying within one or multiple vocabulary.      
+    </p>
+    <p>
+      GSWA’s vocabularies are also published for general discovery in the 
+      <a target="_blank" href="https://ardc.edu.au/">Australian Research Data Commons (ARDC)</a>'s 
+      <a target="_blank" href="https://vocabs.ardc.edu.au/">Research Vocabularies Australia (RVA) Portal</a>. 
     </p>
 
+    <h3>Vocabularies context</h3>
     <p>
       GSWA’s vocabularies are formulated according to the 
-      <a href="https://www.w3.org/2001/sw/wiki/SKOS">Simple Knowledge Organization System (SKOS) W3C web standard</a>, 
+      <a target="_blank" href="https://www.w3.org/2001/sw/wiki/SKOS">Simple Knowledge Organization System (SKOS) W3C web standard</a>, 
       which provides a standard way to represent knowledge organization systems using the Resource Description Framework (RDF). 
       This means that vocabulary information can be passed between computer applications in an interoperable way — making GSWA’s 
       vocabularies machine readable.      
     </p>
 
     <p>
-      The vocabularies are prepared using the Excel template-based tool <a href="https://github.com/surroundaustralia/VocExcel">VocExcel</a>,
-      and are published via <a href="https://github.com/RDFLib/VocPrez/">VocPrez</a>, 
+      The vocabularies are prepared using the Excel template-based tool <a target="_blank" href="https://github.com/surroundaustralia/VocExcel">VocExcel</a>,
+      and are published via <a target="_blank" href="https://github.com/RDFLib/VocPrez/">VocPrez</a>, 
       a read-only web delivery system for SKOS-formulated RDF vocabularies. VocPrez enables human readability of the 
-      vocabularies, via web pages and searches, and also machine readability via a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
-      and also a <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL service</a>. 
+      vocabularies, via web pages and searches, and also machine readability via a <a target="_blank" href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
+      and also a <a target="_blank" href="https://en.wikipedia.org/wiki/SPARQL">SPARQL service</a>. 
       GSWA's vocabularies are also available as text files from their point-of-truth code repository 
-      <a href="https://github.com/Geological-Survey-of-Western-Australia/Vocabularies">GSWA's vocabulary source 
+      <a target="_blank" href="https://github.com/Geological-Survey-of-Western-Australia/Vocabularies">GSWA's vocabulary source 
       files on GitHub</a>. The vocabularies listed there are automatically loaded into this system.      
     </p>
 
-    <p>
-      GSWA’s vocabularies are also published for general discovery in the <a href="https://ardc.edu.au/">Australian Research Data Commons (ARDC)'s 
-      Research Vocabularies Australia (RVA) Portal</a>.
-    </p>
-
-    <p>
-      VocPrez presents different views, or profiles, of vocabularies which, in
-      this system's case, it gets from GSWA's graph database of vocabularies and
-      other
-      <a href="https://www.w3.org/standards/semanticweb/">Semantic Web</a>
-      content.
-    </p>
-
+    <h3>Contact</h3>
     <p>
       For more information or to provide feedback, contact <a href="mailto:GSWA.vocabularies@dmirs.wa.gov.au">GSWA.vocabularies@dmirs.wa.gov.au</a>
     </p>

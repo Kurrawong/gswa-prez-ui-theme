@@ -18,10 +18,10 @@ onMounted(() => {
 <template>
     <h1 class="page-title">About Prez</h1>
     <p>
-        Prez is an open source an Application Programming Interface (API) that implements <a
-            href="https://www.w3.org/standards/semanticweb/data">Linked Data</a>
-        methods for providing access to a wide range of data on the web. It also implements the <a
-            href="https://docs.ogc.org/is/17-069r3/17-069r3.html">OGC API:Features</a>
+        Prez is an open source an Application Programming Interface (API) that implements
+        <a target="_blank" href="https://www.w3.org/standards/semanticweb/data">Linked Data</a>
+        methods for providing access to a wide range of data on the web. It also implements the 
+        <a target="_blank" href="https://docs.ogc.org/is/17-069r3/17-069r3.html">OGC API:Features</a>
         for spatial data.
     </p>
     <p>
@@ -43,8 +43,7 @@ onMounted(() => {
     <p>Prez is licensed using the <a href="https://github.com/rdflib/prez/blob/main/LICENSE" target="_blank"
             rel="noopener noreferrer">BSD 3-Clause licence</a>.</p>
     <h2>Documentation</h2>
-    <p>See the <a href="https://github.com/RDFLib/prez-ui" target="_blank" rel="noopener noreferrer">Prez project page</a> for
-        details.</p>
+    <p>See detailed <a href="https://kurrawong.ai/products/prez/" target="_blank" rel="noopener noreferrer">Prez documentation</a>.</p>
 </template>
 
 <style lang="scss" scoped></style>

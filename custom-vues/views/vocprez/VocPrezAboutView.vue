@@ -37,7 +37,7 @@ onMounted(() => {
             /vocab/{id}/{concept-id}        - Concept within a vocabulary
         </pre>
     <p>Navigation to any of those endpoints delivers content in HTML, for humans, and multiple <a
-            href="https://www.w3.org/RDF/">RDF</a> formats, for machines.</p>
+        target="_blank" href="https://www.w3.org/RDF/">RDF</a> formats, for machines.</p>
     <p>
         This API provides <em>alternate profiles</em> of all content, so a the information is resented according to several
         different data models.
@@ -47,7 +47,7 @@ onMounted(() => {
     </p>
     <p>
         VocPrez' data is all natively stored in RDF graph form, according to the <a
-            href="https://w3id.org/profile/vocpub">VocPub</a> profile of SKOS and,
+        target="_blank" href="https://w3id.org/profile/vocpub">VocPub</a> profile of SKOS and,
         optionally, according to other data models too, if implemented.
     </p>
 </template>
