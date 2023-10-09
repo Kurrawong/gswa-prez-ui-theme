@@ -18,6 +18,8 @@ import { ensureProfiles, sortByTitle, getLanguagePriority } from "@/util/helpers
 
 import { ALT_PROFILE_CURIE } from "@/util/consts";
 
+let predicateColumns = ['description', 'status', 'derivationMode'];
+
 const { namedNode } = DataFactory;
 
 const apiBaseUrl = inject(apiBaseUrlConfigKey) as string;
@@ -28,7 +30,7 @@ const { store, parseIntoStore, qnameToIri } = useRdfStore();
 const { data, profiles, loading, error, doRequest } = useGetRequest();
 
 const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
-const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description")];
+const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description"), qnameToIri("skos:definition")];
 const TOP_LEVEL_TYPES = [
     qnameToIri("dcat:Catalog"),
     qnameToIri("dcat:Dataset"),
@@ -114,6 +116,7 @@ function configByType(type: string) {
             // searchDefaults.value = { vocab: item.value.iri };
             break;
         case qnameToIri("skos:Collection"):
+            predicateColumns = ['description'];
             itemType.value.label = "Collections";
             break;
         case qnameToIri("prof:Profile"):
@@ -370,7 +373,7 @@ onMounted(() => {
         <ErrorMessage v-if="error" :message="error" />
         <LoadingMessage v-else-if="loading" />
         <template v-else-if="items.length > 0">
-            <SortableTabularList v-if="flavour === 'VocPrez'" :items="items" :predicates="['description', 'status', 'derivationMode']" />
+            <SortableTabularList v-if="flavour === 'VocPrez'" :items="items" :predicates="predicateColumns" />
             <ItemList v-else :items="items" :childName="childrenConfig.buttonTitle" :childLink="childrenConfig.buttonLink" />
             <PaginationComponent :url="route.path" :totalCount="count" :currentPage="currentPageNumber" :perPage="currentPerPage" />
         </template>
