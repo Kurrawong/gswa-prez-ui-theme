@@ -31,7 +31,7 @@ RUN rm .env
 RUN npm ci && npm run build
 
 # ---
-FROM docker.io/nginx:1.23-alpine
+FROM docker.io/nginx:1.25.3-alpine
 
 RUN apk add --no-cache bash
 
