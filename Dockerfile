@@ -31,10 +31,9 @@ RUN rm .env
 RUN npm ci && npm run build
 
 # ---
-FROM docker.io/nginx:1.25.3-alpine
+FROM nginx:1.25.3-alpine-slim
 
 RUN apk add --no-cache bash
-RUN apk del libx11
 
 RUN mkdir /app
 
