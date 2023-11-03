@@ -34,6 +34,7 @@ RUN npm ci && npm run build
 FROM docker.io/nginx:1.25.3-alpine
 
 RUN apk add --no-cache bash
+RUN apk del curl
 
 RUN mkdir /app
 
