@@ -21,7 +21,7 @@ const links = [
     <h2>GSWA Vocabularies</h2>
     <p>
       Welcome to the public vocabulary registry of the Geological Survey of Western Australia 
-      (<a target="_blank" href="http://www.dmirs.wa.gov.au/gswa">GSWA</a>). The
+      (<a target="_blank" href="http://www.demirs.wa.gov.au/gswa">GSWA</a>). The
       registry aims to build a controlled geoscience vocabulary for GSWA that includes unified, 
       standardized and externally aligned terminology defining the key scientific terms, relationships 
       and actions that underpin our data/systems.
@@ -93,7 +93,7 @@ const links = [
 
     <h3>Contact</h3>
     <p>
-      For more information or to provide feedback, contact <a href="mailto:GSWA.vocabularies@dmirs.wa.gov.au">GSWA.vocabularies@dmirs.wa.gov.au</a>
+      For more information or to provide feedback, contact <a href="mailto:GSWA.vocabularies@demirs.wa.gov.au">GSWA.vocabularies@demirs.wa.gov.au</a>
     </p>
 
   </FlavourHome>
