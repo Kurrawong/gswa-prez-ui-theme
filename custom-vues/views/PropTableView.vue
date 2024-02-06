@@ -36,7 +36,7 @@ const { data, profiles, loading, error, doRequest } = useGetRequest();
 const { data: countData, loading: countLoading, error: countError, doRequest: countDoRequest } = useGetRequest();
 const { data: conceptData, loading: conceptLoading, error: conceptError, doRequest: conceptDoRequest } = useGetRequest();
 
-const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
+const DEFAULT_LABEL_PREDICATES = [qnameToIri("skos:prefLabel"), qnameToIri("rdfs:label"), qnameToIri("dcterms:title")];
 const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description"), qnameToIri("skos:definition")];
 const DEFAULT_GEO_PREDICATES = [qnameToIri("geo:hasBoundingBox"), qnameToIri("geo:hasGeometry")];
 const DEFAULT_CHILDREN_PREDICATES = [qnameToIri("rdfs:member"), qnameToIri("skos:member"), qnameToIri("dcterms:hasPart")];

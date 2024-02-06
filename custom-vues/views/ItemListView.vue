@@ -29,7 +29,7 @@ const ui = useUiStore();
 const { store, parseIntoStore, qnameToIri } = useRdfStore();
 const { data, profiles, loading, error, doRequest } = useGetRequest();
 
-const DEFAULT_LABEL_PREDICATES = [qnameToIri("rdfs:label")];
+const DEFAULT_LABEL_PREDICATES = [qnameToIri("skos:prefLabel"), qnameToIri("rdfs:label"), qnameToIri("dcterms:title")];
 const DEFAULT_DESC_PREDICATES = [qnameToIri("dcterms:description"), qnameToIri("skos:definition")];
 const TOP_LEVEL_TYPES = [
     qnameToIri("dcat:Catalog"),
