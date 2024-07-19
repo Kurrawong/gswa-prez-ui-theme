@@ -840,3 +840,8 @@ table tr th {
     min-width: 150px;
 }
 </style>
+<style>
+#content-body > p > em, #content-body .obj-value {
+    white-space: pre-wrap;
+}
+</style>
