@@ -1,4 +1,4 @@
-FROM docker.io/node:18-alpine3.16 AS builder
+FROM node:lts-alpine AS builder
 
 RUN apk update && \
     apk add \
@@ -31,7 +31,7 @@ RUN rm .env
 RUN npm ci && npm run build
 
 # ---
-FROM nginx:1.25.3-alpine-slim
+FROM nginx:stable-alpine-slim
 
 RUN apk add --no-cache bash
 
