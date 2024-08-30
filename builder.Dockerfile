@@ -27,4 +27,5 @@ RUN mv /app/src/App.vue /app/src/PrezApp.vue
 COPY custom-vues/ /app/src/
 
 
-RUN npm ci
+#RUN npm ci
+RUN npm ci && npm run build && npm run type-check
