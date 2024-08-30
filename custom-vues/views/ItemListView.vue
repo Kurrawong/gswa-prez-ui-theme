@@ -205,7 +205,7 @@ function getProperties() {
     nodeList.forEach(member => {
         let c: ListItemExtra = {
             iri: member.id,
-            extras: {keywords: []}
+            extras: {keywords: [] as ListItemSortable[]}
         };
 
         const labels: languageLabel[] = [];

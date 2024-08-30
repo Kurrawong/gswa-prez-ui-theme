@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
-import type { ListItemExtra } from "@/types";
+import type { ListItemExtra } from "../types";
 import ItemListSortButton from "@/components/ItemListSortButton.vue";
 
 const props = defineProps<{
@@ -77,17 +77,17 @@ function camelToTitleCase(s: string): string {
         <tbody>
             <tr v-for="item in sortedList" class="row" role="row">
                 <td v-for="predicate in extraPredicates">
-                    <RouterLink v-if="predicate === 'title'" :to="!!item.link ? item.link : ''">
-                        {{ item.title || item.iri }}
-                    </RouterLink>
-                    <div v-else-if="predicate === 'description' && !!item.description">{{ item.description.substring(0, 80) + "..." }}</div>
-                    <div v-else-if="!!item.extras[predicate] && Array.isArray(item.extras[predicate])">
+                    <div v-if="Array.isArray(item.extras[predicate])">
                         <div v-for="extra in item.extras[predicate]">
                             <a v-if="!!extra.iri" :href="extra.iri" target="_blank" rel="noopener noreferrer">{{ extra.label }}</a>
                             <template v-else>{{ extra.label }}</template>
                             <span v-if="!!extra.color" :style="{color: extra.color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>
                         </div>
                     </div>
+                    <RouterLink v-else-if="predicate === 'title'" :to="!!item.link ? item.link : ''">
+                        {{ item.title || item.iri }}
+                    </RouterLink>
+                    <div v-else-if="predicate === 'description' && !!item.description">{{ item.description.substring(0, 80) + "..." }}</div>
                     <div v-else-if="!!item.extras[predicate]">
                         <a v-if="!!item.extras[predicate].iri" :href="item.extras[predicate].iri" target="_blank" rel="noopener noreferrer">{{ item.extras[predicate].label }}</a>
                         <template v-else>{{ item.extras[predicate].label }}</template>

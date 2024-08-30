@@ -105,7 +105,7 @@ export interface ListItem {
 // extra properies for SortableTable display go in extras
 export interface ListItemExtra extends ListItem {
     extras: {
-        [key: string]: ListItemSortable
+        [key: string]: ListItemSortable | ListItemSortable[];
     };
 }
 
