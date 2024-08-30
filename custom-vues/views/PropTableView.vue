@@ -707,8 +707,12 @@ function getData(url:string) {
     });
 }
 
+const msg = ref('');
+
 onMounted(() => {
     loading.value = true;
+    msg.value = '';
+    
     // wait for profiles to be set in Pinia
     ensureProfiles().then(() => {
 
@@ -717,7 +721,17 @@ onMounted(() => {
                 if (parseInt(countData.value.replace('"', "")) <= conceptPerPage) {
                     hasFewChildren.value = true;
                 }
-                getData(`${apiBaseUrl}${hasFewChildren.value ? route.path + "/all" + window.location.search : route.fullPath}`);
+
+                if ((route.query && route.query._profile) &&
+                    (route.query._mediatype || ![defaultProfile?.value?.token, ALT_PROFILE_CURIE].includes(route.query._profile as string))) {
+
+                    msg.value = `Loading ${route.query._mediatype} resource...`;
+                    loading.value = false;
+
+                    window.location.replace(`${apiBaseUrl}${route.path}?_profile=${route.query._profile}${route.query._mediatype ? `&_mediatype=${route.query._mediatype}` : ""}`);                        
+                } else {              
+                    getData(`${apiBaseUrl}${hasFewChildren.value ? route.path + "/all" + window.location.search : route.fullPath}`);
+                }
             });
         } else {
             let fullPath = "";
@@ -739,6 +753,11 @@ onMounted(() => {
 </script>
 
 <template>
+
+    <div v-if="msg != ''" class="msg">
+            {{ msg }}
+    </div>
+
     <ProfilesTable v-if="isAltView" :profiles="profiles" :path="route.path" />
     <template v-else>
         <PropTable v-if="properties.length > 0" :item="item" :properties="properties" :blankNodes="blankNodes" :prefixes="prefixes" :hiddenPreds="hiddenPredicates">
@@ -834,6 +853,11 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.msg {
+    padding-top:80px;
+    padding-left:20px;
 }
 
 table tr th {

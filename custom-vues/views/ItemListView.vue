@@ -18,7 +18,7 @@ import { ensureProfiles, sortByTitle, getLanguagePriority } from "@/util/helpers
 
 import { ALT_PROFILE_CURIE } from "@/util/consts";
 
-let predicateColumns = ['description', 'status', 'derivationMode'];
+let predicateColumns = ['description', 'status', 'derivationMode', 'keywords'];
 
 const { namedNode } = DataFactory;
 
@@ -205,7 +205,7 @@ function getProperties() {
     nodeList.forEach(member => {
         let c: ListItemExtra = {
             iri: member.id,
-            extras: {}
+            extras: {keywords: []}
         };
 
         const labels: languageLabel[] = [];
@@ -242,6 +242,19 @@ function getProperties() {
 
                     c.extras.derivationMode = mode;
                 }, q.object, qnameToIri("prov:hadRole"), null);
+            } else if (flavour.value === "VocPrez" && q.predicate.value === "https://schema.org/keywords") {
+
+                if(q.object.termType == "Literal") {
+                    c.extras.keywords.push({iri: undefined, label: q.object.value});
+                } else {
+                    const iri = q.object.value;
+                    let label = undefined;
+                    store.value.forObjects(result => {
+                        label = result.value;
+                    }, q.object, qnameToIri("skos:prefLabel"), null);
+
+                    c.extras.keywords.push({iri: iri, label: label});
+                }
             }
         }, member, null, null, null);
         // sort labels by language priority
