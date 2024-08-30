@@ -79,16 +79,18 @@ function camelToTitleCase(s: string): string {
                 <td v-for="predicate in extraPredicates">
                     <div v-if="Array.isArray(item.extras[predicate])">
                         <div v-for="extra in item.extras[predicate]">
-                            <a v-if="extra?.iri && !!extra.iri" :href="extra.iri" target="_blank" rel="noopener noreferrer">{{ extra.label }}</a>
-                            <template v-else-if="extra?.label">{{ extra.label }}</template>
-                            <span v-if="extra?.color && !!extra.color" :style="{color: extra.color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>
+                            <template v-if="typeof extra !== 'string'">
+                                <a v-if="!!extra.iri" :href="extra.iri" target="_blank" rel="noopener noreferrer">{{ extra.label }}</a>
+                                <template v-else-if="extra?.label">{{ extra.label }}</template>
+                                <span v-if="extra?.color && !!extra.color" :style="{color: extra.color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>
+                            </template>
                         </div>
                     </div>
                     <RouterLink v-else-if="predicate === 'title'" :to="!!item.link ? item.link : ''">
                         {{ item.title || item.iri }}
                     </RouterLink>
                     <div v-else-if="predicate === 'description' && !!item.description">{{ item.description.substring(0, 80) + "..." }}</div>
-                    <div v-else-if="!!item.extras[predicate]">
+                    <div v-else-if="!!item.extras[predicate] && typeof item.extras[predicate] !== 'string'">
                         <a v-if="!!item.extras[predicate].iri" :href="item.extras[predicate].iri" target="_blank" rel="noopener noreferrer">{{ item.extras[predicate].label }}</a>
                         <template v-else>{{ item.extras[predicate].label }}</template>
                         <span v-if="!!item.extras[predicate].color" :style="{color: item.extras[predicate].color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>

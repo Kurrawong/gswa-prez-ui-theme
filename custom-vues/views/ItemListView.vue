@@ -248,7 +248,7 @@ function getProperties() {
                     (c.extras.keywords as ListItemSortable[]).push({iri: undefined, label: q.object.value});
                 } else {
                     const iri = q.object.value;
-                    let label = undefined;
+                    let label = getIRILocalName(iri);
                     store.value.forObjects(result => {
                         label = result.value;
                     }, q.object, qnameToIri("skos:prefLabel"), null);
