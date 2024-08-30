@@ -245,7 +245,7 @@ function getProperties() {
             } else if (flavour.value === "VocPrez" && q.predicate.value === "https://schema.org/keywords") {
 
                 if(q.object.termType == "Literal") {
-                    c.extras.keywords.push({iri: undefined, label: q.object.value});
+                    (c.extras.keywords as ListItemSortable[]).push({iri: undefined, label: q.object.value});
                 } else {
                     const iri = q.object.value;
                     let label = undefined;
@@ -253,7 +253,7 @@ function getProperties() {
                         label = result.value;
                     }, q.object, qnameToIri("skos:prefLabel"), null);
 
-                    c.extras.keywords.push({iri: iri, label: label});
+                    (c.extras.keywords as ListItemSortable[]).push({iri: iri, label: label});
                 }
             }
         }, member, null, null, null);

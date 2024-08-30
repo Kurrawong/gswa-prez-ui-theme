@@ -18,7 +18,7 @@ const extraPredicates = computed(() => {
 const sortedList = computed(() => {
     const [sortPredicate, sortDirection]: string[] = sortKey.value.split("-");
     const isAscending = sortDirection === "asc";
-    return props.items.sort((a, b) => {
+    return props.items.sort((a:any, b:any) => {
         if (sortPredicate === "title" || sortPredicate === "description" || sortPredicate === "keywords") {
             if (a[sortPredicate] && b[sortPredicate]) {
                 return isAscending ? a[sortPredicate]!.localeCompare(b[sortPredicate]!) : b[sortPredicate]!.localeCompare(a[sortPredicate]!);
@@ -79,9 +79,9 @@ function camelToTitleCase(s: string): string {
                 <td v-for="predicate in extraPredicates">
                     <div v-if="Array.isArray(item.extras[predicate])">
                         <div v-for="extra in item.extras[predicate]">
-                            <a v-if="!!extra.iri" :href="extra.iri" target="_blank" rel="noopener noreferrer">{{ extra.label }}</a>
-                            <template v-else>{{ extra.label }}</template>
-                            <span v-if="!!extra.color" :style="{color: extra.color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>
+                            <a v-if="extra?.iri && !!extra.iri" :href="extra.iri" target="_blank" rel="noopener noreferrer">{{ extra.label }}</a>
+                            <template v-else-if="extra?.label">{{ extra.label }}</template>
+                            <span v-if="extra?.color && !!extra.color" :style="{color: extra.color, marginLeft: '6px'}" class="fa-solid fa-circle fa-2xs"></span>
                         </div>
                     </div>
                     <RouterLink v-else-if="predicate === 'title'" :to="!!item.link ? item.link : ''">
