@@ -64,7 +64,7 @@ function camelToTitleCase(s: string): string {
         <thead>
             <tr role="row">
                 <th v-for="predicate in extraPredicates">
-                    {{ camelToTitleCase(predicate) }}&nbsp;
+                    {{ camelToTitleCase(predicate == 'keywords' ? 'Themes' : predicate) }}&nbsp;
                     <ItemListSortButton
                         v-if="predicate !== 'keywords'"
                         :id="predicate"
