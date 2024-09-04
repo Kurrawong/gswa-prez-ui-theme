@@ -19,7 +19,7 @@ const sortedList = computed(() => {
     const [sortPredicate, sortDirection]: string[] = sortKey.value.split("-");
     const isAscending = sortDirection === "asc";
     return props.items.sort((a:any, b:any) => {
-        if (sortPredicate === "title" || sortPredicate === "description" || sortPredicate === "keywords") {
+        if (sortPredicate === "title" || sortPredicate === "description") {
             if (a[sortPredicate] && b[sortPredicate]) {
                 return isAscending ? a[sortPredicate]!.localeCompare(b[sortPredicate]!) : b[sortPredicate]!.localeCompare(a[sortPredicate]!);
             } else if (a[sortPredicate]) {
@@ -31,8 +31,8 @@ const sortedList = computed(() => {
             }
         } else {
             if (a.extras[sortPredicate] && b.extras[sortPredicate]) {
-                const aLabel = a.extras[sortPredicate].label;
-                const bLabel = b.extras[sortPredicate].label;
+                const aLabel = Array.isArray(a.extras[sortPredicate]) ? a.extras[sortPredicate].map((x:any)=>x.label).join(', ') : a.extras[sortPredicate].label;
+                const bLabel = Array.isArray(b.extras[sortPredicate]) ? b.extras[sortPredicate].map((x:any)=>x.label).join(', ') : b.extras[sortPredicate].label;
                 return isAscending ? aLabel.localeCompare(bLabel) : bLabel.localeCompare(aLabel);
             } else if (a.extras[sortPredicate]) {
                 return isAscending ? -1 : 1;
@@ -66,7 +66,6 @@ function camelToTitleCase(s: string): string {
                 <th v-for="predicate in extraPredicates">
                     {{ camelToTitleCase(predicate == 'keywords' ? 'Themes' : predicate) }}&nbsp;
                     <ItemListSortButton
-                        v-if="predicate !== 'keywords'"
                         :id="predicate"
                         :state="sortKey.startsWith(predicate) ? sortKey.endsWith('asc') : null"
                         @clicked="id => setSorted(id)"
