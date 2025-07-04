@@ -10,18 +10,18 @@ import PrezApp from "./PrezApp.vue";
   <header id="title-header">
       <div id="title-header-content">
         <div>
-          <a class="header-logo-link" href="https://www.demirs.wa.gov.au">
-              <img src="/public/DEMIRSLogo.png" alt="WA Gov logo">
+          <a class="header-logo-link" href="https://www.dmpe.wa.gov.au">
+              <img src="/public/dmpe-logo.png" alt="Department of Mines, Petroleum and Exploration">
           </a>
         </div>
         <div class="header-heading">
           <h1>GSWA Vocabularies</h1>
         </div>
         <div class="header-links">
-          <a class="link" href="https://www.demirs.wa.gov.au/accessibility">
+          <a class="link" href="https://www.dmpe.wa.gov.au/accessibility">
             Accessibility
           </a>
-          <a class="link" href="https://www.demirs.wa.gov.au/contact">
+          <a class="link" href="https://www.dmpe.wa.gov.au/contact">
             Contact us
           </a>
         </div>
@@ -46,9 +46,7 @@ import PrezApp from "./PrezApp.vue";
             </div>
             <div id="footer-contact">
                 <h3>
-                  Contact the Department of Energy, Mines, 
-                  Industry Regulation and
-                  Safety
+                  Contact the Department of Mines, Petroleum and Exploration
                 </h3>
                 <div id="footer-contact-container">
                     <div>
@@ -58,7 +56,7 @@ import PrezApp from "./PrezApp.vue";
                         </p>
                         <p>
                             <span>Email:&nbsp;</span>
-                            <span><a href="mailto:GSWA.vocabularies@demirs.wa.gov.au">GSWA.vocabularies@demirs.wa.gov.au</a></span>
+                            <span><a href="mailto:GSWA.vocabularies@dmpe.wa.gov.au">GSWA.vocabularies@dmpe.wa.gov.au</a></span>
                         </p>
                     </div>
                 </div>
@@ -67,16 +65,16 @@ import PrezApp from "./PrezApp.vue";
         <div id="footer-content-bottom">
             <div id="footer-nav">
                 <a href="https://www.wa.gov.au">WA.gov.au</a>
-                <a href="https://www.demirs.wa.gov.au/copyright">Copyright</a>
-                <a href="https://www.demirs.wa.gov.au/disclaimer">Disclaimer</a>
-                <a href="https://www.demirs.wa.gov.au/privacy">Privacy</a>
-                <a href="https://www.demirs.wa.gov.au/content/about-department">About</a>
+                <a href="https://www.dmpe.wa.gov.au/copyright">Copyright</a>
+                <a href="https://www.dmpe.wa.gov.au/disclaimer">Disclaimer</a>
+                <a href="https://www.dmpe.wa.gov.au/privacy">Privacy</a>
+                <a href="https://www.dmpe.wa.gov.au/content/about-department">About</a>
             </div>
             <div>
                 <p>
                     © Government of Western Australia 2021-2023
                     <br/>
-                    Department of Energy, Mines, Industry Regulation and Safety
+                    Department of Mines, Petroleum and Exploration
                 </p>
             </div>
         </div>

@@ -60,13 +60,13 @@ const childrenConfig = ref({
     buttonTitle: "",
     buttonLink: ""
 });
-const perPage = ref(isNaN(defaultPerPage) ? 20 : Number(defaultPerPage));
+const perPage = ref(isNaN(defaultPerPage) ? 50 : Number(defaultPerPage));
 
 const currentPerPage = computed(() => {
     if (route.query && route.query.page) {
         return parseInt(route.query.per_page as string);
     } else {
-        return perPage.value ? perPage.value : 20;
+        return perPage.value ? perPage.value : 50;
     }
 });
 
@@ -334,7 +334,7 @@ onBeforeMount(() => {
 onMounted(() => {
     loading.value = true;
 
-    const defPerPage = isNaN(currentPerPage.value) ? currentPerPage : isNaN(defaultPerPage) ? defaultPerPage : 20;
+    const defPerPage = isNaN(currentPerPage.value) ? currentPerPage : isNaN(defaultPerPage) ? defaultPerPage : 50;
 
     let fullPath = Object.keys(route.query).length > 0 ? (route.query.per_page ? route.fullPath : route.fullPath + `&per_page=${perPage.value}`) : route.path + `?per_page=${defPerPage}`;
 

@@ -11,7 +11,7 @@ const props = defineProps<{
 }>();
 
 // GSWA determine paging
-const perPageRef = ref(props.perPage || 20);
+const perPageRef = ref(props.perPage || 50);
 const perPages = [5, 10, 20, 50];
 const currentPage = props.currentPage || 1;
 const pageStartRow = 1 + ((currentPage - 1) * perPageRef.value);
