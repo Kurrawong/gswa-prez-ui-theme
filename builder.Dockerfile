@@ -17,6 +17,10 @@ RUN git init && \
 
 COPY public/ /app/public
 
+# Copy custom index.html to override upstream template
+COPY index.html /app/index.html
+
+
 # Move project's App.vue to PrezApp.vue so it can be extended
 RUN mv /app/src/App.vue /app/src/PrezApp.vue
 
